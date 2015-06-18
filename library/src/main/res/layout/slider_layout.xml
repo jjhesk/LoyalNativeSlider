@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.daimajia.slider.library.Tricks.MultiViewPager
+    <com.hkm.slider.Tricks.MultiViewPager
         android:id="@+id/mulitpages_slider_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.daimajia.slider.library.Tricks.InfiniteViewPager
+    <com.hkm.slider.Tricks.InfiniteViewPager
         android:id="@+id/daimajia_slider_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.daimajia.slider.library.Indicators.PagerIndicator
+    <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/default_center_bottom_indicator"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.daimajia.slider.library.Indicators.PagerIndicator
+    <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/default_bottom_right_indicator"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.daimajia.slider.library.Indicators.PagerIndicator
+    <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/default_bottom_left_indicator"
         android:gravity="center"
         android:layout_alignParentBottom="true"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.daimajia.slider.library.Indicators.PagerIndicator
+    <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/default_center_top_indicator"
         android:gravity="center"
         android:layout_alignParentTop="true"
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.daimajia.slider.library.Indicators.PagerIndicator
+    <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/default_center_top_right_indicator"
         android:layout_alignParentTop="true"
         android:gravity="center"
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.daimajia.slider.library.Indicators.PagerIndicator
+    <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/default_center_top_left_indicator"
         android:layout_alignParentTop="true"
         android:gravity="center"

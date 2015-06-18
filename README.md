@@ -1,4 +1,4 @@
-# Android Image Slider [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
+# Loyal Native Slider [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  
@@ -21,12 +21,16 @@ from daimajia [Download Apk](https://github.com/daimajia/AndroidImageSlider/rele
 #### Gradle
 
 ```groovy
+
 dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
-    compile "com.android.support:support-v4:22.1.1"
+    compile 'com.android.support:support-v4:22.1.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.nineoldandroids:library:2.4.0'
+
+    compile 'com.hkm.loyalslider:library:1.2.1@aar'
 }
+
 ```
 
 
@@ -78,7 +82,7 @@ If you want to load images from drawable, then no additional permissions are nec
 Add the Slider to your layout:
  
 ```java
-<com.daimajia.slider.library.SliderLayout
+<com.hkm.slider.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -88,7 +92,7 @@ Add the Slider to your layout:
 There are some default indicators. If you want to use a provided indicator:
  
 ```java
-<com.daimajia.slider.library.Indicators.PagerIndicator
+<com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/custom_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.daimajia.slider.library.SliderLayout;
+import com.hkm.slider.SliderLayout;
 
 /**
  * Created by daimajia on 14-5-29.

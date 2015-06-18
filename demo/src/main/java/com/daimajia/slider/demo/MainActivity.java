@@ -15,12 +15,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
-import com.daimajia.slider.library.Indicators.PagerIndicator;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.hkm.slider.Animations.DescriptionAnimation;
+import com.hkm.slider.Indicators.PagerIndicator;
+import com.hkm.slider.SliderLayout;
+import com.hkm.slider.SliderTypes.BaseSliderView;
+import com.hkm.slider.SliderTypes.TextSliderView;
+import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.util.HashMap;
 
