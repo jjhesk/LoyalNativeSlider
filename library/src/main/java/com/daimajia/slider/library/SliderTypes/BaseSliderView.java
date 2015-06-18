@@ -24,7 +24,7 @@ public abstract class BaseSliderView {
 
     protected Context mContext;
 
-    private Bundle mBundle;
+    private final Bundle mBundle;
 
     /**
      * Error place holder image.
