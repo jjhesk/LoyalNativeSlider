@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/arrowbackground" />
+        </shape>
+    </item>
+    <item
+        android:bottom="11dp"
+        android:drawable="@mipmap/rightarrow"
+        android:left="7dp"
+        android:right="7dp"
+        android:top="11dp" />
+</layer-list>
