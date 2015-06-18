@@ -8,9 +8,11 @@ You can easily load images from an internet URL, drawable, or file. And there ar
  
 ## Demo
  
-![](http://ww3.sinaimg.cn/mw690/610dc034jw1egzor66ojdg20950fknpe.gif)
+![](scn/device-2015-06-17-142823.png)
+![](scn/device-2015-06-17-150718.png)
+![](scn/device-2015-06-17-150829.png)
 
-[Download Apk](https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.8/demo-1.0.8.apk)
+from daimajia [Download Apk](https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.8/demo-1.0.8.apk)
  
 ## Usage
 
@@ -20,10 +22,10 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 
 ```groovy
 dependencies {
-    	compile "com.android.support:support-v4:+"
-    	compile 'com.squareup.picasso:picasso:2.3.2'
-    	compile 'com.nineoldandroids:library:2.4.0'
-    	compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile "com.android.support:support-v4:22.1.1"
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.nineoldandroids:library:2.4.0'
 }
 ```
 
@@ -97,9 +99,8 @@ There are some default indicators. If you want to use a provided indicator:
 [Code example](https://github.com/daimajia/AndroidImageSlider/blob/master/demo%2Fsrc%2Fmain%2Fjava%2Fcom%2Fdaimajia%2Fslider%2Fdemo%2FMainActivity.java)
  
 ====
- 
-## Advanced usage
 
+## Advanced usage
 Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki)
  
 ## Thanks
@@ -107,7 +108,6 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki)
 - [Picasso](https://github.com/square/picasso)
 - [NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)
 - [ViewPagerTransforms](https://github.com/ToxicBakery/ViewPagerTransforms)
+- [Android Image Slider](https://github.com/daimajia/AndroidImageSlider)
 
 ##About me
- 
-I am a student in mainland China. I love Google, love Android, love everything that is interesting. If you get any problems when using this library or you have an internship opportunity, please feel free to [email me](mailto:daimajia@gmail.com). :smiley:
