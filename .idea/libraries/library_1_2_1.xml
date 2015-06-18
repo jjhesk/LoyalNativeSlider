@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="library-1.2.1">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/demo/build/intermediates/exploded-aar/com.hkm.loyalslider/library/1.2.1/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/demo/build/intermediates/exploded-aar/com.hkm.loyalslider/library/1.2.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/demo/build/intermediates/exploded-aar/com.hkm.loyalslider/library/1.2.1/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
