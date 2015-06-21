@@ -9,7 +9,12 @@
         </attr>
 
         <attr name="auto_cycle" format="boolean" />
-
+        <!-- page indicator presentations -->
+        <attr name="lns_use_presentation" format="enum">
+            <enum name="Smart" value="0">Smart</enum>
+            <enum name="Dots" value="1">Dots</enum>
+            <enum name="Numbers" value="2">Numbers</enum>
+        </attr>
         <!-- page animation -->
         <attr name="pager_animation" format="enum">
             <enum name="Default" value="0">Default</enum>
