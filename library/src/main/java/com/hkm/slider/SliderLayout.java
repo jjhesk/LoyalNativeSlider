@@ -130,7 +130,7 @@ public class SliderLayout extends RelativeLayout {
     private boolean mAutoRecover = true;
 
     private int mTransformerId;
-
+    private int mSliderIndicatorPresentations;
     /**
      * {@link com.hkm.slider.Tricks.ViewPagerEx} transformer time span.
      */
@@ -182,10 +182,10 @@ public class SliderLayout extends RelativeLayout {
         super(context, attrs, defStyle);
         mContext = context;
         LayoutInflater.from(context).inflate(R.layout.slider_layout, this, true);
-        final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SliderLayout,
-                defStyle, 0);
+        final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SliderLayout, defStyle, 0);
         mTransformerSpan = attributes.getInteger(R.styleable.SliderLayout_pager_animation_span, 1100);
         mTransformerId = attributes.getInt(R.styleable.SliderLayout_pager_animation, Transformer.Default.ordinal());
+        mSliderIndicatorPresentations = attributes.getInt(R.styleable.SliderLayout_lns_use_presentation, PresentationConfig.Smart.ordinal());
         mAutoCycle = attributes.getBoolean(R.styleable.SliderLayout_auto_cycle, true);
         int visibility = attributes.getInt(R.styleable.SliderLayout_indicator_visibility, 0);
         for (PagerIndicator.IndicatorVisibility v : PagerIndicator.IndicatorVisibility.values()) {
@@ -512,6 +512,29 @@ public class SliderLayout extends RelativeLayout {
     }
 
     /**
+     * presentation of indicators
+     */
+    public enum PresentationConfig {
+        Smart("Smart"),
+        Dots("Dots"),
+        Numbers("Numbers");
+        private final String name;
+
+        private PresentationConfig(String s) {
+            name = s;
+        }
+
+        public String toString() {
+            return name;
+        }
+
+        public boolean equals(String other) {
+            return (other == null) ? false : name.equals(other);
+        }
+
+    }
+
+    /**
      * preset transformers and their names
      */
     public enum Transformer {
@@ -763,7 +786,14 @@ public class SliderLayout extends RelativeLayout {
         Left_Bottom("Left_Bottom", R.id.default_bottom_left_indicator),
         Center_Top("Center_Top", R.id.default_center_top_indicator),
         Right_Top("Right_Top", R.id.default_center_top_right_indicator),
-        Left_Top("Left_Top", R.id.default_center_top_left_indicator);
+        Left_Top("Left_Top", R.id.default_center_top_left_indicator),
+
+        num_Top_Center("num_Top_Center", R.id.default_center_top_left_indicator),
+        num_Top_Left("num_Top_Left", R.id.default_center_top_left_indicator),
+        num_Top_Right("num_Top_Right", R.id.default_center_top_left_indicator),
+        num_Left_Bottom("num_Left_Bottom", R.id.default_center_top_left_indicator),
+        num_Right_Bottom("num_Right_Bottom", R.id.default_center_top_left_indicator),
+        num_Center_Bottom("num_Center_Bottom", R.id.default_center_top_left_indicator);
 
         private final String name;
         private final int id;
