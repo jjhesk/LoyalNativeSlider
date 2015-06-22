@@ -41,7 +41,7 @@ dependencies {
 <dependency>
     <groupId>com.squareup.picasso</groupId>
     <artifactId>picasso</artifactId>
-    <version>2.3.2</version>
+    <version>2.5.2</version>
 </dependency>
 <dependency>
     <groupId>com.nineoldandroids</groupId>
@@ -49,9 +49,9 @@ dependencies {
     <version>2.4.0</version>
 </dependency>
 <dependency>
-    <groupId>com.daimajia.slider</groupId>
+    <groupId>com.hkm.loyalslider</groupId>
     <artifactId>library</artifactId>
-    <version>1.1.2</version>
+    <version>1.2.1</version>
     <type>apklib</type>
 </dependency>
 ```
@@ -61,6 +61,8 @@ dependencies {
 For Eclipse users, I provided a sample project which orgnized as Eclipse way. You can download it from [here](https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.9/AndroidImageSlider-Eclipse.zip), and make some changes to fit your project.
 
 Notice: It's the version of 1.0.9, it may not update any more. You can update manually by yourself.
+
+For Eclipse project, you might need to with the parent project from daimajia.
 
 ### Step 2
 
@@ -101,7 +103,7 @@ There are some default indicators. If you want to use a provided indicator:
         />
 ```
 
-[Code example](https://github.com/daimajia/AndroidImageSlider/blob/master/demo%2Fsrc%2Fmain%2Fjava%2Fcom%2Fdaimajia%2Fslider%2Fdemo%2FMainActivity.java)
+[Code example](https://github.com/jjhesk/LoyalNativeSlider/blob/master/demo/src/main/java/com/daimajia/slider/demo/MainActivity.java)
  
 ====
 
