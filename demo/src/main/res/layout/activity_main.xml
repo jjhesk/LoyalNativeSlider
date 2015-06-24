@@ -12,7 +12,8 @@
         custom:auto_cycle="true"
         custom:indicator_visibility="visible"
         custom:pager_animation="Accordion"
-        custom:pager_animation_span="1100" />
+        custom:pager_animation_span="1100"
+        custom:slider_side_buttons="true" />
 
     <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/custom_indicator"
