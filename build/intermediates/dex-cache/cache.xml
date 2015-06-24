@@ -2,11 +2,18 @@
 <items version="2" >
 
     <item
-        jar="M:\tempAndroid\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-746cd4bf46c2774f3b1813b03b960bec7b628e86.jar" />
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-06f49b17e72201633292eb3fc118204dbce8c80c.jar" />
+    </item>
+    <item
+        jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\LoyalNativeSlider\library\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7fc7bfcfc714cc0d8cbc24b9519190f2f55e7a55">
+        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\classes-c577e1044e5f97c8de63e6635039ca71d16951e2.jar" />
     </item>
     <item
         jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
@@ -16,18 +23,18 @@
         <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\classes-552c0aad1e5cba126d646d19113418b14fbeab86.jar" />
     </item>
     <item
-        jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\LoyalNativeSlider\library\unspecified\jars\classes.jar"
+        jar="C:\Users\hesk\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="89eb6001e89ed0f6379cedc5bed352ef4763fdb9">
-        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\classes-c577e1044e5f97c8de63e6635039ca71d16951e2.jar" />
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\picasso-2.5.2-6e95445dc34f689588a530da5f668d71ff6b4909.jar" />
     </item>
     <item
-        jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\com.daimajia.androidanimations\library\1.0.3\jars\classes.jar"
+        jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="f7a9468c473a9a6f046eb735abe06a08d8edac5f">
-        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\classes-e87490408ae33c4f8cd0d45b8d708787706ecfea.jar" />
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\classes-834df5a073242cc8cca6a8790bb22331506907d1.jar" />
     </item>
     <item
         jar="C:\Users\hesk\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
@@ -37,25 +44,18 @@
         <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\library-2.4.0-6a4482bdf7cf4633fb1e1f75c02d9eeedf510fee.jar" />
     </item>
     <item
-        jar="C:\Users\hesk\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\com.daimajia.androidanimations\library\1.0.3\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\picasso-2.5.2-6e95445dc34f689588a530da5f668d71ff6b4909.jar" />
+        sha1="f7a9468c473a9a6f046eb735abe06a08d8edac5f">
+        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\classes-e87490408ae33c4f8cd0d45b8d708787706ecfea.jar" />
     </item>
     <item
-        jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jar="M:\tempAndroid\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-06f49b17e72201633292eb3fc118204dbce8c80c.jar" />
-    </item>
-    <item
-        jar="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\classes-834df5a073242cc8cca6a8790bb22331506907d1.jar" />
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="F:\backupgithub\LoyalNativeSlider\demo\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-746cd4bf46c2774f3b1813b03b960bec7b628e86.jar" />
     </item>
 
 </items>

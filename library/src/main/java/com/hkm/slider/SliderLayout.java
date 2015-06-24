@@ -10,29 +10,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.hkm.slider.Animations.BaseAnimationInterface;
 import com.hkm.slider.Indicators.PagerIndicator;
-import com.hkm.slider.R;
 import com.hkm.slider.SliderTypes.BaseSliderView;
-import com.hkm.slider.Transformers.AccordionTransformer;
-import com.hkm.slider.Transformers.BackgroundToForegroundTransformer;
 import com.hkm.slider.Transformers.BaseTransformer;
-import com.hkm.slider.Transformers.CubeInTransformer;
-import com.hkm.slider.Transformers.DefaultTransformer;
-import com.hkm.slider.Transformers.DepthPageTransformer;
-import com.hkm.slider.Transformers.FadeTransformer;
-import com.hkm.slider.Transformers.FlipHorizontalTransformer;
-import com.hkm.slider.Transformers.FlipPageViewTransformer;
-import com.hkm.slider.Transformers.ForegroundToBackgroundTransformer;
-import com.hkm.slider.Transformers.RotateDownTransformer;
-import com.hkm.slider.Transformers.RotateUpTransformer;
-import com.hkm.slider.Transformers.StackTransformer;
-import com.hkm.slider.Transformers.TabletTransformer;
-import com.hkm.slider.Transformers.ZoomInTransformer;
-import com.hkm.slider.Transformers.ZoomOutSlideTransformer;
-import com.hkm.slider.Transformers.ZoomOutTransformer;
 import com.hkm.slider.Tricks.FixedSpeedScroller;
 import com.hkm.slider.Tricks.InfinitePagerAdapter;
 import com.hkm.slider.Tricks.InfiniteViewPager;
@@ -40,7 +24,6 @@ import com.hkm.slider.Tricks.MultiViewPager;
 import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.lang.reflect.Field;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -67,23 +50,6 @@ import java.util.TimerTask;
  * indicator_unselected_drawable
  * /
  * pager_animation
- * Default
- * Accordion
- * Background2Foreground
- * CubeIn
- * DepthPage
- * Fade
- * FlipHorizontal
- * FlipPage
- * Foreground2Background
- * RotateDown
- * RotateUp
- * Stack
- * Tablet
- * ZoomIn
- * ZoomOutSlide
- * ZoomOut
- * pager_animation_span
  */
 public class SliderLayout extends RelativeLayout {
 
@@ -123,7 +89,7 @@ public class SliderLayout extends RelativeLayout {
      * If {@link com.hkm.slider.Tricks.ViewPagerEx} is Cycling
      */
     private boolean mCycling;
-
+    private boolean sidebuttons;
     /**
      * Determine if auto recover after user touch the {@link com.hkm.slider.Tricks.ViewPagerEx}
      */
@@ -187,6 +153,7 @@ public class SliderLayout extends RelativeLayout {
         mTransformerId = attributes.getInt(R.styleable.SliderLayout_pager_animation, TransformerL.Default.ordinal());
         mSliderIndicatorPresentations = attributes.getInt(R.styleable.SliderLayout_lns_use_presentation, PresentationConfig.Smart.ordinal());
         mAutoCycle = attributes.getBoolean(R.styleable.SliderLayout_auto_cycle, true);
+        sidebuttons = attributes.getBoolean(R.styleable.SliderLayout_slider_side_buttons, false);
         int visibility = attributes.getInt(R.styleable.SliderLayout_indicator_visibility, 0);
         for (PagerIndicator.IndicatorVisibility v : PagerIndicator.IndicatorVisibility.values()) {
             if (v.ordinal() == visibility) {
@@ -204,6 +171,30 @@ public class SliderLayout extends RelativeLayout {
         setIndicatorVisibility(mIndicatorVisibility);
         if (mAutoCycle) {
             startAutoCycle();
+        }
+        buttonNSetup();
+
+    }
+
+    private void buttonNSetup() {
+        ImageView Arrr_L = (ImageView) findViewById(R.id.arrow_l);
+        ImageView Arrr_R = (ImageView) findViewById(R.id.arrow_r);
+        if (!sidebuttons) {
+            Arrr_L.setVisibility(GONE);
+            Arrr_R.setVisibility(GONE);
+        } else {
+            Arrr_L.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    moveNextPosition(true);
+                }
+            });
+            Arrr_R.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    movePrevPosition(true);
+                }
+            });
         }
     }
 
@@ -323,7 +314,6 @@ public class SliderLayout extends RelativeLayout {
     public void movePrevPosition() {
         movePrevPosition(true);
     }
-
 
     public void slideToNextItem() {
         mViewPager.nextItem();

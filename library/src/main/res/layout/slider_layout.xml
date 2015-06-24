@@ -77,4 +77,23 @@
         android:id="@+id/number_count_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+
+
+    <ImageView
+        android:id="@+id/arrow_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/arrow_r" />
+
+    <ImageView
+        android:id="@+id/arrow_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/arrow_l" />
+
 </RelativeLayout>
