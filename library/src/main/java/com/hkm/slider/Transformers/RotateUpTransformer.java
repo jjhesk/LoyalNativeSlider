@@ -1,8 +1,8 @@
 package com.hkm.slider.Transformers;
 
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 
-import com.nineoldandroids.view.ViewHelper;
 
 public class RotateUpTransformer extends BaseTransformer {
 
@@ -13,10 +13,10 @@ public class RotateUpTransformer extends BaseTransformer {
 		final float width = view.getWidth();
 		final float rotation = ROT_MOD * position;
 
-		ViewHelper.setPivotX(view,width * 0.5f);
-        ViewHelper.setPivotY(view,0f);
-        ViewHelper.setTranslationX(view,0f);
-        ViewHelper.setRotation(view,rotation);
+		ViewCompat.setPivotX(view, width * 0.5f);
+        ViewCompat.setPivotY(view,0f);
+        ViewCompat.setTranslationX(view,0f);
+        ViewCompat.setRotation(view,rotation);
 	}
 	
 	@Override

@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.hkm.slider.SliderLayout;
+import com.hkm.slider.TransformerL;
 
 /**
  * Created by daimajia on 14-5-29.
@@ -20,12 +21,12 @@ public class TransformerAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return SliderLayout.Transformer.values().length;
+        return TransformerL.values().length;
     }
 
     @Override
     public Object getItem(int position) {
-        return SliderLayout.Transformer.values()[position].toString();
+        return TransformerL.values()[position].toString();
     }
 
     @Override

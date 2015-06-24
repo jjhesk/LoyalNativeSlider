@@ -20,6 +20,7 @@ import com.hkm.slider.Indicators.PagerIndicator;
 import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
+import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.util.HashMap;
@@ -60,7 +61,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
             mDemoSlider.addSlider(textSliderView);
         }
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        mDemoSlider.setPresetTransformer(TransformerL.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
@@ -113,7 +114,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                 mDemoSlider.setCustomAnimation(new DescriptionAnimation());
                 break;
             case R.id.action_github:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/daimajia/AndroidImageSlider"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.urlgithub)));
                 startActivity(browserIntent);
                 break;
         }
