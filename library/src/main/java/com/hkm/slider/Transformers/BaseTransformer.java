@@ -1,10 +1,10 @@
 package com.hkm.slider.Transformers;
 
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 
 import com.hkm.slider.Animations.BaseAnimationInterface;
 import com.hkm.slider.Tricks.ViewPagerEx;
-import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,20 +72,20 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
     protected void onPreTransform(View view, float position) {
         final float width = view.getWidth();
 
-        ViewHelper.setRotationX(view, 0);
-        ViewHelper.setRotationY(view, 0);
-        ViewHelper.setRotation(view, 0);
-        ViewHelper.setScaleX(view, 1);
-        ViewHelper.setScaleY(view, 1);
-        ViewHelper.setPivotX(view, 0);
-        ViewHelper.setPivotY(view, 0);
-        ViewHelper.setTranslationY(view, 0);
-        ViewHelper.setTranslationX(view, isPagingEnabled() ? 0f : -width * position);
+        ViewCompat.setRotationX(view, 0);
+        ViewCompat.setRotationY(view, 0);
+        ViewCompat.setRotation(view, 0);
+        ViewCompat.setScaleX(view, 1);
+        ViewCompat.setScaleY(view, 1);
+        ViewCompat.setPivotX(view, 0);
+        ViewCompat.setPivotY(view, 0);
+        ViewCompat.setTranslationY(view, 0);
+        ViewCompat.setTranslationX(view, isPagingEnabled() ? 0f : -width * position);
 
         if (hideOffscreenPages()) {
-            ViewHelper.setAlpha(view, position <= -1f || position >= 1f ? 0f : 1f);
+            ViewCompat.setAlpha(view, position <= -1f || position >= 1f ? 0f : 1f);
         } else {
-            ViewHelper.setAlpha(view, 1f);
+            ViewCompat.setAlpha(view, 1f);
         }
         if (mCustomAnimationInterface != null) {
             if (h.containsKey(view) == false || h.get(view).size() == 1) {

@@ -184,7 +184,7 @@ public class SliderLayout extends RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.slider_layout, this, true);
         final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SliderLayout, defStyle, 0);
         mTransformerSpan = attributes.getInteger(R.styleable.SliderLayout_pager_animation_span, 1100);
-        mTransformerId = attributes.getInt(R.styleable.SliderLayout_pager_animation, Transformer.Default.ordinal());
+        mTransformerId = attributes.getInt(R.styleable.SliderLayout_pager_animation, TransformerL.Default.ordinal());
         mSliderIndicatorPresentations = attributes.getInt(R.styleable.SliderLayout_lns_use_presentation, PresentationConfig.Smart.ordinal());
         mAutoCycle = attributes.getBoolean(R.styleable.SliderLayout_auto_cycle, true);
         int visibility = attributes.getInt(R.styleable.SliderLayout_indicator_visibility, 0);
@@ -537,41 +537,7 @@ public class SliderLayout extends RelativeLayout {
     /**
      * preset transformers and their names
      */
-    public enum Transformer {
-        Default("Default"),
-        Accordion("Accordion"),
-        Background2Foreground("Background2Foreground"),
-        CubeIn("CubeIn"),
-        DepthPage("DepthPage"),
-        Fade("Fade"),
-        FlipHorizontal("FlipHorizontal"),
-        FlipPage("FlipPage"),
-        Foreground2Background("Foreground2Background"),
-        RotateDown("RotateDown"),
-        RotateUp("RotateUp"),
-        Stack("Stack"),
-        Tablet("Tablet"),
-        ZoomIn("ZoomIn"),
-        ZoomOutSlide("ZoomOutSlide"),
-        ZoomOut("ZoomOut"),
-        Shuffle("Shuffle");
 
-        private final String name;
-
-        private Transformer(String s) {
-            name = s;
-        }
-
-        public String toString() {
-            return name;
-        }
-
-        public boolean equals(String other) {
-            return (other == null) ? false : name.equals(other);
-        }
-    }
-
-    ;
 
     /**
      * set a preset viewpager transformer by id.
@@ -579,7 +545,7 @@ public class SliderLayout extends RelativeLayout {
      * @param transformerId the recongized transformer ID
      */
     public void setPresetTransformer(int transformerId) {
-        for (Transformer t : Transformer.values()) {
+        for (TransformerL t : TransformerL.values()) {
             if (t.ordinal() == transformerId) {
                 setPresetTransformer(t);
                 break;
@@ -593,7 +559,7 @@ public class SliderLayout extends RelativeLayout {
      * @param transformerName the transformer name in string
      */
     public void setPresetTransformer(String transformerName) {
-        for (Transformer t : Transformer.values()) {
+        for (TransformerL t : TransformerL.values()) {
             if (t.equals(transformerName)) {
                 setPresetTransformer(t);
                 return;
@@ -620,130 +586,21 @@ public class SliderLayout extends RelativeLayout {
      *
      * @param ts the transformer object
      */
-    public void setPresetTransformer(Transformer ts) {
-        //
-        // special thanks to https://github.com/ToxicBakery/ViewPagerTransforms
-        //
-        BaseTransformer t = null;
-        mIsShuffle = false;
-        switch (ts) {
-            case Default:
-                t = new DefaultTransformer();
-                break;
-            case Accordion:
-                t = new AccordionTransformer();
-                break;
-            case Background2Foreground:
-                t = new BackgroundToForegroundTransformer();
-                break;
-            case CubeIn:
-                t = new CubeInTransformer();
-                break;
-            case DepthPage:
-                t = new DepthPageTransformer();
-                break;
-            case Fade:
-                t = new FadeTransformer();
-                break;
-            case FlipHorizontal:
-                t = new FlipHorizontalTransformer();
-                break;
-            case FlipPage:
-                t = new FlipPageViewTransformer();
-                break;
-            case Foreground2Background:
-                t = new ForegroundToBackgroundTransformer();
-                break;
-            case RotateDown:
-                t = new RotateDownTransformer();
-                break;
-            case RotateUp:
-                t = new RotateUpTransformer();
-                break;
-            case Stack:
-                t = new StackTransformer();
-                break;
-            case Tablet:
-                t = new TabletTransformer();
-                break;
-            case ZoomIn:
-                t = new ZoomInTransformer();
-                break;
-            case ZoomOutSlide:
-                t = new ZoomOutSlideTransformer();
-                break;
-            case ZoomOut:
-                t = new ZoomOutTransformer();
-                break;
-            case Shuffle:
-                mIsShuffle = true;
-                t = getShuffleTransformer();
-                break;
-        }
-        setPagerTransformer(true, t);
+    public void setPresetTransformer(TransformerL ts) {
+        if (ts == TransformerL.Shuffle) {
+            setPagerTransformer(true, getShuffleTransformer());
+        } else
+            setPagerTransformer(true, ts.getTranformFunction());
     }
 
     /**
-     * return a random Transformer between [0, the length of enum -1)
+     * return a random TransformerL between [0, the length of enum -1)
      *
      * @return BaseTransformer
      */
     public BaseTransformer getShuffleTransformer() {
-        BaseTransformer t = null;
-        int transformerNumber = Transformer.values().length;
-        int random = new Random().nextInt(transformerNumber - 1);
-        Transformer ts = Transformer.values()[random];
-        switch (ts) {
-            case Default:
-                t = new DefaultTransformer();
-                break;
-            case Accordion:
-                t = new AccordionTransformer();
-                break;
-            case Background2Foreground:
-                t = new BackgroundToForegroundTransformer();
-                break;
-            case CubeIn:
-                t = new CubeInTransformer();
-                break;
-            case DepthPage:
-                t = new DepthPageTransformer();
-                break;
-            case Fade:
-                t = new FadeTransformer();
-                break;
-            case FlipHorizontal:
-                t = new FlipHorizontalTransformer();
-                break;
-            case FlipPage:
-                t = new FlipPageViewTransformer();
-                break;
-            case Foreground2Background:
-                t = new ForegroundToBackgroundTransformer();
-                break;
-            case RotateDown:
-                t = new RotateDownTransformer();
-                break;
-            case RotateUp:
-                t = new RotateUpTransformer();
-                break;
-            case Stack:
-                t = new StackTransformer();
-                break;
-            case Tablet:
-                t = new TabletTransformer();
-                break;
-            case ZoomIn:
-                t = new ZoomInTransformer();
-                break;
-            case ZoomOutSlide:
-                t = new ZoomOutSlideTransformer();
-                break;
-            case ZoomOut:
-                t = new ZoomOutTransformer();
-                break;
-        }
-        return t;
+        mIsShuffle = true;
+        return TransformerL.randomSymbol();
     }
 
     /**
