@@ -108,7 +108,8 @@ There are some default indicators. If you want to use a provided indicator:
 ====
 
 ## Advanced usage
-Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki)
+Visit the Transform [Wiki](https://github.com/jjhesk/LoyalNativeSlider/wiki)
+Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the mother library
  
 ## Thanks
 
