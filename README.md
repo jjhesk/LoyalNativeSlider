@@ -123,18 +123,18 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the
 If there are someone who I do not mention here, please accept my sincere appologies and tell me.
 
 ###Donation:
-Donate $9.99: [![$9.99](http://i.imgur.com/wUWK6e1.jpg)]
+Donate $9.99: [![$9.99](http://i.imgur.com/wUWK6e1.jpg)] https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=9.99&return=&item_name=LoyalSliderDonation)
 
-Donate $19.99: [![$19.99](http://i.imgur.com/wUWK6e1.jpg)]
+Donate $19.99: [![$19.99](http://i.imgur.com/wUWK6e1.jpg)]https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=19.99&return=&item_name=LoyalSliderDonation)
 
-Donate $39.99: [![$39.99](http://i.imgur.com/wUWK6e1.jpg)]
+Donate $39.99: [![$39.99](http://i.imgur.com/wUWK6e1.jpg)]https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=39.99&return=&item_name=LoyalSliderDonation)
 
-Donate $59.99: [![$59.99](http://i.imgur.com/wUWK6e1.jpg)]
+Donate $59.99: [![$59.99](http://i.imgur.com/wUWK6e1.jpg)]https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=59.99&return=&item_name=LoyalSliderDonation)
 
 
-Open Donation - USD: [![$59.99](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=&return=&item_name=LoyalSliderDonation)
+Open Donation - USD: [![OPEN](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=&return=&item_name=LoyalSliderDonation)
 
-Open Donation - HKD: [![$59.99](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=HKD&amount=&return=&item_name=LoyalSliderDonation)
+Open Donation - HKD: [![OPEN](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=HKD&amount=&return=&item_name=LoyalSliderDonation)
 
 License
 --------
