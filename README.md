@@ -113,11 +113,45 @@ There are some default indicators. If you want to use a provided indicator:
 Visit the Transform [Wiki](https://github.com/jjhesk/LoyalNativeSlider/wiki)
 Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the mother library
  
-## Thanks
+## Thanks for the Reference
 
 - [Picasso](https://github.com/square/picasso)
 - [NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)
 - [ViewPagerTransforms](https://github.com/ToxicBakery/ViewPagerTransforms)
 - [Android Image Slider](https://github.com/daimajia/AndroidImageSlider)
+
+If there are someone who I do not mention here, please accept my sincere appologies and tell me.
+
+###Donation:
+Donate $9.99: [![$9.99](http://i.imgur.com/wUWK6e1.jpg)]
+
+Donate $19.99: [![$19.99](http://i.imgur.com/wUWK6e1.jpg)]
+
+Donate $39.99: [![$39.99](http://i.imgur.com/wUWK6e1.jpg)]
+
+Donate $59.99: [![$59.99](http://i.imgur.com/wUWK6e1.jpg)]
+
+
+Open Donation - USD: [![$59.99](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=&return=&item_name=LoyalSliderDonation)
+
+Open Donation - HKD: [![$59.99](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=HKD&amount=&return=&item_name=LoyalSliderDonation)
+
+License
+--------
+
+    Copyright 2015 JJHesk
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
 
 ##About me
