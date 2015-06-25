@@ -1,4 +1,23 @@
 language: android
+# Turning off caching to avoid caching Issues
+# cache: false
+# Using the new Container-Based Infrastructure
+sudo: false
+
+env:
+  global:
+    # Initiating clean Gradle output
+    - TERM=dumb
+    # Amount of memory granted to Gradle JVM
+    - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
+    # General Android settings used in builds
+    - ANDROID_TARGET=android-22
+
+before_install:
+    # Making sure gradlew has executable permissions
+    # - cd UltimateRecyclerView
+    - chmod a+x gradlew
+    
 android:
   components:
     # Uncomment the lines below if you want to
@@ -6,20 +25,27 @@ android:
     # - platform-tools
     # - tools
 
-    # The BuildTools version used by your project
-    - build-tools-22.0.1
-
     # The SDK version used to compile your project
     - android-22
 
+    # The BuildTools version used by your project
+    - build-tools-22.0.1
+    
+    - platform-tools
+    - tools
+    
     # Additional components
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
-    - addon-google_apis-google-19
+    # - addon-google_apis-google-19
 
+  licenses:
+     - 'android-sdk-license-.+'
+     
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-19
     - sys-img-x86-android-17
+    
 script: ./gradlew assembleDebug
