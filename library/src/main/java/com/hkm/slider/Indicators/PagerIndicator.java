@@ -398,10 +398,10 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
     public void redraw() {
         mItemCount = getShouldDrawCount();
         mPreviousSelectedIndicator = null;
+
         for (View i : mIndicators) {
             removeView(i);
         }
-
 
         for (int i = 0; i < mItemCount; i++) {
             ImageView indicator = new ImageView(mContext);

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.hkm.slider.Animations.BaseAnimationInterface;
+import com.hkm.slider.Indicators.NumContainer;
 import com.hkm.slider.Indicators.PagerIndicator;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.Transformers.BaseTransformer;
@@ -72,7 +73,7 @@ public class SliderLayout extends RelativeLayout {
      */
     private PagerIndicator mIndicator;
 
-
+    private final NumContainer numIndicator;
     /**
      * A timer and a TimerTask using to cycle the {@link com.hkm.slider.Tricks.ViewPagerEx}.
      */
@@ -132,6 +133,11 @@ public class SliderLayout extends RelativeLayout {
     private int mPagerMargin;
 
     /**
+     * this is the limit for switching from dot types into the page number type
+     */
+    private int slideDotLimit;
+
+    /**
      * {@link com.hkm.slider.Indicators.PagerIndicator} shape, rect or oval.
      *
      * @param context context
@@ -154,6 +160,7 @@ public class SliderLayout extends RelativeLayout {
         mSliderIndicatorPresentations = attributes.getInt(R.styleable.SliderLayout_lns_use_presentation, PresentationConfig.Smart.ordinal());
         mAutoCycle = attributes.getBoolean(R.styleable.SliderLayout_auto_cycle, true);
         sidebuttons = attributes.getBoolean(R.styleable.SliderLayout_slider_side_buttons, false);
+        slideDotLimit = attributes.getInt(R.styleable.SliderLayout_slide_dot_limit, 5);
         int visibility = attributes.getInt(R.styleable.SliderLayout_indicator_visibility, 0);
         for (PagerIndicator.IndicatorVisibility v : PagerIndicator.IndicatorVisibility.values()) {
             if (v.ordinal() == visibility) {
@@ -161,6 +168,7 @@ public class SliderLayout extends RelativeLayout {
                 break;
             }
         }
+        numIndicator = new NumContainer(mContext);
         mSliderAdapter = new SliderAdapter(mContext);
         mSliderAdapter.registerDataSetObserver(sliderDataObserver);
         pagerSetup();
@@ -173,7 +181,6 @@ public class SliderLayout extends RelativeLayout {
             startAutoCycle();
         }
         buttonNSetup();
-
     }
 
     private void buttonNSetup() {
@@ -273,10 +280,37 @@ public class SliderLayout extends RelativeLayout {
         mIndicator.redraw();
     }
 
-    public <T extends BaseSliderView> void addSlider(T imageContent) {
-        mSliderAdapter.addSlider(imageContent);
+    public void setNumericIndicator(PagerIndicator positions) {
+        // if (numIndicator != null) {
+        //   numIndicator.destroySelf();
+        // }
+        /*
+        numIndicator = positions;
+        numIndicator.setIndicatorVisibility(mIndicatorVisibility);
+        numIndicator.setViewPager(mViewPager);
+        numIndicator.redraw();
+        */
     }
 
+    public <T extends BaseSliderView> void addSlider(T imageContent) {
+        mSliderAdapter.addSlider(imageContent);
+        final boolean c1 = mSliderAdapter.getCount() > slideDotLimit,
+                c2 = PresentationConfig.Smart == PresentationConfig.byVal(mSliderIndicatorPresentations),
+                c3 = PresentationConfig.Numbers == PresentationConfig.byVal(mSliderIndicatorPresentations);
+        if ((c1 && c2) || c3) {
+            if (!numIndicator.redraw())
+                numIndicator.initNumberContainer(this);
+            mIndicator.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
+        } else {
+            mIndicator.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Visible);
+            numIndicator.destroySelf();
+        }
+    }
+
+    private void setPresentIndicator() {
+
+
+    }
 
     /**
      * move to the next slide
@@ -522,6 +556,14 @@ public class SliderLayout extends RelativeLayout {
             return (other == null) ? false : name.equals(other);
         }
 
+        public static PresentationConfig byVal(final int presentationInt) {
+            for (TransformerL t : TransformerL.values()) {
+                if (t.ordinal() == presentationInt) {
+                    return PresentationConfig.values()[t.ordinal()];
+                }
+            }
+            return Smart;
+        }
     }
 
     /**
@@ -535,12 +577,7 @@ public class SliderLayout extends RelativeLayout {
      * @param transformerId the recongized transformer ID
      */
     public void setPresetTransformer(int transformerId) {
-        for (TransformerL t : TransformerL.values()) {
-            if (t.ordinal() == transformerId) {
-                setPresetTransformer(t);
-                break;
-            }
-        }
+        setPresetTransformer(TransformerL.fromVal(transformerId));
     }
 
     /**
@@ -599,11 +636,12 @@ public class SliderLayout extends RelativeLayout {
      * @param visibility the page visibility
      */
     public void setIndicatorVisibility(PagerIndicator.IndicatorVisibility visibility) {
-        if (mIndicator == null) {
-            return;
+        if (numIndicator != null) {
+          //  numIndicator.setIndicatorVisibility(visibility);
         }
-
-        mIndicator.setIndicatorVisibility(visibility);
+        if (mIndicator != null) {
+            mIndicator.setIndicatorVisibility(visibility);
+        }
     }
 
     public PagerIndicator.IndicatorVisibility getIndicatorVisibility() {
@@ -635,17 +673,16 @@ public class SliderLayout extends RelativeLayout {
         Right_Top("Right_Top", R.id.default_center_top_right_indicator),
         Left_Top("Left_Top", R.id.default_center_top_left_indicator),
 
-        num_Top_Center("num_Top_Center", R.id.default_center_top_left_indicator),
-        num_Top_Left("num_Top_Left", R.id.default_center_top_left_indicator),
-        num_Top_Right("num_Top_Right", R.id.default_center_top_left_indicator),
-        num_Left_Bottom("num_Left_Bottom", R.id.default_center_top_left_indicator),
-        num_Right_Bottom("num_Right_Bottom", R.id.default_center_top_left_indicator),
-        num_Center_Bottom("num_Center_Bottom", R.id.default_center_top_left_indicator);
+        num_Top_Left("num_Top_Left", R.id.number_count_layout),
+        num_Top_Right("num_Top_Right", R.id.number_count_layout),
+        num_Left_Bottom("num_Left_Bottom", R.id.number_count_layout),
+        num_Right_Bottom("num_Right_Bottom", R.id.number_count_layout),
+        num_Center_Bottom("num_Center_Bottom", R.id.number_count_layout);
 
         private final String name;
         private final int id;
 
-        private PresetIndicators(String name, int id) {
+        PresetIndicators(String name, int id) {
             this.name = name;
             this.id = id;
         }

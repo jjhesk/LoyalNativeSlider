@@ -143,4 +143,22 @@ public enum TransformerL {
         TransformerL ts = TransformerL.values()[random];
         return ts.bySymbol(ts);
     }
+
+    public static TransformerL byName(String name) {
+        for (TransformerL t : TransformerL.values()) {
+            if (t.equals(name)) {
+                return TransformerL.valueOf(name);
+            }
+        }
+        return Default;
+    }
+
+    public static TransformerL fromVal(int transformerId) {
+        for (TransformerL t : TransformerL.values()) {
+            if (t.ordinal() == transformerId) {
+                return TransformerL.values()[t.ordinal()];
+            }
+        }
+        return Default;
+    }
 }
