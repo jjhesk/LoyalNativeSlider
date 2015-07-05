@@ -54,6 +54,7 @@
         <!-- Maximum size. -->
         <attr name="android:maxHeight" />
     </declare-styleable>
+
     <declare-styleable name="PagerIndicator">
         <!-- indicator visibility -->
         <attr name="visibility" format="enum">

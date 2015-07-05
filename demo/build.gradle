@@ -11,6 +11,7 @@ android {
         versionCode 2
         versionName "1.0.1"
     }
+
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
@@ -26,5 +27,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     // compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.androidanimations:library:1.0.3@aar'
-    //compile 'com.hkm.loyalslider:library:1.2.1'
+    // compile 'com.hkm.loyalslider:library:1.2.3@aar'
 }

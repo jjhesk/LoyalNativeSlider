@@ -12,8 +12,8 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
         classpath 'com.github.dcendents:android-maven-plugin:1.2'
-        classpath 'com.novoda:bintray-release:0.2.11'
-        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
+        classpath 'com.novoda:bintray-release:0.3.0'
+       // classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
     }
 }
 
