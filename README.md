@@ -115,26 +115,17 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the
  
 ## Thanks for the Reference
 
-- [Picasso](https://github.com/square/picasso)
-- [NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)
-- [ViewPagerTransforms](https://github.com/ToxicBakery/ViewPagerTransforms)
-- [Android Image Slider](https://github.com/daimajia/AndroidImageSlider)
+- [Picasso][2]
+- [NineOldAndroids][3]
+- [ViewPagerTransforms][4]
+- [Android Image Slider][5]
 
 If there are someone who I do not mention here, please accept my sincere appologies and tell me.
 
+
+
 ###Donation:
-Donate $9.99: [![$9.99](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=9.99&return=&item_name=LoyalSliderDonation)
-
-Donate $19.99: [![$19.99](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=19.99&return=&item_name=LoyalSliderDonation)
-
-Donate $39.99: [![$39.99](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=39.99&return=&item_name=LoyalSliderDonation)
-
-Donate $59.99: [![$59.99](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=59.99&return=&item_name=LoyalSliderDonation)
-
-
-Open Donation - USD: [![OPEN](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=&return=&item_name=LoyalSliderDonation)
-
-Open Donation - HKD: [![OPEN](http://i.imgur.com/wUWK6e1.jpg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=HKD&amount=&return=&item_name=LoyalSliderDonation)
+Open Donation - USD: [![OPEN](http://i.imgur.com/wUWK6e1.jpg)][1]
 
 License
 --------
@@ -155,3 +146,8 @@ License
 
 
 ##About me
+[1]: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=&return=&item_name=LoyalSliderDonation
+[2]: https://github.com/square/picasso
+[3]: https://github.com/JakeWharton/NineOldAndroids
+[4]: https://github.com/ToxicBakery/ViewPagerTransforms
+[5]: https://github.com/daimajia/AndroidImageSlider
