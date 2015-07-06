@@ -28,6 +28,7 @@ gen/
 # Gradle files
 .gradle/
 build/
+/*/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -63,4 +64,3 @@ output/
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.jdt.launching.prefs
 .settings/
-
