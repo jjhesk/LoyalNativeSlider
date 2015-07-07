@@ -38,13 +38,8 @@ if (hasProperty('POM_DEVELOPER_ID')) {
     publish.bintrayUser = property('POM_DEVELOPER_ID')
 }
 
-<<<<<<< Updated upstream
-if (hasProperty('API')) {
-    publish.bintrayKey = property('API')
-=======
 if (hasProperty('BAPI')) {
     publish.bintrayKey = property('BAPI')
->>>>>>> Stashed changes
 }
 
 apply plugin: 'maven'
