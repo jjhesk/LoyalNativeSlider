@@ -78,8 +78,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<<<<<<< Updated upstream
-=======
         <RelativeLayout
             android:id="@+id/subcontainer"
             android:layout_width="50dp"
@@ -87,7 +85,6 @@
     </RelativeLayout>
 
 
->>>>>>> Stashed changes
     <ImageView
         android:id="@+id/arrow_r"
         android:layout_width="wrap_content"

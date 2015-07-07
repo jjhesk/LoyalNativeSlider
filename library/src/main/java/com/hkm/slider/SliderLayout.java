@@ -181,15 +181,13 @@ public class SliderLayout extends RelativeLayout {
         }
         numframesetup();
         buttonNSetup();
-<<<<<<< Updated upstream
-=======
+
     }
 
     private RelativeLayout holderNum;
 
     private void numframesetup() {
         holderNum = (RelativeLayout) findViewById(R.id.number_count_layout);
->>>>>>> Stashed changes
     }
 
     private void buttonNSetup() {
@@ -297,37 +295,14 @@ public class SliderLayout extends RelativeLayout {
         mIndicator.redraw();
     }
 
-    public void setNumericIndicator(PagerIndicator positions) {
-        // if (numIndicator != null) {
-        //   numIndicator.destroySelf();
-        // }
-        /*
-        numIndicator = positions;
-        numIndicator.setIndicatorVisibility(mIndicatorVisibility);
-        numIndicator.setViewPager(mViewPager);
-        numIndicator.redraw();
-        */
-    }
-
     public <T extends BaseSliderView> void addSlider(T imageContent) {
         mSliderAdapter.addSlider(imageContent);
         final boolean c1 = mSliderAdapter.getCount() > slideDotLimit,
                 c2 = PresentationConfig.Smart == PresentationConfig.byVal(mSliderIndicatorPresentations),
                 c3 = PresentationConfig.Numbers == PresentationConfig.byVal(mSliderIndicatorPresentations);
-        if ((c1 && c2) || c3) {
-            if (!numIndicator.redraw())
-                numIndicator.initNumberContainer(this);
-            mIndicator.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
-        } else {
-            mIndicator.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Visible);
-            numIndicator.destroySelf();
-        }
-    }
-
-    private void setPresentIndicator() {
-
 
     }
+
 
     /**
      * move to the next slide
@@ -590,7 +565,6 @@ public class SliderLayout extends RelativeLayout {
             return (other == null) ? false : name.equals(other);
         }
 
-<<<<<<< Updated upstream
         public static PresentationConfig byVal(final int presentationInt) {
             for (TransformerL t : TransformerL.values()) {
                 if (t.ordinal() == presentationInt) {
@@ -599,9 +573,9 @@ public class SliderLayout extends RelativeLayout {
             }
             return Smart;
         }
-=======
+
         // public abstract <T> getInstance();
->>>>>>> Stashed changes
+
     }
 
     /**
@@ -713,18 +687,8 @@ public class SliderLayout extends RelativeLayout {
         Right_Bottom("Right_Bottom", R.id.default_bottom_right_indicator),
         Left_Bottom("Left_Bottom", R.id.default_bottom_left_indicator),
         Center_Top("Center_Top", R.id.default_center_top_indicator),
-        Right_Top("Right_Top", R.id.default_center_top_right_indicator),
-<<<<<<< Updated upstream
-        Left_Top("Left_Top", R.id.default_center_top_left_indicator),
+        Right_Top("Right_Top", R.id.default_center_top_right_indicator);
 
-        num_Top_Left("num_Top_Left", R.id.number_count_layout),
-        num_Top_Right("num_Top_Right", R.id.number_count_layout),
-        num_Left_Bottom("num_Left_Bottom", R.id.number_count_layout),
-        num_Right_Bottom("num_Right_Bottom", R.id.number_count_layout),
-        num_Center_Bottom("num_Center_Bottom", R.id.number_count_layout);
-=======
-        Left_Top("Left_Top", R.id.default_center_top_left_indicator);
->>>>>>> Stashed changes
 
         private final String name;
         private final int id;
