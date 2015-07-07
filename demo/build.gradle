@@ -6,11 +6,11 @@ repositories {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':library')
+    //compile project(':library')
     compile 'com.android.support:appcompat-v7:22.2.0'
     // compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.androidanimations:library:1.0.3@aar'
-    // compile 'com.hkm.loyalslider:library:1.2.3@aar'
+    compile 'com.hkm.loyalslider:library:1.2.7'
 }
 
 android {
@@ -20,8 +20,8 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 22
-        versionCode 2
-        versionName "1.2.1"
+        versionCode 4
+        versionName "1.2.3"
     }
 
     buildTypes {
