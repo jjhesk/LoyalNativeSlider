@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="arrowbackground">#a4a357a3</color>
+    <color name="arrowbackground">#a460a342</color>
+    <color name="letter">#fffbffca</color>
+    <color name="letterbox">#ca000000</color>
 </resources>

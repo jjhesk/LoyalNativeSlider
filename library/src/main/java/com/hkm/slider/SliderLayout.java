@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -31,25 +32,20 @@ import java.util.TimerTask;
 /**
  * SliderLayout is compound layout. This is combined with {@link com.hkm.slider.Indicators.PagerIndicator}
  * and {@link com.hkm.slider.Tricks.ViewPagerEx} .
- * /
+ * -----
  * There is some properties you can set in XML:
- * /
+ * -----
  * indicator_visibility
  * visible
  * invisible
- * /
+ * -----
  * indicator_shape
  * oval
  * rect
- * /
  * indicator_selected_color
- * /
  * indicator_unselected_color
- * /
  * indicator_selected_drawable
- * /
  * indicator_unselected_drawable
- * /
  * pager_animation
  */
 public class SliderLayout extends RelativeLayout {
@@ -131,6 +127,7 @@ public class SliderLayout extends RelativeLayout {
      * the margin for setting the view pager margin distance
      */
     private int mPagerMargin;
+    private int buttondr, buttondl;
 
     /**
      * this is the limit for switching from dot types into the page number type
@@ -158,6 +155,8 @@ public class SliderLayout extends RelativeLayout {
         mTransformerSpan = attributes.getInteger(R.styleable.SliderLayout_pager_animation_span, 1100);
         mTransformerId = attributes.getInt(R.styleable.SliderLayout_pager_animation, TransformerL.Default.ordinal());
         mSliderIndicatorPresentations = attributes.getInt(R.styleable.SliderLayout_lns_use_presentation, PresentationConfig.Smart.ordinal());
+        buttondl = attributes.getResourceId(R.styleable.SliderLayout_image_button_l, R.drawable.arrow_l);
+        buttondr = attributes.getResourceId(R.styleable.SliderLayout_image_button_r, R.drawable.arrow_r);
         mAutoCycle = attributes.getBoolean(R.styleable.SliderLayout_auto_cycle, true);
         sidebuttons = attributes.getBoolean(R.styleable.SliderLayout_slider_side_buttons, false);
         slideDotLimit = attributes.getInt(R.styleable.SliderLayout_slide_dot_limit, 5);
@@ -180,12 +179,24 @@ public class SliderLayout extends RelativeLayout {
         if (mAutoCycle) {
             startAutoCycle();
         }
+        numframesetup();
         buttonNSetup();
+<<<<<<< Updated upstream
+=======
+    }
+
+    private RelativeLayout holderNum;
+
+    private void numframesetup() {
+        holderNum = (RelativeLayout) findViewById(R.id.number_count_layout);
+>>>>>>> Stashed changes
     }
 
     private void buttonNSetup() {
         ImageView Arrr_L = (ImageView) findViewById(R.id.arrow_l);
         ImageView Arrr_R = (ImageView) findViewById(R.id.arrow_r);
+        Arrr_L.setImageResource(buttondl);
+        Arrr_R.setImageResource(buttondr);
         if (!sidebuttons) {
             Arrr_L.setVisibility(GONE);
             Arrr_R.setVisibility(GONE);
@@ -229,6 +240,12 @@ public class SliderLayout extends RelativeLayout {
         }
     }
 
+    public <TN extends NumContainer> void setNumLayout(final TN container) {
+        final RelativeLayout mrelative = (RelativeLayout) findViewById(R.id.subcontainer);
+        container.withView(mrelative).setViewPager(mViewPager).build();
+        mrelative.removeAllViewsInLayout();
+        mrelative.addView(container.getView());
+    }
 
     /**
      * set the current slider
@@ -333,6 +350,18 @@ public class SliderLayout extends RelativeLayout {
         moveNextPosition(true);
     }
 
+    public void presentation(PresentationConfig pc) {
+        mSliderIndicatorPresentations = pc.ordinal();
+        if (pc == PresentationConfig.Dots) {
+            mIndicator.setVisibility(View.VISIBLE);
+            holderNum.setVisibility(View.GONE);
+        } else if (pc == PresentationConfig.Numbers) {
+            mIndicator.setVisibility(View.GONE);
+            holderNum.setVisibility(View.VISIBLE);
+        } else {
+
+        }
+    }
 
     /**
      * move to prev slide.
@@ -539,12 +568,17 @@ public class SliderLayout extends RelativeLayout {
      * presentation of indicators
      */
     public enum PresentationConfig {
-        Smart("Smart"),
+        Smart("Smart")/* {
+            @Override
+            public Object getInstance() {
+                return new Object();
+            }
+        }*/,
         Dots("Dots"),
         Numbers("Numbers");
         private final String name;
 
-        private PresentationConfig(String s) {
+        PresentationConfig(String s) {
             name = s;
         }
 
@@ -556,6 +590,7 @@ public class SliderLayout extends RelativeLayout {
             return (other == null) ? false : name.equals(other);
         }
 
+<<<<<<< Updated upstream
         public static PresentationConfig byVal(final int presentationInt) {
             for (TransformerL t : TransformerL.values()) {
                 if (t.ordinal() == presentationInt) {
@@ -564,6 +599,9 @@ public class SliderLayout extends RelativeLayout {
             }
             return Smart;
         }
+=======
+        // public abstract <T> getInstance();
+>>>>>>> Stashed changes
     }
 
     /**
@@ -644,6 +682,11 @@ public class SliderLayout extends RelativeLayout {
         }
     }
 
+    /**
+     * get the indicator if it is visible
+     *
+     * @return PagerIndicator
+     */
     public PagerIndicator.IndicatorVisibility getIndicatorVisibility() {
         if (mIndicator == null) {
             return mIndicator.getIndicatorVisibility();
@@ -671,6 +714,7 @@ public class SliderLayout extends RelativeLayout {
         Left_Bottom("Left_Bottom", R.id.default_bottom_left_indicator),
         Center_Top("Center_Top", R.id.default_center_top_indicator),
         Right_Top("Right_Top", R.id.default_center_top_right_indicator),
+<<<<<<< Updated upstream
         Left_Top("Left_Top", R.id.default_center_top_left_indicator),
 
         num_Top_Left("num_Top_Left", R.id.number_count_layout),
@@ -678,6 +722,9 @@ public class SliderLayout extends RelativeLayout {
         num_Left_Bottom("num_Left_Bottom", R.id.number_count_layout),
         num_Right_Bottom("num_Right_Bottom", R.id.number_count_layout),
         num_Center_Bottom("num_Center_Bottom", R.id.number_count_layout);
+=======
+        Left_Top("Left_Top", R.id.default_center_top_left_indicator);
+>>>>>>> Stashed changes
 
         private final String name;
         private final int id;

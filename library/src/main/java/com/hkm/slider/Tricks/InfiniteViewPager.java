@@ -5,6 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
+import com.hkm.slider.Indicators.NumContainer;
+
 /**
  * A {@link ViewPager} that allows pseudo-infinite paging with a wrap-around effect. Should be used with an {@link
  * InfinitePagerAdapter}.
@@ -35,7 +37,6 @@ public class InfiniteViewPager extends ViewPagerEx {
         // offset the current item to ensure there is space to scroll
         item = getOffsetAmount() + (item % getAdapter().getCount());
         super.setCurrentItem(item);
-
     }
 
     public void beforeItem() {
@@ -58,5 +59,6 @@ public class InfiniteViewPager extends ViewPagerEx {
             return 0;
         }
     }
+
 
 }

@@ -8,5 +8,4 @@ public interface IContainer {
 
     int getTextField();
 
-    int getAlignment();
 }

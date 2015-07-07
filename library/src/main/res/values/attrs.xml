@@ -44,6 +44,11 @@
         </attr>
         <!-- marging distance for both side -->
         <!--<attr name="pager_margin" format="dimension" />-->
+<<<<<<< Updated upstream
+=======
+        <attr name="image_button_l" format="reference" />
+        <attr name="image_button_r" format="reference" />
+>>>>>>> Stashed changes
         <attr name="slider_side_buttons" format="boolean" />
     </declare-styleable>
     <declare-styleable name="MultiViewPager">

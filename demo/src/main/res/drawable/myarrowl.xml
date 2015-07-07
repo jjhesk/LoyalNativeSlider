@@ -6,7 +6,7 @@
         android:right="0dp"
         android:top="0dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/arrowbackground" />
+            <solid android:color="@color/red_23" />
         </shape>
     </item>
     <item

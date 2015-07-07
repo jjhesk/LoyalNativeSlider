@@ -1,23 +1,35 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.daimajia.slider.demo.MainActivity" >
-    <item android:id="@+id/action_custom_indicator"
+    tools:context="com.daimajia.slider.demo.MainActivity">
+    <item
+        android:id="@+id/toggle_number_display"
+        android:orderInCategory="100"
+        android:title="Toggle Number display"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/indicator_default"
+        android:orderInCategory="100"
+        android:title="Default Indicator"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_custom_indicator"
+        android:orderInCategory="100"
         android:title="Custom Indicator"
-        android:orderInCategory="100"
         app:showAsAction="never" />
-    <item android:id="@+id/action_custom_child_animation"
+    <item
+        android:id="@+id/action_custom_child_animation"
+        android:orderInCategory="100"
         android:title="ChildView Animation"
-        android:orderInCategory="100"
         app:showAsAction="never" />
-    <item android:id="@+id/action_restore_default"
+    <item
+        android:id="@+id/action_restore_default"
         android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="Restore default"/>
-    <item android:id="@+id/action_github"
+        android:title="Restore default"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_github"
         android:orderInCategory="100"
-        app:showAsAction="never"
         android:title="GitHub"
-        >
-    </item>
+        app:showAsAction="never"></item>
 </menu>

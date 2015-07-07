@@ -1,5 +1,6 @@
 package com.daimajia.slider.demo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hkm.slider.Animations.DescriptionAnimation;
+import com.hkm.slider.Indicators.NumContainer;
 import com.hkm.slider.Indicators.PagerIndicator;
 import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.BaseSliderView;
@@ -30,11 +32,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     private SliderLayout mDemoSlider;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+    private HashMap<String, Integer> datasetup() {
 
         HashMap<String, String> url_maps = new HashMap<String, String>();
         url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
@@ -47,20 +45,12 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         file_maps.put("Big Bang Theory", R.drawable.bigbang);
         file_maps.put("House of Cards", R.drawable.house);
         file_maps.put("Game of Thrones", R.drawable.game_of_thrones);
+        return file_maps;
+    }
 
-        for (String name : file_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
-            //add your extra information
-            textSliderView.getBundle().putString("extra", name);
-
-            mDemoSlider.addSlider(textSliderView);
-        }
+    @SuppressLint("ResourceAsColor")
+    private void setupSlider() {
+        // remember setup first
         mDemoSlider.setPresetTransformer(TransformerL.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -68,6 +58,13 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
+        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_24, R.color.red_pink_26);
+
+        final munum n = new munum(this);
+        n.setAlignment(NumContainer.Alignment.Center_Top);
+        mDemoSlider.setNumLayout(n);
+        mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
+
         ListView l = (ListView) findViewById(R.id.transformers);
         l.setAdapter(new TransformerAdapter(this));
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -79,6 +76,28 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         });
 
 
+        //and data second. it is a must because you will except the data to be streamed into the pipline.
+        HashMap<String, Integer> file_maps = datasetup();
+        for (String name : file_maps.keySet()) {
+            TextSliderView textSliderView = new TextSliderView(this);
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(this);
+            //add your extra information
+            textSliderView.getBundle().putString("extra", name);
+            mDemoSlider.addSlider(textSliderView);
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+        setupSlider();
     }
 
     @Override
@@ -100,9 +119,18 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         return super.onCreateOptionsMenu(menu);
     }
 
+    private boolean numbered = false;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.toggle_number_display:
+                numbered = !numbered;
+                mDemoSlider.presentation(numbered ? SliderLayout.PresentationConfig.Numbers : SliderLayout.PresentationConfig.Dots);
+                break;
+            case R.id.indicator_default:
+                mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator2));
+                break;
             case R.id.action_custom_indicator:
                 mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
                 break;
