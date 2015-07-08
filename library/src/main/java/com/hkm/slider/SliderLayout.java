@@ -29,6 +29,8 @@ import java.lang.reflect.Field;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.hkm.slider.SliderLayout.PresentationConfig.*;
+
 /**
  * SliderLayout is compound layout. This is combined with {@link com.hkm.slider.Indicators.PagerIndicator}
  * and {@link com.hkm.slider.Tricks.ViewPagerEx} .
@@ -69,7 +71,6 @@ public class SliderLayout extends RelativeLayout {
      */
     private PagerIndicator mIndicator;
 
-    private final NumContainer numIndicator;
     /**
      * A timer and a TimerTask using to cycle the {@link com.hkm.slider.Tricks.ViewPagerEx}.
      */
@@ -93,7 +94,7 @@ public class SliderLayout extends RelativeLayout {
     private boolean mAutoRecover = true;
 
     private int mTransformerId;
-    private int mSliderIndicatorPresentations;
+    private int mSliderIndicatorPresentations, usingPresentation;
     /**
      * {@link com.hkm.slider.Tricks.ViewPagerEx} transformer time span.
      */
@@ -154,7 +155,7 @@ public class SliderLayout extends RelativeLayout {
         final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SliderLayout, defStyle, 0);
         mTransformerSpan = attributes.getInteger(R.styleable.SliderLayout_pager_animation_span, 1100);
         mTransformerId = attributes.getInt(R.styleable.SliderLayout_pager_animation, TransformerL.Default.ordinal());
-        mSliderIndicatorPresentations = attributes.getInt(R.styleable.SliderLayout_lns_use_presentation, PresentationConfig.Smart.ordinal());
+        mSliderIndicatorPresentations = attributes.getInt(R.styleable.SliderLayout_lns_use_presentation, Smart.ordinal());
         buttondl = attributes.getResourceId(R.styleable.SliderLayout_image_button_l, R.drawable.arrow_l);
         buttondr = attributes.getResourceId(R.styleable.SliderLayout_image_button_r, R.drawable.arrow_r);
         mAutoCycle = attributes.getBoolean(R.styleable.SliderLayout_auto_cycle, true);
@@ -167,7 +168,6 @@ public class SliderLayout extends RelativeLayout {
                 break;
             }
         }
-        numIndicator = new NumContainer(mContext);
         mSliderAdapter = new SliderAdapter(mContext);
         mSliderAdapter.registerDataSetObserver(sliderDataObserver);
         pagerSetup();
@@ -295,11 +295,20 @@ public class SliderLayout extends RelativeLayout {
         mIndicator.redraw();
     }
 
-    public <T extends BaseSliderView> void addSlider(T imageContent) {
-        mSliderAdapter.addSlider(imageContent);
-        final boolean c1 = mSliderAdapter.getCount() > slideDotLimit,
-                c2 = PresentationConfig.Smart == PresentationConfig.byVal(mSliderIndicatorPresentations),
-                c3 = PresentationConfig.Numbers == PresentationConfig.byVal(mSliderIndicatorPresentations);
+    public <T extends BaseSliderView> void addSlider(T slide) {
+        mSliderAdapter.addSlider(slide);
+        final boolean overlimit = mSliderAdapter.getCount() > slideDotLimit;
+        switch (byVal(mSliderIndicatorPresentations)) {
+            case Smart:
+                presentation(overlimit ? Numbers : Dots);
+                break;
+            case Dots:
+
+                break;
+            case Numbers:
+
+                break;
+        }
 
     }
 
@@ -326,11 +335,11 @@ public class SliderLayout extends RelativeLayout {
     }
 
     public void presentation(PresentationConfig pc) {
-        mSliderIndicatorPresentations = pc.ordinal();
-        if (pc == PresentationConfig.Dots) {
+        usingPresentation = pc.ordinal();
+        if (pc == Dots) {
             mIndicator.setVisibility(View.VISIBLE);
             holderNum.setVisibility(View.GONE);
-        } else if (pc == PresentationConfig.Numbers) {
+        } else if (pc == Numbers) {
             mIndicator.setVisibility(View.GONE);
             holderNum.setVisibility(View.VISIBLE);
         } else {
@@ -568,7 +577,7 @@ public class SliderLayout extends RelativeLayout {
         public static PresentationConfig byVal(final int presentationInt) {
             for (TransformerL t : TransformerL.values()) {
                 if (t.ordinal() == presentationInt) {
-                    return PresentationConfig.values()[t.ordinal()];
+                    return values()[t.ordinal()];
                 }
             }
             return Smart;
@@ -648,9 +657,6 @@ public class SliderLayout extends RelativeLayout {
      * @param visibility the page visibility
      */
     public void setIndicatorVisibility(PagerIndicator.IndicatorVisibility visibility) {
-        if (numIndicator != null) {
-          //  numIndicator.setIndicatorVisibility(visibility);
-        }
         if (mIndicator != null) {
             mIndicator.setIndicatorVisibility(visibility);
         }
@@ -677,34 +683,6 @@ public class SliderLayout extends RelativeLayout {
      */
     public PagerIndicator getPagerIndicator() {
         return mIndicator;
-    }
-
-    /**
-     * Preset Indicators
-     */
-    public enum PresetIndicators {
-        Center_Bottom("Center_Bottom", R.id.default_center_bottom_indicator),
-        Right_Bottom("Right_Bottom", R.id.default_bottom_right_indicator),
-        Left_Bottom("Left_Bottom", R.id.default_bottom_left_indicator),
-        Center_Top("Center_Top", R.id.default_center_top_indicator),
-        Right_Top("Right_Top", R.id.default_center_top_right_indicator);
-
-
-        private final String name;
-        private final int id;
-
-        PresetIndicators(String name, int id) {
-            this.name = name;
-            this.id = id;
-        }
-
-        public String toString() {
-            return name;
-        }
-
-        public int getResourceId() {
-            return id;
-        }
     }
 
     public void setPresetIndicator(PresetIndicators presetIndicator) {
@@ -787,6 +765,34 @@ public class SliderLayout extends RelativeLayout {
         mSliderAdapter.unregisterDataSetObserver(sliderDataObserver);
         stopAutoCycle();
         mViewPager.removeAllViews();
+    }
+
+    /**
+     * Preset Indicators
+     */
+    public enum PresetIndicators {
+        Center_Bottom("Center_Bottom", R.id.default_center_bottom_indicator),
+        Right_Bottom("Right_Bottom", R.id.default_bottom_right_indicator),
+        Left_Bottom("Left_Bottom", R.id.default_bottom_left_indicator),
+        Center_Top("Center_Top", R.id.default_center_top_indicator),
+        Right_Top("Right_Top", R.id.default_center_top_right_indicator);
+
+
+        private final String name;
+        private final int id;
+
+        PresetIndicators(String name, int id) {
+            this.name = name;
+            this.id = id;
+        }
+
+        public String toString() {
+            return name;
+        }
+
+        public int getResourceId() {
+            return id;
+        }
     }
 
 }
