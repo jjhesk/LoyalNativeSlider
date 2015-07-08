@@ -21,7 +21,8 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 - [x] mutislidable viewpager list
 - [x] infinity viewpager slider
 - [x] added buttons for both sides
-- 
+
+
 ## Demo
  
 ![](scn/device-2015-06-17-142823.png)
