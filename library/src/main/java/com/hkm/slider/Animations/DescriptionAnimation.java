@@ -2,6 +2,8 @@ package com.hkm.slider.Animations;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 
@@ -16,9 +18,9 @@ public class DescriptionAnimation implements BaseAnimationInterface {
 
     @Override
     public void onPrepareCurrentItemLeaveScreen(View current) {
-        View descriptionLayout = current.findViewById(R.id.description_layout);
+        View descriptionLayout = current.findViewById(R.id.ns_desc_frame);
         if (descriptionLayout != null) {
-            current.findViewById(R.id.description_layout).setVisibility(View.INVISIBLE);
+            current.findViewById(R.id.ns_desc_frame).setVisibility(View.INVISIBLE);
         }
     }
 
@@ -29,9 +31,9 @@ public class DescriptionAnimation implements BaseAnimationInterface {
      */
     @Override
     public void onPrepareNextItemShowInScreen(View next) {
-        View descriptionLayout = next.findViewById(R.id.description_layout);
+        View descriptionLayout = next.findViewById(R.id.ns_desc_frame);
         if (descriptionLayout != null) {
-            next.findViewById(R.id.description_layout).setVisibility(View.INVISIBLE);
+            next.findViewById(R.id.ns_desc_frame).setVisibility(View.INVISIBLE);
         }
     }
 
@@ -47,13 +49,14 @@ public class DescriptionAnimation implements BaseAnimationInterface {
      *
      * @param view view
      */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onNextItemAppear(View view) {
 
-        View descriptionLayout = view.findViewById(R.id.description_layout);
+        View descriptionLayout = view.findViewById(R.id.ns_desc_frame);
         if (descriptionLayout != null) {
             float layoutY = ViewCompat.getY(descriptionLayout);
-            view.findViewById(R.id.description_layout).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.ns_desc_frame).setVisibility(View.VISIBLE);
             ValueAnimator animator = ObjectAnimator.ofFloat(
                     descriptionLayout,
                     "y",

@@ -10,6 +10,8 @@ This is an amazing image slider for the Android platform. I decided to open sour
 You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
+###v0.2.9
+- [x] fixed id reflection issue
 ###v0.2.8
 - [x] fixed bugs
 - [x] enhanced extenable number indicator
@@ -45,32 +47,11 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.nineoldandroids:library:2.4.0'
 
-    compile 'com.hkm.loyalslider:library:1.2.1@aar'
+    compile 'com.hkm.loyalslider:library:1.2.9@aar'
 }
 
 ```
 
-
-#### Maven
-
-```xml
-<dependency>
-    <groupId>com.squareup.picasso</groupId>
-    <artifactId>picasso</artifactId>
-    <version>2.5.2</version>
-</dependency>
-<dependency>
-    <groupId>com.nineoldandroids</groupId>
-    <artifactId>library</artifactId>
-    <version>2.4.0</version>
-</dependency>
-<dependency>
-    <groupId>com.hkm.loyalslider</groupId>
-    <artifactId>library</artifactId>
-    <version>1.2.1</version>
-    <type>apklib</type>
-</dependency>
-```
 
 #### Eclipse
 

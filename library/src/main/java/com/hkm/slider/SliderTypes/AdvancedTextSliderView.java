@@ -21,8 +21,8 @@ public abstract class AdvancedTextSliderView<TV extends TextView, Image extends 
     @Override
     public View getView() {
         View v = LayoutInflater.from(getContext()).inflate(renderedLayoutTextBanner(), null);
-        Image target = (Image) v.findViewById(R.id.daimajia_slider_image);
-        final TV description = (TV) v.findViewById(R.id.description);
+        final Image target = (Image) v.findViewById(R.id.ns_slider_image);
+        final TV description = (TV) v.findViewById(R.id.ns_slider_desc);
         description.setText(getDescription());
         bindEventAndShow(v, target);
         return v;

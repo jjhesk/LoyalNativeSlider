@@ -1,10 +1,13 @@
 package com.hkm.slider.SliderTypes;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.hkm.slider.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -262,10 +265,16 @@ public abstract class BaseSliderView {
         }
 
         rq.into(targetImageView, new Callback() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onSuccess() {
-                if (v.findViewById(R.id.loading_bar) != null) {
-                    v.findViewById(R.id.loading_bar).setVisibility(View.INVISIBLE);
+                if (v.findViewById(R.id.ns_loading_progress) != null) {
+                    v.findViewById(R.id.ns_loading_progress).animate().alpha(0f).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            v.findViewById(R.id.ns_loading_progress).setVisibility(View.INVISIBLE);
+                        }
+                    });
                 }
             }
 

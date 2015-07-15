@@ -5,4 +5,10 @@
     <color name="red_pink_26">#ffec70b9</color>
     <color name="dark_num_background">#cc757575</color>
     <color name="letter">#e8c6c6c6</color>
+
+    <!--component for slider-->
+    <color name="shadowstart">#00000000</color>
+    <color name="shadowends">#7f000000</color>
+
+
 </resources>

@@ -1,6 +1,7 @@
 package com.daimajia.slider.demo;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.hkm.slider.Animations.DescriptionAnimation;
 import com.hkm.slider.Indicators.NumContainer;
 import com.hkm.slider.Indicators.PagerIndicator;
 import com.hkm.slider.SliderLayout;
+import com.hkm.slider.SliderTypes.AdvancedTextSliderView;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hkm.slider.TransformerL;
@@ -61,10 +64,9 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_24, R.color.red_pink_26);
 
         final munum n = new munum(this);
-        n.setAlignment(NumContainer.Alignment.Center_Top);
+        n.setAlignment(NumContainer.Alignment.Center_Bottom);
         mDemoSlider.setNumLayout(n);
         mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
-
         ListView l = (ListView) findViewById(R.id.transformers);
         l.setAdapter(new TransformerAdapter(this));
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,16 +76,46 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                 Toast.makeText(MainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
         //and data second. it is a must because you will except the data to be streamed into the pipline.
-        HashMap<String, Integer> file_maps = datasetup();
-        for (String name : file_maps.keySet()) {
+        customSliderView(datasetup());
+        //defaultCompleteSlider(datasetup());
+    }
+
+    protected void customSliderView(final HashMap<String, Integer> maps) {
+        for (String name : maps.keySet()) {
+            Smooke textSliderView = new Smooke(this);
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(maps.get(name))
+
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(this);
+            //add your extra information
+            textSliderView.getBundle().putString("extra", name);
+            mDemoSlider.addSlider(textSliderView);
+        }
+    }
+
+    private static class Smooke extends AdvancedTextSliderView<TextView, ImageView> {
+
+        public Smooke(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected int renderedLayoutTextBanner() {
+            return R.layout.feature_banner_slide;
+        }
+    }
+
+    protected void defaultCompleteSlider(final HashMap<String, Integer> maps) {
+        for (String name : maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
                     .description(name)
-                    .image(file_maps.get(name))
+                    .image(maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);
             //add your extra information
@@ -140,6 +172,14 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             case R.id.action_restore_default:
                 mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                 mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+                break;
+            case R.id.custom_slider_layout:
+                mDemoSlider.removeAllSliders();
+                customSliderView(datasetup());
+                break;
+            case R.id.default_slider_layout:
+                mDemoSlider.removeAllSliders();
+                defaultCompleteSlider(datasetup());
                 break;
             case R.id.action_github:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.urlgithub)));
