@@ -12,6 +12,7 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 ##Features
 ###v0.2.9
 - [x] fixed id reflection issue
+
 ###v0.2.8
 - [x] fixed bugs
 - [x] enhanced extenable number indicator
