@@ -265,16 +265,10 @@ public abstract class BaseSliderView {
         }
 
         rq.into(targetImageView, new Callback() {
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onSuccess() {
                 if (v.findViewById(R.id.ns_loading_progress) != null) {
-                    v.findViewById(R.id.ns_loading_progress).animate().alpha(0f).withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            v.findViewById(R.id.ns_loading_progress).setVisibility(View.INVISIBLE);
-                        }
-                    });
+                    hideoutView(v.findViewById(R.id.ns_loading_progress));
                 }
             }
 
@@ -285,8 +279,18 @@ public abstract class BaseSliderView {
                 }
             }
         });
+
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void hideoutView(final View view) {
+        view.animate().alpha(0f).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                view.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
 
     public BaseSliderView setScaleType(ScaleType type) {
         mScaleType = type;

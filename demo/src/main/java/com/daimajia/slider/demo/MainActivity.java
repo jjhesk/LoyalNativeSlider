@@ -77,8 +77,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             }
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
-        customSliderView(datasetup());
-        //defaultCompleteSlider(datasetup());
+        defaultCompleteSlider(datasetup());
     }
 
     protected void customSliderView(final HashMap<String, Integer> maps) {
