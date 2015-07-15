@@ -5,8 +5,9 @@
     android:background="@color/dark_num_background">
 
     <TextView
-        android:id="@+id/tvv"
+        android:id="@id/ns_number_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textAlignment="center"
         android:textColor="@color/letter" />
 </RelativeLayout>

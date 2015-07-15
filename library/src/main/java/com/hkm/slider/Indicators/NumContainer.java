@@ -138,7 +138,7 @@ public class NumContainer<customText extends TextView> implements IContainer, Vi
 
     @Override
     public int getTextField() {
-        return R.id.tvv;
+        return R.id.ns_number_holder;
     }
 
 

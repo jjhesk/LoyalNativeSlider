@@ -1,5 +1,5 @@
 # Loyal Native Slider 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1998)[ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1998)[ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)[![Android Gems](http://www.android-gems.com/badge/jjhesk/LoyalNativeSlider.svg?branch=master)](http://www.android-gems.com/lib/jjhesk/LoyalNativeSlider)[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  
 Master: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
 
@@ -8,7 +8,23 @@ Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=
 This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android.
  
 You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
- 
+
+##Features
+###v0.2.9
+- [x] fixed id reflection issue
+###v0.2.8
+- [x] fixed bugs
+- [x] enhanced extenable number indicator
+- [x] allow different position for the indicator presentations
+- [x] extensive custom buttons for <back> and <previous>
+- [x] more options for smart presention including the constance for the item limit
+
+###v0.2.5
+- [x] mutislidable viewpager list
+- [x] infinity viewpager slider
+- [x] added buttons for both sides
+
+
 ## Demo
  
 ![](scn/device-2015-06-17-142823.png)
@@ -31,32 +47,11 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.nineoldandroids:library:2.4.0'
 
-    compile 'com.hkm.loyalslider:library:1.2.1@aar'
+    compile 'com.hkm.loyalslider:library:1.2.9@aar'
 }
 
 ```
 
-
-#### Maven
-
-```xml
-<dependency>
-    <groupId>com.squareup.picasso</groupId>
-    <artifactId>picasso</artifactId>
-    <version>2.5.2</version>
-</dependency>
-<dependency>
-    <groupId>com.nineoldandroids</groupId>
-    <artifactId>library</artifactId>
-    <version>2.4.0</version>
-</dependency>
-<dependency>
-    <groupId>com.hkm.loyalslider</groupId>
-    <artifactId>library</artifactId>
-    <version>1.2.1</version>
-    <type>apklib</type>
-</dependency>
-```
 
 #### Eclipse
 

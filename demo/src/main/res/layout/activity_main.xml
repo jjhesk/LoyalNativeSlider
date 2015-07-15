@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.daimajia.slider.demo.MainActivity">
+    tools:context="com.daimajia.slider.demo.MainActivity"
+    >
 
     <RelativeLayout
         android:id="@+id/sliderframe"
@@ -13,7 +14,7 @@
         <com.hkm.slider.SliderLayout
             android:id="@+id/slider"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             custom:auto_cycle="true"
             custom:image_button_l="@drawable/myarrowl"
             custom:indicator_visibility="visible"
