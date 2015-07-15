@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.daimajia.slider.demo.MainActivity"
-    >
+    tools:context="com.daimajia.slider.demo.MainActivity">
 
     <RelativeLayout
         android:id="@+id/sliderframe"
@@ -18,10 +17,10 @@
             custom:auto_cycle="true"
             custom:image_button_l="@drawable/myarrowl"
             custom:indicator_visibility="visible"
-            custom:lns_use_presentation="Dots"
+            custom:lns_use_presentation="Smart"
             custom:pager_animation="Accordion"
             custom:pager_animation_span="1100"
-            custom:slider_side_buttons="true" />
+            custom:slider_side_buttons="false" />
 
         <com.hkm.slider.Indicators.PagerIndicator
             android:id="@+id/custom_indicator"
