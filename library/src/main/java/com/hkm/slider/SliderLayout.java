@@ -94,7 +94,7 @@ public class SliderLayout extends RelativeLayout {
     private boolean mAutoRecover = true;
 
     private int mTransformerId;
-    private int mSliderIndicatorPresentations, usingPresentation;
+    private int mSliderIndicatorPresentations;
     /**
      * {@link com.hkm.slider.Tricks.ViewPagerEx} transformer time span.
      */
@@ -335,7 +335,7 @@ public class SliderLayout extends RelativeLayout {
     }
 
     public void presentation(PresentationConfig pc) {
-        usingPresentation = pc.ordinal();
+       // usingPresentation = pc.ordinal();
         if (pc == Dots) {
             mIndicator.setVisibility(View.VISIBLE);
             holderNum.setVisibility(View.GONE);

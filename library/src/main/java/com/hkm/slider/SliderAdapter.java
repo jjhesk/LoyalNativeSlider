@@ -12,20 +12,19 @@ import java.util.ArrayList;
 /**
  * A slider adapter
  */
-public class SliderAdapter extends PagerAdapter implements BaseSliderView.ImageLoadListener {
+public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implements BaseSliderView.ImageLoadListener {
 
     private Context mContext;
-    private ArrayList<BaseSliderView> mImageContents;
+    private ArrayList<T> mImageContents;
 
     public SliderAdapter(Context context) {
         mContext = context;
-        mImageContents = new ArrayList<BaseSliderView>();
+        mImageContents = new ArrayList<>();
     }
 
-    public <T extends BaseSliderView> void addSlider(T slider) {
+    public void addSlider(T slider) {
         slider.setOnImageLoadListener(this);
         mImageContents.add(slider);
-
         notifyDataSetChanged();
     }
 
@@ -42,7 +41,7 @@ public class SliderAdapter extends PagerAdapter implements BaseSliderView.ImageL
         return POSITION_NONE;
     }
 
-    public <T extends BaseSliderView> void removeSlider(T slider) {
+    public void removeSlider(BaseSliderView slider) {
         if (mImageContents.contains(slider)) {
             mImageContents.remove(slider);
             notifyDataSetChanged();

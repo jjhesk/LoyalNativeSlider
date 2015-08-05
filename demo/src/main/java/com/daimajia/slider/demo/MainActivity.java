@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -77,8 +78,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             }
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
-        customSliderView(datasetup());
-        //defaultCompleteSlider(datasetup());
+        defaultCompleteSlider(datasetup());
     }
 
     protected void customSliderView(final HashMap<String, Integer> maps) {
@@ -174,12 +174,10 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                 mDemoSlider.setCustomAnimation(new DescriptionAnimation());
                 break;
             case R.id.custom_slider_layout:
-                mDemoSlider.removeAllSliders();
-                customSliderView(datasetup());
+                newcustomSliderView();
                 break;
             case R.id.default_slider_layout:
-                mDemoSlider.removeAllSliders();
-                defaultCompleteSlider(datasetup());
+                newloaddefaultCompleteSlider();
                 break;
             case R.id.action_github:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.urlgithub)));
@@ -187,6 +185,28 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void newcustomSliderView() {
+        final Handler n = new Handler();
+        mDemoSlider.removeAllSliders();
+        n.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                customSliderView(datasetup());
+            }
+        }, 2000);
+    }
+
+    protected void newloaddefaultCompleteSlider() {
+        final Handler n = new Handler();
+        mDemoSlider.removeAllSliders();
+        n.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                defaultCompleteSlider(datasetup());
+            }
+        }, 2000);
     }
 
     @Override
