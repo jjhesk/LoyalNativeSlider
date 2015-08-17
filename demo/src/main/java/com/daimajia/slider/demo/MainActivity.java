@@ -1,9 +1,11 @@
 package com.daimajia.slider.demo;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
@@ -109,6 +111,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected void defaultCompleteSlider(final HashMap<String, Integer> maps) {
         for (String name : maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
@@ -117,6 +120,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                     .description(name)
                     .image(maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .enableSaveImageByLongClick(getFragmentManager())
                     .setOnSliderClickListener(this);
             //add your extra information
             textSliderView.getBundle().putString("extra", name);

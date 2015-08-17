@@ -2,26 +2,12 @@ package com.hkm.slider.Indicators;
 
 import android.content.Context;
 import android.database.DataSetObserver;
-import android.graphics.drawable.ShapeDrawable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.hkm.slider.R;
-
-import android.support.v4.view.PagerAdapter;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.hkm.slider.R;
-import com.hkm.slider.SliderAdapter;
 import com.hkm.slider.Tricks.InfinitePagerAdapter;
 import com.hkm.slider.Tricks.ViewPagerEx;
 

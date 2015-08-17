@@ -1,19 +1,30 @@
 package com.hkm.slider.SliderTypes;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.hkm.slider.CapturePhotoUtils;
 import com.hkm.slider.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * When you want to make your own slider view, you must extends from this class.
@@ -25,7 +36,7 @@ import java.io.File;
 public abstract class BaseSliderView {
 
     protected Context mContext;
-
+    protected RequestCreator rq = null;
     private final Bundle mBundle;
 
     /**
@@ -44,7 +55,7 @@ public abstract class BaseSliderView {
 
     protected OnSliderClickListener mOnSliderClickListener;
 
-    private boolean mErrorDisappear;
+    private boolean mErrorDisappear, mLongClickSaveImage;
 
     private ImageLoadListener mLoadListener;
 
@@ -63,6 +74,7 @@ public abstract class BaseSliderView {
     protected BaseSliderView(Context context) {
         mContext = context;
         this.mBundle = new Bundle();
+        mLongClickSaveImage = false;
     }
 
     /**
@@ -208,15 +220,49 @@ public abstract class BaseSliderView {
         return this;
     }
 
+    protected View.OnLongClickListener mDefaultLongClickListener = null;
+    protected FragmentManager fmg;
+
+    /**
+     * to enable the slider for saving images
+     *
+     * @param defaultPath
+     * @return this thing
+     */
+    public BaseSliderView enableSaveImageByLongClick(FragmentManager fmg) {
+        mLongClickSaveImage = true;
+        mDefaultLongClickListener = null;
+        this.fmg = fmg;
+        return this;
+    }
+
+    /**
+     * to set custom listener for long click event
+     *
+     * @param listen the listener
+     * @return thos thomg
+     */
+    public BaseSliderView setSliderLongClickListener(View.OnLongClickListener listen) {
+        mDefaultLongClickListener = listen;
+        mLongClickSaveImage = false;
+        return this;
+    }
+
+    public BaseSliderView setSliderLongClickListener(View.OnLongClickListener listen, FragmentManager fmg) {
+        mDefaultLongClickListener = listen;
+        mLongClickSaveImage = false;
+        this.fmg = fmg;
+        return this;
+    }
+
     /**
      * When you want to implement your own slider view, please call this method in the end in `getView()` method
      *
      * @param v               the whole view
      * @param targetImageView where to place image
      */
-    protected void bindEventAndShow(final View v, ImageView targetImageView) {
+    protected void bindEventAndShow(final View v, final ImageView targetImageView) {
         final BaseSliderView me = this;
-
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,9 +273,8 @@ public abstract class BaseSliderView {
         });
 
         mLoadListener.onStart(me);
-
         Picasso p = Picasso.with(mContext);
-        RequestCreator rq = null;
+        rq = null;
         if (mUrl != null) {
             rq = p.load(mUrl);
         } else if (mFile != null) {
@@ -270,6 +315,19 @@ public abstract class BaseSliderView {
                 if (v.findViewById(R.id.ns_loading_progress) != null) {
                     hideoutView(v.findViewById(R.id.ns_loading_progress));
                 }
+
+                if (mLongClickSaveImage && fmg != null) {
+                    mDefaultLongClickListener = new View.OnLongClickListener() {
+                        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+                        @Override
+                        public boolean onLongClick(View v) {
+                            final saveImageDialog saveImageDial = new saveImageDialog();
+                            saveImageDial.show(fmg, mDescription);
+                            return false;
+                        }
+                    };
+                    v.setOnLongClickListener(mDefaultLongClickListener);
+                }
             }
 
             @Override
@@ -280,6 +338,72 @@ public abstract class BaseSliderView {
             }
         });
 
+    }
+
+    protected void saveImage() {
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        try {
+            CapturePhotoUtils.insertImage(
+                    mContext.getContentResolver(),
+                    rq.get(),
+                    df.toString(),
+                    mDescription);
+        } catch (IOException e) {
+            e.printStackTrace();
+            ErrorMessage er = ErrorMessage.message(e.getMessage());
+            er.show(fmg, "erroropen");
+        }
+    }
+
+    @SuppressLint("ValidFragment")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class ErrorMessage extends DialogFragment {
+        public static ErrorMessage message(final String mes) {
+            Bundle h = new Bundle();
+            h.putString("message", mes);
+            ErrorMessage e = new ErrorMessage();
+            e.setArguments(h);
+            return e;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(getArguments().getString("message"))
+                    .setNeutralButton(R.string.okay_now, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    })
+            ;
+            return builder.create();
+        }
+    }
+
+
+    @SuppressLint("ValidFragment")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public class saveImageDialog extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setMessage(R.string.save_image)
+                    .setPositiveButton(R.string.yes_save, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            saveImage();
+                        }
+                    })
+                    .setNegativeButton(R.string.no_keep, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
