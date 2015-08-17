@@ -10,6 +10,11 @@ This is an amazing image slider for the Android platform. I decided to open sour
 You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
+
+###v0.3.2
+- [x] save image function by long click on the thumb
+- [x] enhanced number view
+
 ###v0.2.9
 - [x] fixed id reflection issue
 
