@@ -184,6 +184,17 @@ public class SliderLayout extends RelativeLayout {
 
     }
 
+    private DataSetObserver sliderDataObserver = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            if (mSliderAdapter.getCount() <= 1) {
+                pauseAutoCycle();
+            } else {
+                recoverCycle();
+            }
+        }
+    };
+
     private RelativeLayout holderNum;
 
     private void numframesetup() {
@@ -335,7 +346,7 @@ public class SliderLayout extends RelativeLayout {
     }
 
     public void presentation(PresentationConfig pc) {
-       // usingPresentation = pc.ordinal();
+        // usingPresentation = pc.ordinal();
         if (pc == Dots) {
             mIndicator.setVisibility(View.VISIBLE);
             holderNum.setVisibility(View.GONE);
@@ -457,16 +468,6 @@ public class SliderLayout extends RelativeLayout {
         mCycling = false;
     }
 
-    private DataSetObserver sliderDataObserver = new DataSetObserver() {
-        @Override
-        public void onChanged() {
-            if (mSliderAdapter.getCount() <= 1) {
-                pauseAutoCycle();
-            } else {
-                recoverCycle();
-            }
-        }
-    };
 
     public void addOnPageChangeListener(ViewPagerEx.OnPageChangeListener onPageChangeListener) {
         if (onPageChangeListener != null) {
@@ -509,6 +510,12 @@ public class SliderLayout extends RelativeLayout {
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 pauseAutoCycle();
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                if (getRealAdapter().getCount() <= 1) {
+                    return true;
+                }
                 break;
         }
         return false;

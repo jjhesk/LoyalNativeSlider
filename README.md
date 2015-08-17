@@ -12,8 +12,10 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 ##Features
 
 ###v0.3.2
-- [x] save image function by long click on the thumb
-- [x] enhanced number view
+- [x] Save image function by long click on the thumb
+- [x] Enhanced number view
+- [x] Allow direct image resizing
+- [x] When there is only one image, it will not able to scroll.
 
 ###v0.2.9
 - [x] fixed id reflection issue

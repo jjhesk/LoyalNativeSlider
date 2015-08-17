@@ -38,7 +38,7 @@ public abstract class BaseSliderView {
     protected Context mContext;
     protected RequestCreator rq = null;
     private final Bundle mBundle;
-
+    private int mTargetWidth, mTargetHeight;
     /**
      * Error place holder image.
      */
@@ -226,7 +226,7 @@ public abstract class BaseSliderView {
     /**
      * to enable the slider for saving images
      *
-     * @param defaultPath
+     * @param fmg FragmentManager
      * @return this thing
      */
     public BaseSliderView enableSaveImageByLongClick(FragmentManager fmg) {
@@ -254,6 +254,22 @@ public abstract class BaseSliderView {
         this.fmg = fmg;
         return this;
     }
+
+    public BaseSliderView resize(int targetWidth, int targetHeight) {
+        if (targetWidth < 0) {
+            throw new IllegalArgumentException("Width must be positive number or 0.");
+        }
+        if (targetHeight < 0) {
+            throw new IllegalArgumentException("Height must be positive number or 0.");
+        }
+        if (targetHeight == 0 && targetWidth == 0) {
+            throw new IllegalArgumentException("At least one dimension has to be positive number.");
+        }
+        mTargetWidth = targetWidth;
+        mTargetHeight = targetHeight;
+        return this;
+    }
+
 
     /**
      * When you want to implement your own slider view, please call this method in the end in `getView()` method
@@ -296,7 +312,9 @@ public abstract class BaseSliderView {
         if (getError() != 0) {
             rq.error(getError());
         }
-
+        if (mTargetWidth > 0 || mTargetHeight > 0) {
+                      rq.resize(mTargetWidth, mTargetHeight);
+                 }
         switch (mScaleType) {
             case Fit:
                 rq.fit();
@@ -340,8 +358,8 @@ public abstract class BaseSliderView {
 
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected void saveImage() {
-
         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
         try {
             CapturePhotoUtils.insertImage(
