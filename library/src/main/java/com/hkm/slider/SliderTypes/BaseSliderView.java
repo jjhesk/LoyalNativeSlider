@@ -6,25 +6,34 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.hkm.slider.CapturePhotoUtils;
 import com.hkm.slider.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
+import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Handler;
 
 /**
  * When you want to make your own slider view, you must extends from this class.
@@ -313,8 +322,8 @@ public abstract class BaseSliderView {
             rq.error(getError());
         }
         if (mTargetWidth > 0 || mTargetHeight > 0) {
-                      rq.resize(mTargetWidth, mTargetHeight);
-                 }
+            rq.resize(mTargetWidth, mTargetHeight);
+        }
         switch (mScaleType) {
             case Fit:
                 rq.fit();
@@ -358,21 +367,82 @@ public abstract class BaseSliderView {
 
     }
 
+    final android.os.Handler nh = new android.os.Handler();
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected void saveImage() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-        try {
-            CapturePhotoUtils.insertImage(
-                    mContext.getContentResolver(),
-                    rq.get(),
-                    df.toString(),
-                    mDescription);
-        } catch (IOException e) {
-            e.printStackTrace();
-            ErrorMessage er = ErrorMessage.message(e.getMessage());
-            er.show(fmg, "erroropen");
-        }
+        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy ssmm");
+        final String time = df.format(new Date());
+        final ContentResolver resolver = mContext.getContentResolver();
+        final Target target = new Target() {
+
+            /**
+             * Callback when an image has been successfully loaded.
+             * <p/>
+             * <strong>Note:</strong> You must not recycle the bitmap.
+             *
+             * @param bitmap
+             * @param from
+             */
+            @Override
+            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+                //nh.post(new Runnable() {
+                CapturePhotoUtils.insertImage(
+                        resolver,
+                        bitmap,
+                        time,
+                        mDescription, new CapturePhotoUtils.Callback() {
+                            @Override
+                            public void complete() {
+                                nh.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext,
+                                                //"This image is kept in your photo directory now."
+                                                R.string.save_image
+                                                , Toast.LENGTH_LONG);
+                                    }
+                                });
+                            }
+                        }
+                );
+
+                //  });
+            }
+
+            /**
+             * Callback indicating the image could not be successfully loaded.
+             * <p/>
+             * <strong>Note:</strong> The passed {@link Drawable} may be {@code null} if none has been
+             * specified via {@link RequestCreator#error(Drawable)}
+             * or {@link RequestCreator#error(int)}.
+             *
+             * @param errorDrawable
+             */
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            /**
+             * Callback invoked right before your request is submitted.
+             * <p/>
+             * <strong>Note:</strong> The passed {@link Drawable} may be {@code null} if none has been
+             * specified via {@link RequestCreator#placeholder(Drawable)}
+             * or {@link RequestCreator#placeholder(int)}.
+             *
+             * @param placeHolderDrawable
+             */
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+
+        rq.into(target);
+
     }
+
 
     @SuppressLint("ValidFragment")
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)

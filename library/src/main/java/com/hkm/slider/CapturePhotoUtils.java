@@ -12,14 +12,26 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+import com.squareup.picasso.Target;
 
 /**
  * HKM Invention 2015
  * Created by hesk on 8/17/2015.
  */
 public class CapturePhotoUtils {
+
+    public interface Callback {
+        void complete();
+    }
+
     /**
      * A copy of the Android internals  insertImage method, this method populates the
      * meta data with DATE_ADDED and DATE_TAKEN. This fixes a common problem where media
@@ -31,7 +43,8 @@ public class CapturePhotoUtils {
     public static final String insertImage(ContentResolver cr,
                                            Bitmap source,
                                            String title,
-                                           String description) {
+                                           String description,
+                                           Callback cb) {
 
         ContentValues values = new ContentValues();
         values.put(Images.Media.TITLE, title);
@@ -75,7 +88,9 @@ public class CapturePhotoUtils {
         if (url != null) {
             stringUrl = url.toString();
         }
-
+        if (cb != null) {
+            cb.complete();
+        }
         return stringUrl;
     }
 
