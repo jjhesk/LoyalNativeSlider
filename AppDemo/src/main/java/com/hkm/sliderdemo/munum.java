@@ -1,4 +1,4 @@
-package com.daimajia.slider.demo;
+package com.hkm.sliderdemo;
 
 import android.content.Context;
 import android.widget.TextView;

@@ -397,10 +397,8 @@ public abstract class BaseSliderView {
                                 nh.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(mContext,
-                                                //"This image is kept in your photo directory now."
-                                                R.string.save_image
-                                                , Toast.LENGTH_LONG);
+                                        final SMessage sm = SMessage.message("This image is kept in your photo directory now.");
+                                        sm.show(fmg, "done");
                                     }
                                 });
                             }
@@ -446,11 +444,11 @@ public abstract class BaseSliderView {
 
     @SuppressLint("ValidFragment")
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class ErrorMessage extends DialogFragment {
-        public static ErrorMessage message(final String mes) {
+    public static class SMessage extends DialogFragment {
+        public static SMessage message(final String mes) {
             Bundle h = new Bundle();
             h.putString("message", mes);
-            ErrorMessage e = new ErrorMessage();
+            SMessage e = new SMessage();
             e.setArguments(h);
             return e;
         }
