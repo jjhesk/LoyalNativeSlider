@@ -103,7 +103,7 @@ public class SliderLayout extends RelativeLayout {
     private boolean mAutoCycle;
 
     private boolean mIsShuffle = false;
-
+    private boolean button_side_function_flip = false;
     /**
      * the duration between animation.
      */
@@ -158,6 +158,7 @@ public class SliderLayout extends RelativeLayout {
         mSliderIndicatorPresentations = attributes.getInt(R.styleable.SliderLayout_lns_use_presentation, Smart.ordinal());
         buttondl = attributes.getResourceId(R.styleable.SliderLayout_image_button_l, R.drawable.arrow_l);
         buttondr = attributes.getResourceId(R.styleable.SliderLayout_image_button_r, R.drawable.arrow_r);
+        button_side_function_flip = attributes.getBoolean(R.styleable.SliderLayout_slider_side_buttons_function_flip, false);
         mAutoCycle = attributes.getBoolean(R.styleable.SliderLayout_auto_cycle, true);
         sidebuttons = attributes.getBoolean(R.styleable.SliderLayout_slider_side_buttons, false);
         slideDotLimit = attributes.getInt(R.styleable.SliderLayout_slide_dot_limit, 5);
@@ -202,24 +203,28 @@ public class SliderLayout extends RelativeLayout {
     }
 
     private void buttonNSetup() {
-        ImageView Arrr_L = (ImageView) findViewById(R.id.arrow_l);
-        ImageView Arrr_R = (ImageView) findViewById(R.id.arrow_r);
-        Arrr_L.setImageResource(buttondl);
-        Arrr_R.setImageResource(buttondr);
+        final ImageView mButtonLeft = (ImageView) findViewById(R.id.arrow_l);
+        final ImageView mButtonRight = (ImageView) findViewById(R.id.arrow_r);
+        mButtonLeft.setImageResource(buttondl);
+        mButtonRight.setImageResource(buttondr);
         if (!sidebuttons) {
-            Arrr_L.setVisibility(GONE);
-            Arrr_R.setVisibility(GONE);
+            mButtonLeft.setVisibility(GONE);
+            mButtonRight.setVisibility(GONE);
         } else {
-            Arrr_L.setOnClickListener(new OnClickListener() {
+            mButtonLeft.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    moveNextPosition(true);
+                    if (!button_side_function_flip)
+                        moveNextPosition(true);
+                    else movePrevPosition(true);
                 }
             });
-            Arrr_R.setOnClickListener(new OnClickListener() {
+            mButtonRight.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    movePrevPosition(true);
+                    if (!button_side_function_flip)
+                        movePrevPosition(true);
+                    else moveNextPosition(true);
                 }
             });
         }

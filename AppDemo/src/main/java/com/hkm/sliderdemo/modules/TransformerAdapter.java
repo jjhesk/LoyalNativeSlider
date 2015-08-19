@@ -1,4 +1,4 @@
-package com.hkm.sliderdemo;
+package com.hkm.sliderdemo.modules;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.hkm.slider.TransformerL;
+import com.hkm.sliderdemo.R;
 
 /**
  * Created by daimajia on 14-5-29.

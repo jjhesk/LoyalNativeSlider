@@ -1,10 +1,11 @@
-package com.hkm.sliderdemo;
+package com.hkm.sliderdemo.Util;
 
 import android.util.Log;
 import android.view.View;
 
 import com.daimajia.androidanimations.library.attention.StandUpAnimator;
 import com.hkm.slider.Animations.BaseAnimationInterface;
+import com.hkm.sliderdemo.R;
 
 public class ChildAnimationExample implements BaseAnimationInterface {
 

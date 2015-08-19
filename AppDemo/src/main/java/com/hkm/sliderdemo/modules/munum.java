@@ -1,4 +1,4 @@
-package com.hkm.sliderdemo;
+package com.hkm.sliderdemo.modules;
 
 import android.content.Context;
 import android.widget.TextView;

@@ -2,21 +2,19 @@ package com.hkm.sliderdemo;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,34 +23,23 @@ import com.hkm.slider.Animations.DescriptionAnimation;
 import com.hkm.slider.Indicators.NumContainer;
 import com.hkm.slider.Indicators.PagerIndicator;
 import com.hkm.slider.SliderLayout;
-import com.hkm.slider.SliderTypes.AdvancedTextSliderView;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
+import com.hkm.sliderdemo.Util.ChildAnimationExample;
+import com.hkm.sliderdemo.Util.DataProvider;
+import com.hkm.sliderdemo.modules.CustomNumberView;
+import com.hkm.sliderdemo.modules.TransformerAdapter;
+import com.hkm.sliderdemo.modules.munum;
 
 import java.util.HashMap;
 
 
-public class MainActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout mDemoSlider;
 
-    private HashMap<String, Integer> datasetup() {
-
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
-
-        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Hannibal", R.drawable.hannibal);
-        file_maps.put("Big Bang Theory", R.drawable.bigbang);
-        file_maps.put("House of Cards", R.drawable.house);
-        file_maps.put("Game of Thrones", R.drawable.game_of_thrones);
-        return file_maps;
-    }
 
     @SuppressLint("ResourceAsColor")
     private void setupSlider() {
@@ -65,7 +52,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
         mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_24, R.color.red_pink_26);
-
         final munum n = new munum(this);
         n.setAlignment(NumContainer.Alignment.Center_Bottom);
         mDemoSlider.setNumLayout(n);
@@ -80,12 +66,12 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             }
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
-        defaultCompleteSlider(datasetup());
+        defaultCompleteSlider(DataProvider.getDataSource());
     }
 
     protected void customSliderView(final HashMap<String, Integer> maps) {
         for (String name : maps.keySet()) {
-            Smooke textSliderView = new Smooke(this);
+            CustomNumberView textSliderView = new CustomNumberView(this);
             // initialize a SliderLayout
             textSliderView
                     .description(name)
@@ -99,17 +85,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         }
     }
 
-    private static class Smooke extends AdvancedTextSliderView<TextView, ImageView> {
-
-        public Smooke(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected int renderedLayoutTextBanner() {
-            return R.layout.feature_banner_slide;
-        }
-    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected void defaultCompleteSlider(final HashMap<String, Integer> maps) {
@@ -164,29 +139,42 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                 numbered = !numbered;
                 mDemoSlider.presentation(numbered ? SliderLayout.PresentationConfig.Numbers : SliderLayout.PresentationConfig.Dots);
                 break;
+
             case R.id.indicator_default:
                 mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator2));
                 break;
+
             case R.id.action_custom_indicator:
                 mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
                 break;
+
             case R.id.action_custom_child_animation:
                 mDemoSlider.setCustomAnimation(new ChildAnimationExample());
                 break;
+
             case R.id.action_restore_default:
                 mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                 mDemoSlider.setCustomAnimation(new DescriptionAnimation());
                 break;
+
             case R.id.custom_slider_layout:
                 newcustomSliderView();
                 break;
+
             case R.id.default_slider_layout:
                 newloaddefaultCompleteSlider();
                 break;
+
             case R.id.action_github:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.urlgithub)));
                 startActivity(browserIntent);
                 break;
+
+            case R.id.action_bigscreendemo:
+                Intent hk_scn_demo = new Intent(this, BigScreenDemo.class);
+                startActivity(hk_scn_demo);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -197,7 +185,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         n.postDelayed(new Runnable() {
             @Override
             public void run() {
-                customSliderView(datasetup());
+                customSliderView(DataProvider.getDataSource());
             }
         }, 2000);
     }
@@ -208,7 +196,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         n.postDelayed(new Runnable() {
             @Override
             public void run() {
-                defaultCompleteSlider(datasetup());
+                defaultCompleteSlider(DataProvider.getDataSource());
             }
         }, 2000);
     }
