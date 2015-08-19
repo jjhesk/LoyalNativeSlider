@@ -11,7 +11,7 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 
 ##Features
 
-###v0.3.2
+###v1.3.2
 - [x] Save image function by long click on the thumb
 - [x] Enhanced number view
 - [x] Allow direct image resizing
