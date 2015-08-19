@@ -48,15 +48,10 @@ from daimajia [Download Apk](https://github.com/daimajia/AndroidImageSlider/rele
 
 #### Gradle
 [ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)
-```groovy
+```gradle
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.android.support:support-v4:22.1.1'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.nineoldandroids:library:2.4.0'
-
-    compile 'com.hkm.loyalslider:library:1.2.9@aar'
+    compile 'com.hkm.loyalslider:library:1.3.2@aar'
 }
 
 ```
