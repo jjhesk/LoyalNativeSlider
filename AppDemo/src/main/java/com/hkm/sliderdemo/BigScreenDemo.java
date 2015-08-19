@@ -3,6 +3,7 @@ package com.hkm.sliderdemo;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -136,4 +137,20 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
     public void onSliderClick(BaseSliderView coreSlider) {
 
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+        setupSlider();
+    }
+
+    @Override
+    protected void onStop() {
+        // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment is destroyed
+        mDemoSlider.stopAutoCycle();
+        super.onStop();
+    }
+
 }
