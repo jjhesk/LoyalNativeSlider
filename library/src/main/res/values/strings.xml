@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Slider</string>
+    <string name="save_image">Do you want to save this image?</string>
+    <string name="yes_save">Keep Image</string>
+    <string name="no_keep">No</string>
+    <string name="okay_now">ok</string>
+    <string name="success_save_image">This image is kept in your photo directory now.</string>
 </resources>

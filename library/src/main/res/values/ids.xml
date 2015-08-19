@@ -5,4 +5,5 @@
     <item name="ns_number_holder" type="id" />
     <item name="ns_loading_progress" type="id" />
     <item name="ns_desc_frame" type="id" />
+    <item name="ns_display_number_container" type="id" />
 </resources>

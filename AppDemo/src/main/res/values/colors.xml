@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red_23">#ffec2133</color>
+    <color name="red_pink_24">#ffe09280</color>
+    <color name="red_pink_26">#ffec70b9</color>
+    <color name="dark_num_background">#cc757575</color>
+    <color name="letter">#e8c6c6c6</color>
+
+    <!--component for slider-->
+    <color name="shadowstart">#00000000</color>
+    <color name="shadowends">#7f000000</color>
+    <color name="field_color">#a45dafcf</color>
+
+
+</resources>

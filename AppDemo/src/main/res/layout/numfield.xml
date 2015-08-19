@@ -9,7 +9,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="5dp"
-        android:background="@color/bhgletterbox">
+        android:background="@color/field_color">
 
         <TextView
             android:id="@id/ns_number_holder"

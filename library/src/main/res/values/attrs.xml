@@ -49,6 +49,8 @@
         <attr name="image_button_r" format="reference" />
 
         <attr name="slider_side_buttons" format="boolean" />
+
+        <attr name="slider_side_buttons_function_flip" format="boolean" />
     </declare-styleable>
     <declare-styleable name="MultiViewPager">
         <!-- Child view inside a page to match the page size against. -->
