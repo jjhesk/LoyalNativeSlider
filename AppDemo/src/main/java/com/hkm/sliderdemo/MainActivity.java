@@ -31,7 +31,7 @@ import com.hkm.sliderdemo.Util.ChildAnimationExample;
 import com.hkm.sliderdemo.Util.DataProvider;
 import com.hkm.sliderdemo.modules.CustomNumberView;
 import com.hkm.sliderdemo.modules.TransformerAdapter;
-import com.hkm.sliderdemo.modules.munum;
+import com.hkm.sliderdemo.modules.NumZero;
 
 import java.util.HashMap;
 
@@ -52,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
         mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_24, R.color.red_pink_26);
-        final munum n = new munum(this);
-        n.setAlignment(NumContainer.Alignment.Center_Bottom);
+        final NumZero n = new NumZero(this);
         mDemoSlider.setNumLayout(n);
         mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
         ListView l = (ListView) findViewById(R.id.transformers);
@@ -66,10 +65,10 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
             }
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
-        defaultCompleteSlider(DataProvider.getDataSource());
+        defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
     }
 
-    protected void customSliderView(final HashMap<String, Integer> maps) {
+    protected void customSliderView(final HashMap<String, String> maps) {
         for (String name : maps.keySet()) {
             CustomNumberView textSliderView = new CustomNumberView(this);
             // initialize a SliderLayout
@@ -200,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         n.postDelayed(new Runnable() {
             @Override
             public void run() {
-                customSliderView(DataProvider.getDataSource());
+                customSliderView(DataProvider.getDataUrlSource());
             }
         }, 2000);
     }
@@ -211,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         n.postDelayed(new Runnable() {
             @Override
             public void run() {
-                defaultCompleteSlider(DataProvider.getDataSource());
+                defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
             }
         }, 2000);
     }

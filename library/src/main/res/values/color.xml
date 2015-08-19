@@ -3,4 +3,6 @@
     <color name="arrowbackground">#a460a342</color>
     <color name="letter">#fffbffca</color>
     <color name="letterbox">#ca000000</color>
+    <color name="bgletterbox">#caff49db</color>
+    <color name="bhgletterbox">#ca71ff46</color>
 </resources>

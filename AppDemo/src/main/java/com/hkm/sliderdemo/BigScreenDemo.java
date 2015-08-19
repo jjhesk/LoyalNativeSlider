@@ -22,7 +22,7 @@ import com.hkm.slider.Tricks.ViewPagerEx;
 import com.hkm.sliderdemo.Util.DataProvider;
 import com.hkm.sliderdemo.modules.CustomNumberView;
 import com.hkm.sliderdemo.modules.TransformerAdapter;
-import com.hkm.sliderdemo.modules.munum;
+import com.hkm.sliderdemo.modules.NumZero;
 
 import java.util.HashMap;
 
@@ -33,14 +33,14 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
     private SliderLayout mDemoSlider;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected void defaultCompleteSlider(final HashMap<String, Integer> maps) {
+    protected void defaultCompleteSlider(final HashMap<String, String> maps) {
         for (String name : maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
                     .description(name)
                     .image(maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
                     .enableSaveImageByLongClick(getFragmentManager())
                     .setOnSliderClickListener(this);
             //add your extra information
@@ -68,17 +68,14 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
     @SuppressLint("ResourceAsColor")
     private void setupSlider() {
         // remember setup first
-        mDemoSlider.setPresetTransformer(TransformerL.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        //   mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
         mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_24, R.color.red_pink_26);
-        final munum n = new munum(this);
-        n.setAlignment(NumContainer.Alignment.Center_Bottom);
-        mDemoSlider.setNumLayout(n);
+        mDemoSlider.setNumLayout(new NumZero(this));
         mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
         ListView l = (ListView) findViewById(R.id.transformers);
         l.setAdapter(new TransformerAdapter(this));
@@ -90,7 +87,7 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
             }
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
-        defaultCompleteSlider(DataProvider.getDataSource());
+        defaultCompleteSlider(DataProvider.getVerticalDataSrc());
     }
 
     /**
@@ -141,7 +138,7 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.vertical_slider);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         setupSlider();
     }

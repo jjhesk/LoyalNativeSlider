@@ -3,11 +3,14 @@ package com.hkm.slider;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -38,6 +41,53 @@ public class CapturePhotoUtils {
      * that is inserted manually gets saved at the end of the gallery (because date is not populated).
      *
      * @see android.provider.MediaStore.Images.Media#insertImage(ContentResolver, Bitmap, String, String)
+     */
+
+    /**
+     * The file will be named as default date and time
+     *
+     * @param contex      the context in the activity
+     * @param source      the bitmap source file
+     * @param description the description in string
+     * @param cb          optional additional call back
+     * @return the string in return
+     */
+    public static final String insertImage(Context contex,
+                                           Bitmap source,
+                                           String description,
+                                           Callback cb) {
+        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy:ss:mm:hh");
+        final String filename_title = "img" + df.format(new Date());
+        return insertImage(contex.getContentResolver(), source, filename_title, description, cb);
+    }
+
+    /**
+     * the simple date format for the context
+     *
+     * @param contex      the context in the activity
+     * @param source      the bitmap source file
+     * @param title       the title in string
+     * @param description the description in string
+     * @param cb          optional additional call back
+     * @return the string in return
+     */
+    public static final String insertImage(Context contex,
+                                           Bitmap source,
+                                           String title,
+                                           String description,
+                                           Callback cb) {
+        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy ssmm");
+        final String time = df.format(new Date());
+        return insertImage(contex.getContentResolver(), source, title, description, cb);
+    }
+
+    /**
+     * @param cr          The content resolver
+     * @param source      the bitmap source file
+     * @param title       the title in string
+     * @param description the description in string
+     * @param cb          optional additional call back
+     * @return the string in return
      */
     @TargetApi(Build.VERSION_CODES.ECLAIR)
     public static final String insertImage(ContentResolver cr,
@@ -99,6 +149,13 @@ public class CapturePhotoUtils {
      * populate the android.provider.MediaStore.Images.Media#insertImage with all the correct
      * meta data. The StoreThumbnail method is private so it must be duplicated here.
      *
+     * @param cr     content resolver
+     * @param source sour
+     * @param id     the ID or the UUID for the saved file
+     * @param width  expected saved image in width
+     * @param height expected saved image in height
+     * @param kind   the file format in saved file
+     * @return the bitmap data
      * @see android.provider.MediaStore.Images.Media (StoreThumbnail private method)
      */
     private static final Bitmap storeThumbnail(

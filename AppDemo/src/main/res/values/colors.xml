@@ -9,6 +9,7 @@
     <!--component for slider-->
     <color name="shadowstart">#00000000</color>
     <color name="shadowends">#7f000000</color>
+    <color name="field_color">#a45dafcf</color>
 
 
 </resources>

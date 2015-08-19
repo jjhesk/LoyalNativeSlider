@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -171,7 +172,7 @@ public abstract class BaseSliderView {
         return this;
     }
 
-    public BaseSliderView image(int res) {
+    public BaseSliderView image(@DrawableRes int res) {
         if (mUrl != null || mFile != null) {
             throw new IllegalStateException("Call multi image function," +
                     "you only have permission to call it once");
@@ -371,9 +372,6 @@ public abstract class BaseSliderView {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected void saveImage() {
-        final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy ssmm");
-        final String time = df.format(new Date());
-        final ContentResolver resolver = mContext.getContentResolver();
         final Target target = new Target() {
 
             /**
@@ -381,16 +379,14 @@ public abstract class BaseSliderView {
              * <p/>
              * <strong>Note:</strong> You must not recycle the bitmap.
              *
-             * @param bitmap
-             * @param from
+             * @param bitmap  bitmap data
+             * @param from               from the source
              */
             @Override
             public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                //nh.post(new Runnable() {
                 CapturePhotoUtils.insertImage(
-                        resolver,
+                        mContext,
                         bitmap,
-                        time,
                         mDescription, new CapturePhotoUtils.Callback() {
                             @Override
                             public void complete() {
@@ -410,12 +406,11 @@ public abstract class BaseSliderView {
 
             /**
              * Callback indicating the image could not be successfully loaded.
-             * <p/>
              * <strong>Note:</strong> The passed {@link Drawable} may be {@code null} if none has been
              * specified via {@link RequestCreator#error(Drawable)}
              * or {@link RequestCreator#error(int)}.
              *
-             * @param errorDrawable
+             * @param errorDrawable  when the image is failed to save in the system
              */
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
@@ -424,12 +419,11 @@ public abstract class BaseSliderView {
 
             /**
              * Callback invoked right before your request is submitted.
-             * <p/>
              * <strong>Note:</strong> The passed {@link Drawable} may be {@code null} if none has been
              * specified via {@link RequestCreator#placeholder(Drawable)}
              * or {@link RequestCreator#placeholder(int)}.
              *
-             * @param placeHolderDrawable
+             * @param placeHolderDrawable    the place holder for the drawable
              */
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {

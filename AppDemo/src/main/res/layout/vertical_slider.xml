@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.daimajia.slider.demo.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/sliderframe"
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+
+        <com.hkm.slider.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            custom:auto_cycle="true"
+            custom:image_button_l="@drawable/myarrowl"
+            custom:indicator_visibility="visible"
+            custom:lns_use_presentation="Numbers"
+            custom:pager_animation="Default"
+            custom:pager_animation_span="1100"
+            custom:slider_side_buttons="true"
+            custom:slider_side_buttons_function_flip="true" />
+
+        <com.hkm.slider.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            custom:selected_color="#0095BF"
+            custom:selected_drawable="@drawable/bird"
+            custom:selected_height="6dp"
+            custom:selected_padding_left="5dp"
+            custom:selected_padding_right="5dp"
+            custom:selected_width="6dp"
+            custom:shape="oval"
+            custom:unselected_color="#55333333"
+            custom:unselected_height="6dp"
+            custom:unselected_padding_left="5dp"
+            custom:unselected_padding_right="5dp"
+            custom:unselected_width="6dp" />
+
+        <com.hkm.slider.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator2"
+            style="@style/AndroidImageSlider_Corner_Oval_Orange"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp" />
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/slient"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/sliderframe"
+        android:background="@color/red_23" />
+
+    <ListView
+        android:id="@+id/transformers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/slient" />
+
+
+</RelativeLayout>

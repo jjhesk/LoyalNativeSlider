@@ -136,6 +136,11 @@ public class SliderLayout extends RelativeLayout {
     private int slideDotLimit;
 
     /**
+     * hold number specific
+     */
+    private RelativeLayout holderNum;
+
+    /**
      * {@link com.hkm.slider.Indicators.PagerIndicator} shape, rect or oval.
      *
      * @param context context
@@ -180,9 +185,7 @@ public class SliderLayout extends RelativeLayout {
         if (mAutoCycle) {
             startAutoCycle();
         }
-        numframesetup();
         buttonNSetup();
-
     }
 
     private DataSetObserver sliderDataObserver = new DataSetObserver() {
@@ -196,11 +199,6 @@ public class SliderLayout extends RelativeLayout {
         }
     };
 
-    private RelativeLayout holderNum;
-
-    private void numframesetup() {
-        holderNum = (RelativeLayout) findViewById(R.id.number_count_layout);
-    }
 
     private void buttonNSetup() {
         final ImageView mButtonLeft = (ImageView) findViewById(R.id.arrow_l);
@@ -255,10 +253,12 @@ public class SliderLayout extends RelativeLayout {
     }
 
     public <TN extends NumContainer> void setNumLayout(final TN container) {
-        final RelativeLayout mrelative = (RelativeLayout) findViewById(R.id.subcontainer);
-        container.withView(mrelative).setViewPager(mViewPager).build();
-        mrelative.removeAllViewsInLayout();
-        mrelative.addView(container.getView());
+        holderNum = (RelativeLayout) findViewById(R.id.number_count_layout);
+        //   final RelativeLayout mSmallBox = (RelativeLayout) findViewById(R.id.subcontainer);
+        container
+                .withView(holderNum)
+                .setViewPager(mViewPager)
+                .build();
     }
 
     /**

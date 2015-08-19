@@ -1,5 +1,5 @@
 # Loyal Native Slider 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1998)[ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)[![Android Gems](http://www.android-gems.com/badge/jjhesk/LoyalNativeSlider.svg?branch=master)](http://www.android-gems.com/lib/jjhesk/LoyalNativeSlider)[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)][6][ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ][7][![Android Gems](http://www.android-gems.com/badge/jjhesk/LoyalNativeSlider.svg?branch=master)][8][![Gitter](https://badges.gitter.im/Join Chat.svg)][9]
  
 Master: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
 
@@ -16,6 +16,7 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 - [x] Enhanced number view
 - [x] Allow direct image resizing
 - [x] When there is only one image, it will not able to scroll.
+- [x] Allow left and right button flip on the functionality
 
 ###v0.2.9
 - [x] fixed id reflection issue
@@ -154,3 +155,7 @@ License
 [3]: https://github.com/JakeWharton/NineOldAndroids
 [4]: https://github.com/ToxicBakery/ViewPagerTransforms
 [5]: https://github.com/daimajia/AndroidImageSlider
+[6]: http://android-arsenal.com/details/1/1998
+[7]: https://bintray.com/jjhesk/maven/library/_latestVersion
+[8]: http://www.android-gems.com/lib/jjhesk/LoyalNativeSlider
+[9]: https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
