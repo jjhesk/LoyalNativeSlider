@@ -5,9 +5,7 @@ Master: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](ht
 
 Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=dev)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
 
-This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android.
- 
-You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
+This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
 
@@ -40,8 +38,6 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 ![](scn/device-2015-06-17-150718.png)
 ![](scn/device-2015-06-17-150829.png)
 
-from daimajia [Download Apk](https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.8/demo-1.0.8.apk)
- 
 ## Usage
 
 ### Step 1
@@ -55,7 +51,6 @@ dependencies {
 }
 
 ```
-
 
 #### Eclipse
 
@@ -107,13 +102,31 @@ There are some default indicators. If you want to use a provided indicator:
 [Code example](https://github.com/jjhesk/LoyalNativeSlider/blob/master/demo/src/main/java/com/daimajia/slider/demo/MainActivity.java)
  
 ====
+## Attribtues
+
+There are several attributes you can set:
+
+| attr | description| 
+| :---- | :---- | 
+| indicator_visibility| disable or enable the visible area in the whole component. options: visible, invisable | 
+| auto_cycle| option to enable or disable auto cycle |
+| pager_animation| animation list of choices. page animation |
+| pager_animation_span| the page animation time span |
+| auto_cycle| option to enable or disable auto cycle |
+| slide_dot_limit| slide dot limit |
+| lns_use_presentation| choices of presentation on the slider. options: Smart, Dots, Numbers |
+| image_button_l| reference of drawable for the left arrow button to enable previous slide |
+| image_button_r| reference of drawable for the right arrow button to enable next slide |
+| slider_side_buttons| enable or disable the arrow buttons on each right or left side |
+| slider_side_buttons_function_flip| unkown |
+
+
 
 ## Advanced usage
 Visit the Transform [Wiki](https://github.com/jjhesk/LoyalNativeSlider/wiki)
 Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the mother library
  
 ## Thanks for the Reference
-
 - [Picasso][2]
 - [NineOldAndroids][3]
 - [ViewPagerTransforms][4]
