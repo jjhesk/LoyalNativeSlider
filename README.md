@@ -54,7 +54,7 @@ dependencies {
 
 #### Eclipse
 
-For Eclipse users, I provided a sample project which orgnized as Eclipse way. You can download it from [here](https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.9/AndroidImageSlider-Eclipse.zip), and make some changes to fit your project.
+For Eclipse users, I provided a sample project which orgnized as Eclipse way. You can download it from [here][12], and make some changes to fit your project.
 
 Notice: It's the version of 1.0.9, it may not update any more. You can update manually by yourself.
 
@@ -80,7 +80,7 @@ If you want to load images from drawable, then no additional permissions are nec
 
 Add the Slider to your layout:
  
-```java
+```xml
 <com.hkm.slider.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
@@ -169,3 +169,4 @@ License
 [9]: https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [10]: https://github.com/jjhesk/LoyalNativeSlider/blob/master/AppDemo/src/main/java/com/hkm/sliderdemo/MainActivity.java
 [11]: https://github.com/jjhesk/LoyalNativeSlider/blob/master/library/src/main/res/values/attrs.xml#L3-L54
+[12]: https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.9/AndroidImageSlider-Eclipse.zip
