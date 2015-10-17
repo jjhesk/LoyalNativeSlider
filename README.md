@@ -104,7 +104,7 @@ There are some default indicators. If you want to use a provided indicator:
 ====
 ## Attribtues
 
-There are several attributes you can set:
+This is the attribute support set for [SliderLayout](https://github.com/jjhesk/LoyalNativeSlider/blob/master/library/src/main/res/values/attrs.xml#L3-L54)
 
 | attr | description| 
 | :---- | :---- | 
