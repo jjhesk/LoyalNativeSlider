@@ -104,7 +104,7 @@ There are some default indicators. If you want to use a provided indicator:
 ====
 ## Attribtues
 
-This is the attribute support set for [SliderLayout](https://github.com/jjhesk/LoyalNativeSlider/blob/master/library/src/main/res/values/attrs.xml#L3-L54)
+This is the attribute support set for [SliderLayout][11]
 
 | attr | description| 
 | :---- | :---- | 
@@ -168,3 +168,4 @@ License
 [8]: http://www.android-gems.com/lib/jjhesk/LoyalNativeSlider
 [9]: https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [10]: https://github.com/jjhesk/LoyalNativeSlider/blob/master/AppDemo/src/main/java/com/hkm/sliderdemo/MainActivity.java
+[11]: https://github.com/jjhesk/LoyalNativeSlider/blob/master/library/src/main/res/values/attrs.xml#L3-L54
