@@ -90,7 +90,7 @@ Add the Slider to your layout:
  
 There are some default indicators. If you want to use a provided indicator:
  
-```java
+```xml
 <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/custom_indicator"
         android:layout_width="wrap_content"
@@ -99,7 +99,7 @@ There are some default indicators. If you want to use a provided indicator:
         />
 ```
 
-[Code example](https://github.com/jjhesk/LoyalNativeSlider/blob/master/demo/src/main/java/com/daimajia/slider/demo/MainActivity.java)
+[Code example][10]
  
 ====
 ## Attribtues
@@ -167,3 +167,4 @@ License
 [7]: https://bintray.com/jjhesk/maven/library/_latestVersion
 [8]: http://www.android-gems.com/lib/jjhesk/LoyalNativeSlider
 [9]: https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[10]: https://github.com/jjhesk/LoyalNativeSlider/blob/master/AppDemo/src/main/java/com/hkm/sliderdemo/MainActivity.java
