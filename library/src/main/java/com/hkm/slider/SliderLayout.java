@@ -807,4 +807,14 @@ public class SliderLayout extends RelativeLayout {
         }
     }
 
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mCycleTimer != null) mCycleTimer.cancel();
+        if (mCycleTask != null) mCycleTask.cancel();
+        if (mResumingTask != null) mResumingTask.cancel();
+        if (mResumingTimer != null) mResumingTimer.cancel();
+        mh.removeCallbacksAndMessages(null);
+    }
 }
