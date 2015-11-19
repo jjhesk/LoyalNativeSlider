@@ -105,4 +105,22 @@
         <attr name="SliderStyle" format="reference" />
         <attr name="PagerIndicatorStyle" format="reference" />
     </declare-styleable>
+
+
+    <declare-styleable name="MaterialRippleLayout">
+        <attr name="lysr_rippleColor" format="color" localization="suggested" />
+        <attr name="lysr_rippleDimension" format="dimension" localization="suggested" />
+        <attr name="lysr_rippleOverlay" format="boolean" localization="suggested" />
+        <attr name="lysr_rippleAlpha" format="float" localization="suggested" />
+        <attr name="lysr_rippleDuration" format="integer" localization="suggested" />
+        <attr name="lysr_rippleFadeDuration" format="integer" localization="suggested" />
+        <attr name="lysr_rippleHover" format="boolean" localization="suggested" />
+        <attr name="lysr_rippleBackground" format="color" localization="suggested" />
+        <attr name="lysr_rippleDelayClick" format="boolean" localization="suggested" />
+        <attr name="lysr_ripplePersistent" format="boolean" localization="suggested" />
+        <attr name="lysr_rippleInAdapter" format="boolean" localization="suggested" />
+        <attr name="lysr_rippleRoundedCorners" format="dimension" localization="suggested" />
+    </declare-styleable>
+
+
 </resources>

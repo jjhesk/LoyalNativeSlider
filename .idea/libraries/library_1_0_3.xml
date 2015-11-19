@@ -5,6 +5,8 @@
       <root url="file://$PROJECT_DIR$/AppDemo/build/intermediates/exploded-aar/com.daimajia.androidanimations/library/1.0.3/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.daimajia.androidanimations/library/1.0.3/5bcdb02929da1a423a78e295f0524898c64bf837/library-1.0.3-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

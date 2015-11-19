@@ -40,6 +40,7 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
             textSliderView
                     .description(name)
                     .image(maps.get(name))
+                    .enableImageLocalStorage()
                     .setScaleType(BaseSliderView.ScaleType.CenterInside)
                     .enableSaveImageByLongClick(getFragmentManager())
                     .setOnSliderClickListener(this);
