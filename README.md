@@ -12,28 +12,9 @@ This is an amazing image slider for the Android platform. I decided to open sour
 
 ##Features
 
-###v1.3.2
-- [x] Save image function by long click on the thumb
-- [x] Enhanced number view
-- [x] Allow direct image resizing
-- [x] When there is only one image, it will not able to scroll.
-- [x] Allow left and right button flip on the functionality
-
-###v0.2.9
-- [x] fixed id reflection issue
-
-###v0.2.8
-- [x] fixed bugs
-- [x] enhanced extenable number indicator
-- [x] allow different position for the indicator presentations
-- [x] extensive custom buttons for <back> and <previous>
-- [x] more options for smart presention including the constance for the item limit
-
-###v0.2.5
-- [x] mutislidable viewpager list
-- [x] infinity viewpager slider
-- [x] added buttons for both sides
-
+###v1.3.3
+- [x] Add local storage enable for picasso
+- [ ] adapting multiple images in one slide config 2-4
 
 ## Demo
  
@@ -50,7 +31,7 @@ This is an amazing image slider for the Android platform. I decided to open sour
 ```gradle
 
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.3.2@aar'
+    compile 'com.hkm.loyalslider:library:1.3.3'
 }
 
 ```

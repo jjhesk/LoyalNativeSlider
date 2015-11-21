@@ -6,4 +6,25 @@
     <item name="ns_loading_progress" type="id" />
     <item name="ns_desc_frame" type="id" />
     <item name="ns_display_number_container" type="id" />
+    <item name="ns_display_number_s1" type="id" />
+    <item name="ns_display_i_s1" type="id" />
+    <item name="ns_display_t_s1" type="id" />
+    <item name="ns_display_number_s2" type="id" />
+    <item name="ns_display_i_s2" type="id" />
+    <item name="ns_display_t_s2" type="id" />
+    <item name="ns_display_number_s3" type="id" />
+    <item name="ns_display_i_s3" type="id" />
+    <item name="ns_display_t_s3" type="id" />
+    <item name="ns_display_number_s4" type="id" />
+    <item name="ns_display_i_s4" type="id" />
+    <item name="ns_display_t_s4" type="id" />
+    <item name="ns_display_number_s5" type="id" />
+    <item name="ns_display_i_s5" type="id" />
+    <item name="ns_display_t_s5" type="id" />
+    <item name="ns_display_number_s6" type="id" />
+    <item name="ns_display_i_s6" type="id" />
+    <item name="ns_display_t_s6" type="id" />
+    <item name="ns_display_number_s7" type="id" />
+    <item name="ns_display_i_s7" type="id" />
+    <item name="ns_display_t_s7" type="id" />
 </resources>

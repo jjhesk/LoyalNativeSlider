@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.hkm.slider.CapturePhotoUtils;
 import com.hkm.slider.R;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Target;
@@ -66,6 +67,7 @@ public abstract class BaseSliderView {
     protected OnSliderClickListener mOnSliderClickListener;
 
     private boolean mErrorDisappear, mLongClickSaveImage;
+    private boolean mImageLocalStorageEnable;
 
     private ImageLoadListener mLoadListener;
 
@@ -85,6 +87,7 @@ public abstract class BaseSliderView {
         mContext = context;
         this.mBundle = new Bundle();
         mLongClickSaveImage = false;
+        mImageLocalStorageEnable = false;
     }
 
     /**
@@ -280,6 +283,10 @@ public abstract class BaseSliderView {
         return this;
     }
 
+    public BaseSliderView enableImageLocalStorage() {
+        mImageLocalStorageEnable = true;
+        return this;
+    }
 
     /**
      * When you want to implement your own slider view, please call this method in the end in `getView()` method
@@ -310,20 +317,20 @@ public abstract class BaseSliderView {
         } else {
             return;
         }
-
         if (rq == null) {
             return;
         }
-
         if (getEmpty() != 0) {
             rq.placeholder(getEmpty());
         }
-
         if (getError() != 0) {
             rq.error(getError());
         }
         if (mTargetWidth > 0 || mTargetHeight > 0) {
             rq.resize(mTargetWidth, mTargetHeight);
+        }
+        if (mImageLocalStorageEnable) {
+            rq.memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE);
         }
         switch (mScaleType) {
             case Fit:
@@ -365,7 +372,6 @@ public abstract class BaseSliderView {
                 }
             }
         });
-
     }
 
     final android.os.Handler nh = new android.os.Handler();

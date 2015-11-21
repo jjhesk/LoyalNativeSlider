@@ -13,7 +13,6 @@ publish {
     dryRun = false
     issueTracker = "${website}/issues"
     licences = [project.POM_LICENCE_NAME]
-
 }
 /*
 
