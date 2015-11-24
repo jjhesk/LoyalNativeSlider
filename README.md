@@ -16,12 +16,7 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 - [ ] adapting multiple images in one slide config 2-4
 
 ## Demo
- 
-![](scn/device-2015-06-17-142823.png)
-![](scn/device-2015-06-17-150718.png)
-![](scn/device-2015-06-17-150829.png)
 
-from daimajia [Download Apk](https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.8/demo-1.0.8.apk)
  
 ## Usage
 
@@ -36,15 +31,6 @@ dependencies {
 }
 
 ```
-
-
-#### Eclipse
-
-For Eclipse users, I provided a sample project which orgnized as Eclipse way. You can download it from [here](https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.9/AndroidImageSlider-Eclipse.zip), and make some changes to fit your project.
-
-Notice: It's the version of 1.0.9, it may not update any more. You can update manually by yourself.
-
-For Eclipse project, you might need to with the parent project from daimajia.
 
 ### Step 2
 
@@ -88,6 +74,15 @@ There are some default indicators. If you want to use a provided indicator:
 [Code example](https://github.com/jjhesk/LoyalNativeSlider/blob/master/demo/src/main/java/com/daimajia/slider/demo/MainActivity.java)
  
 ====
+## Preview
+<img src="scn/device-2015-06-17-142823.png" width="300px"/>
+<img src="scn/device-2015-06-17-150718.png" width="300px"/>
+<img src="scn/device-2015-06-17-150829.png" width="300px"/>
+
+
+New Version Demo:
+https://www.youtube.com/watch?v=7P6lv662n-8&feature=youtu.be
+
 
 ## Advanced usage
 Visit the Transform [Wiki](https://github.com/jjhesk/LoyalNativeSlider/wiki)
