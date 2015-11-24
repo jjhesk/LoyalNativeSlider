@@ -19,6 +19,9 @@
         <activity
             android:name=".BigScreenDemo"
             android:label="big screen demo" />
+        <activity
+            android:name=".MultSections"
+            android:label="m screen" />
     </application>
 
 </manifest>

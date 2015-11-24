@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -47,9 +48,9 @@ import java.util.logging.Handler;
 public abstract class BaseSliderView {
 
     protected Context mContext;
-    protected RequestCreator rq = null;
+    private RequestCreator rq = null;
     private final Bundle mBundle;
-    private int mTargetWidth, mTargetHeight;
+    protected int mTargetWidth, mTargetHeight;
     /**
      * Error place holder image.
      */
@@ -66,8 +67,8 @@ public abstract class BaseSliderView {
 
     protected OnSliderClickListener mOnSliderClickListener;
 
-    private boolean mErrorDisappear, mLongClickSaveImage;
-    private boolean mImageLocalStorageEnable;
+    protected boolean mErrorDisappear, mLongClickSaveImage;
+    protected boolean mImageLocalStorageEnable;
 
     private ImageLoadListener mLoadListener;
 
@@ -77,7 +78,7 @@ public abstract class BaseSliderView {
     /**
      * Scale type of the image.
      */
-    private ScaleType mScaleType = ScaleType.Fit;
+    protected ScaleType mScaleType = ScaleType.Fit;
 
     public enum ScaleType {
         CenterCrop, CenterInside, Fit, FitCenterCrop
@@ -377,7 +378,7 @@ public abstract class BaseSliderView {
     final android.os.Handler nh = new android.os.Handler();
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected void saveImage() {
+    protected void saveImage(RequestCreator mResquest_creator) {
         final Target target = new Target() {
 
             /**
@@ -437,7 +438,7 @@ public abstract class BaseSliderView {
             }
         };
 
-        rq.into(target);
+        mResquest_creator.into(target);
 
     }
 
@@ -479,7 +480,7 @@ public abstract class BaseSliderView {
             builder.setMessage(R.string.save_image)
                     .setPositiveButton(R.string.yes_save, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            saveImage();
+                            saveImageActionTrigger();
                         }
                     })
                     .setNegativeButton(R.string.no_keep, new DialogInterface.OnClickListener() {
@@ -492,8 +493,14 @@ public abstract class BaseSliderView {
         }
     }
 
+    protected void saveImageActionTrigger() {
+        saveImage(rq);
+    }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void hideoutView(final View view) {
+    protected void hideoutView(@Nullable final View view) {
+        if (view == null) return;
+
         view.animate().alpha(0f).withEndAction(new Runnable() {
             @Override
             public void run() {

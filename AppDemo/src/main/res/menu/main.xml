@@ -18,11 +18,6 @@
         android:title="Custom Indicator"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_custom_child_animation"
-        android:orderInCategory="100"
-        android:title="ChildView Animation"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_restore_default"
         android:orderInCategory="100"
         android:title="Restore default"
@@ -37,14 +32,22 @@
         android:orderInCategory="100"
         android:title="Custom Slider layout"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_github"
-        android:orderInCategory="100"
-        android:title="GitHub"
-        app:showAsAction="never" />
+
+
     <item
         android:id="@+id/action_bigscreendemo"
         android:orderInCategory="100"
-        android:title="Big Screen Demo"
+        android:title="Vertical Screen"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_multi_screen"
+        android:orderInCategory="100"
+        android:title="Multi Screen"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_github"
+        android:orderInCategory="100"
+        android:title="GitHub Help"
         app:showAsAction="never" />
 </menu>

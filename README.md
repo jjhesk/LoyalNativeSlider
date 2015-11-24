@@ -12,15 +12,11 @@ This is an amazing image slider for the Android platform. I decided to open sour
 
 ##Features
 
-###v1.3.3
+###v1.4.1
 - [x] Add local storage enable for picasso
-- [ ] adapting multiple images in one slide config 2-4
+- [X] adapting multiple images in one slide config 2-4
 
-## Demo
- 
-![](scn/device-2015-06-17-142823.png)
-![](scn/device-2015-06-17-150718.png)
-![](scn/device-2015-06-17-150829.png)
+=======
 
 ## Usage
 
@@ -31,18 +27,11 @@ This is an amazing image slider for the Android platform. I decided to open sour
 ```gradle
 
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.3.3'
+    compile 'com.hkm.loyalslider:library:1.4.1'
 }
 
 ```
 
-#### Eclipse
-
-For Eclipse users, I provided a sample project which orgnized as Eclipse way. You can download it from [here][12], and make some changes to fit your project.
-
-Notice: It's the version of 1.0.9, it may not update any more. You can update manually by yourself.
-
-For Eclipse project, you might need to with the parent project from daimajia.
 
 ### Step 2
 
@@ -86,6 +75,16 @@ There are some default indicators. If you want to use a provided indicator:
 [Code example][10]
  
 ====
+
+## Preview
+<img src="scn/device-2015-06-17-142823.png" width="300px"/>
+<img src="scn/device-2015-06-17-150718.png" width="300px"/>
+<img src="scn/device-2015-06-17-150829.png" width="300px"/>
+
+
+## New Version Demo:
+https://www.youtube.com/watch?v=7P6lv662n-8&feature=youtu.be
+=======
 ## Attribtues
 
 This is the attribute support set for [SliderLayout][11]
@@ -103,7 +102,6 @@ This is the attribute support set for [SliderLayout][11]
 | image_button_r| reference of drawable for the right arrow button to enable next slide |
 | slider_side_buttons| enable or disable the arrow buttons on each right or left side |
 | slider_side_buttons_function_flip| unkown |
-
 
 
 ## Advanced usage

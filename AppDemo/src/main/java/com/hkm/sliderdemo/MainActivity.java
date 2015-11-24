@@ -36,13 +36,10 @@ import com.hkm.sliderdemo.modules.NumZero;
 import java.util.HashMap;
 
 
-public class MainActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
-
-    private SliderLayout mDemoSlider;
-    private boolean numbered = false;
+public class MainActivity extends BaseApp {
 
     @SuppressLint("ResourceAsColor")
-    private void setupSlider() {
+    protected void setupSlider() {
         // remember setup first
         mDemoSlider.setPresetTransformer(TransformerL.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
@@ -102,20 +99,6 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
-        setupSlider();
-    }
-
-    @Override
-    protected void onStop() {
-        // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment is destroyed
-        mDemoSlider.stopAutoCycle();
-        super.onStop();
-    }
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
@@ -162,9 +145,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
                 mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
                 break;
 
-            case R.id.action_custom_child_animation:
-                mDemoSlider.setCustomAnimation(new ChildAnimationExample());
-                break;
+
 
             case R.id.action_restore_default:
                 mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
@@ -185,8 +166,13 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
                 break;
 
             case R.id.action_bigscreendemo:
-                Intent hk_scn_demo = new Intent(this, BigScreenDemo.class);
-                startActivity(hk_scn_demo);
+                Intent bigscn = new Intent(this, BigScreenDemo.class);
+                startActivity(bigscn);
+                break;
+
+            case R.id.action_multi_screen:
+                Intent ms = new Intent(this, MultSections.class);
+                startActivity(ms);
                 break;
 
         }
@@ -215,16 +201,5 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         }, 2000);
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-    }
 
-    @Override
-    public void onPageSelected(int position) {
-        Log.d("Slider Demo", "Page Changed: " + position);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-    }
 }
