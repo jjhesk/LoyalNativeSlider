@@ -1,23 +1,23 @@
 # Loyal Native Slider 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)][6][ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ][7][![Android Gems](http://www.android-gems.com/badge/jjhesk/LoyalNativeSlider.svg?branch=master)][8][![Gitter](https://badges.gitter.im/Join Chat.svg)][9]
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)][6][ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ][7][![Android Gems](http://www.android-gems.com/badge/jjhesk/LoyalNativeSlider.svg?branch=master)][8][![Gitter](https://badges.gitter.im/Join Chat.svg)][9][![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jjhesk/loyalnativeslider/trend.png)][13]
+ 
+ 
+ [![Throughput Graph](https://graphs.waffle.io/jjhesk/LoyalNativeSlider/throughput.svg)][14]
  
 Master: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
 
 Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=dev)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
 
-This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android.
- 
-You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
+This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
 
-###v1.3.3
+###v1.4.1
 - [x] Add local storage enable for picasso
-- [ ] adapting multiple images in one slide config 2-4
+- [X] adapting multiple images in one slide config 2-4
 
-## Demo
+=======
 
- 
 ## Usage
 
 ### Step 1
@@ -27,10 +27,11 @@ You can easily load images from an internet URL, drawable, or file. And there ar
 ```gradle
 
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.3.3'
+    compile 'com.hkm.loyalslider:library:1.4.1'
 }
 
 ```
+
 
 ### Step 2
 
@@ -52,7 +53,7 @@ If you want to load images from drawable, then no additional permissions are nec
 
 Add the Slider to your layout:
  
-```java
+```xml
 <com.hkm.slider.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
@@ -62,7 +63,7 @@ Add the Slider to your layout:
  
 There are some default indicators. If you want to use a provided indicator:
  
-```java
+```xml
 <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/custom_indicator"
         android:layout_width="wrap_content"
@@ -71,17 +72,36 @@ There are some default indicators. If you want to use a provided indicator:
         />
 ```
 
-[Code example](https://github.com/jjhesk/LoyalNativeSlider/blob/master/demo/src/main/java/com/daimajia/slider/demo/MainActivity.java)
+[Code example][10]
  
 ====
+
 ## Preview
 <img src="scn/device-2015-06-17-142823.png" width="300px"/>
 <img src="scn/device-2015-06-17-150718.png" width="300px"/>
 <img src="scn/device-2015-06-17-150829.png" width="300px"/>
 
 
-New Version Demo:
+## New Version Demo:
 https://www.youtube.com/watch?v=7P6lv662n-8&feature=youtu.be
+=======
+## Attribtues
+
+This is the attribute support set for [SliderLayout][11]
+
+| attr | description| 
+| :---- | :---- | 
+| indicator_visibility| disable or enable the visible area in the whole component. options: visible, invisable | 
+| auto_cycle| option to enable or disable auto cycle |
+| pager_animation| animation list of choices. page animation |
+| pager_animation_span| the page animation time span |
+| auto_cycle| option to enable or disable auto cycle |
+| slide_dot_limit| slide dot limit |
+| lns_use_presentation| choices of presentation on the slider. options: Smart, Dots, Numbers |
+| image_button_l| reference of drawable for the left arrow button to enable previous slide |
+| image_button_r| reference of drawable for the right arrow button to enable next slide |
+| slider_side_buttons| enable or disable the arrow buttons on each right or left side |
+| slider_side_buttons_function_flip| unkown |
 
 
 ## Advanced usage
@@ -89,7 +109,6 @@ Visit the Transform [Wiki](https://github.com/jjhesk/LoyalNativeSlider/wiki)
 Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the mother library
  
 ## Thanks for the Reference
-
 - [Picasso][2]
 - [NineOldAndroids][3]
 - [ViewPagerTransforms][4]
@@ -130,3 +149,8 @@ License
 [7]: https://bintray.com/jjhesk/maven/library/_latestVersion
 [8]: http://www.android-gems.com/lib/jjhesk/LoyalNativeSlider
 [9]: https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[10]: https://github.com/jjhesk/LoyalNativeSlider/blob/master/AppDemo/src/main/java/com/hkm/sliderdemo/MainActivity.java
+[11]: https://github.com/jjhesk/LoyalNativeSlider/blob/master/library/src/main/res/values/attrs.xml#L3-L54
+[12]: https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.9/AndroidImageSlider-Eclipse.zip
+[13]: https://bitdeli.com/free
+[14]: https://waffle.io/jjhesk/LoyalNativeSlider/metrics
