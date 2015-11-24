@@ -59,21 +59,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MaterialRippleLayout.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/library/src/main/java/com/hkm/slider/Layouts/MaterialRippleLayout.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="153" column="11" selection-start-line="153" selection-start-column="5" selection-end-line="153" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35106382">
-              <caret line="85" column="22" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.46453902">
+              <caret line="87" column="3" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -3612,7 +3602,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/java/com/hkm/slider/Layouts/MaterialRippleLayout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.03722504">
           <caret line="153" column="11" selection-start-line="153" selection-start-column="5" selection-end-line="153" selection-end-column="5" />
           <folding />
         </state>
@@ -3620,8 +3610,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35106382">
-          <caret line="85" column="22" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.46453902">
+          <caret line="87" column="3" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding />
         </state>
       </provider>
