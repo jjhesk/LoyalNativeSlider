@@ -83,8 +83,9 @@ There are some default indicators. If you want to use a provided indicator:
 
 
 ## New Version Demo:
-<iframe width="420" height="315" src="https://www.youtube.com/embed/s0pHZgyLeVo" frameborder="0" allowfullscreen></iframe>
+[Mobile Testing](https://www.youtube.com/embed/s0pHZgyLeVo)
 [Tablet Testing](https://www.youtube.com/watch?v=7P6lv662n-8&feature=youtu.be)
+
 =======
 ## Attribtues
 
