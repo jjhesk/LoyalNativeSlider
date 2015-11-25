@@ -1,6 +1,7 @@
 package com.hkm.sliderdemo;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -26,9 +27,14 @@ public abstract class BaseApp extends AppCompatActivity implements BaseSliderVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(getActivityMainLayoutId());
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         setupSlider();
+    }
+
+    @LayoutRes
+    protected int getActivityMainLayoutId() {
+        return R.layout.activity_main;
     }
 
     protected abstract void setupSlider();

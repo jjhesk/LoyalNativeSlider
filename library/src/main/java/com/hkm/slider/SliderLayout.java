@@ -358,8 +358,6 @@ public class SliderLayout extends RelativeLayout {
         } else if (pc == Numbers) {
             mIndicator.setVisibility(View.GONE);
             holderNum.setVisibility(View.VISIBLE);
-        } else {
-
         }
     }
 
@@ -788,7 +786,6 @@ public class SliderLayout extends RelativeLayout {
         Left_Bottom("Left_Bottom", R.id.default_bottom_left_indicator),
         Center_Top("Center_Top", R.id.default_center_top_indicator),
         Right_Top("Right_Top", R.id.default_center_top_right_indicator);
-
 
         private final String name;
         private final int id;

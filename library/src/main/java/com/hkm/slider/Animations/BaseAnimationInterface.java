@@ -25,26 +25,26 @@ public interface BaseAnimationInterface {
      *
      * @param current view
      */
-    public void onPrepareCurrentItemLeaveScreen(View current);
+    void onPrepareCurrentItemLeaveScreen(View current);
 
     /**
      * The next item which will be shown in ViewPager/
      *
      * @param next view
      */
-    public void onPrepareNextItemShowInScreen(View next);
+    void onPrepareNextItemShowInScreen(View next);
 
     /**
      * Current item totally disappear from screen.
      *
      * @param view view
      */
-    public void onCurrentItemDisappear(View view);
+    void onCurrentItemDisappear(View view);
 
     /**
      * Next item totally show in screen.
      *
      * @param view view
      */
-    public void onNextItemAppear(View view);
+    void onNextItemAppear(View view);
 }

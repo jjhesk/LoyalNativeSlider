@@ -21,7 +21,8 @@
             android:label="big screen demo" />
         <activity
             android:name=".MultSections"
-            android:label="m screen" />
+            android:label="m screen"
+            android:theme="@style/Full" />
     </application>
 
 </manifest>
