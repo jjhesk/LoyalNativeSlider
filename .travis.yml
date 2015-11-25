@@ -11,6 +11,7 @@ jdk:
 branches:
   only:
     - master
+    - dev
 before_install:
     - chmod +x gradlew
     - chmod +x scripts/do.sh
