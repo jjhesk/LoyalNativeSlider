@@ -23,7 +23,7 @@ This is an amazing image slider for the Android platform. I decided to open sour
 ### Step 1
 
 #### Gradle
-[ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)
+[![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)
 ```gradle
 
 dependencies {
@@ -84,7 +84,7 @@ There are some default indicators. If you want to use a provided indicator:
 
 ## New Version Demo:
 [Mobile Testing](https://www.youtube.com/embed/s0pHZgyLeVo)
-[multiple screens support](https//www.youtube.com/embed/yXuMRDX6Cgk)
+[multiple screens support](https://youtu.be/yXuMRDX6Cgk)
 [Tablet Testing](https//www.youtube.com/embed/7P6lv662n-8)
 
 =======
