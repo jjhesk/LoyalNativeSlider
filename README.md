@@ -1,9 +1,9 @@
-# Loyal Native Slider 
+# Loyal Native Slider
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)][6][ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ][7][![Android Gems](http://www.android-gems.com/badge/jjhesk/LoyalNativeSlider.svg?branch=master)][8][![Gitter](https://badges.gitter.im/Join Chat.svg)][9][![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jjhesk/loyalnativeslider/trend.png)][13]
- 
- 
+
+
  [![Throughput Graph](https://graphs.waffle.io/jjhesk/LoyalNativeSlider/throughput.svg)][14]
- 
+
 Master: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
 
 Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=dev)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
@@ -39,7 +39,7 @@ Add permissions (if necessary) to your `AndroidManifest.xml`
 
 ```xml
 <!-- if you want to load images from the internet -->
-<uses-permission android:name="android.permission.INTERNET" /> 
+<uses-permission android:name="android.permission.INTERNET" />
 
 <!-- if you want to load images from a file OR from the internet -->
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -52,7 +52,7 @@ If you want to load images from drawable, then no additional permissions are nec
 ### Step 3
 
 Add the Slider to your layout:
- 
+
 ```xml
 <com.hkm.slider.SliderLayout
         android:id="@+id/slider"
@@ -60,9 +60,9 @@ Add the Slider to your layout:
         android:layout_height="200dp"
 />
 ```        
- 
+
 There are some default indicators. If you want to use a provided indicator:
- 
+
 ```xml
 <com.hkm.slider.Indicators.PagerIndicator
         android:id="@+id/custom_indicator"
@@ -73,7 +73,7 @@ There are some default indicators. If you want to use a provided indicator:
 ```
 
 [Code example][10]
- 
+
 ====
 
 ## Preview
@@ -84,16 +84,17 @@ There are some default indicators. If you want to use a provided indicator:
 
 ## New Version Demo:
 [Mobile Testing](https://www.youtube.com/embed/s0pHZgyLeVo)
-[Tablet Testing](https://www.youtube.com/watch?v=7P6lv662n-8&feature=youtu.be)
+[multiple screens support](https//www.youtube.com/embed/yXuMRDX6Cgk)
+[Tablet Testing](https//www.youtube.com/embed/7P6lv662n-8)
 
 =======
 ## Attribtues
 
 This is the attribute support set for [SliderLayout][11]
 
-| attr | description| 
-| :---- | :---- | 
-| indicator_visibility| disable or enable the visible area in the whole component. options: visible, invisable | 
+| attr | description|
+| :---- | :---- |
+| indicator_visibility| disable or enable the visible area in the whole component. options: visible, invisable |
 | auto_cycle| option to enable or disable auto cycle |
 | pager_animation| animation list of choices. page animation |
 | pager_animation_span| the page animation time span |
@@ -109,7 +110,7 @@ This is the attribute support set for [SliderLayout][11]
 ## Advanced usage
 Visit the Transform [Wiki](https://github.com/jjhesk/LoyalNativeSlider/wiki)
 Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the mother library
- 
+
 ## Thanks for the Reference
 - [Picasso][2]
 - [NineOldAndroids][3]
