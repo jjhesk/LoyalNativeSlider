@@ -84,7 +84,8 @@ There are some default indicators. If you want to use a provided indicator:
 
 ## New Version Demo:
 [Mobile Testing](https://www.youtube.com/embed/s0pHZgyLeVo)
-[Tablet Testing](https://www.youtube.com/watch?v=7P6lv662n-8&feature=youtu.be)
+[multiple screens support](https//www.youtube.com/embed/yXuMRDX6Cgk)
+[Tablet Testing](https//www.youtube.com/embed/7P6lv662n-8)
 
 =======
 ## Attribtues
