@@ -26,6 +26,8 @@ This is an amazing image slider for the Android platform. I decided to open sour
 [![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)
 ```gradle
 
+repositories {maven { url "http://dl.bintray.com/jjhesk/maven" }}
+
 dependencies {
     compile 'com.hkm.loyalslider:library:1.4.1'
 }
