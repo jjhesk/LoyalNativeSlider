@@ -5,4 +5,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Full" parent="Theme.AppCompat.NoActionBar">
+
+    </style>
 </resources>

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,7 +37,7 @@ public class MultSections extends BaseApp {
         // remember setup first
         mDemoSlider.setPresetTransformer(TransformerL.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation(230, new DecelerateInterpolator()));
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
@@ -55,6 +57,11 @@ public class MultSections extends BaseApp {
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
         defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
+    }
+
+    @Override
+    protected int getActivityMainLayoutId() {
+        return R.layout.full_scn;
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -137,7 +144,6 @@ public class MultSections extends BaseApp {
             mDemoSlider.addSlider(s4.build());
 
 
-
             CompactFrameSliderView s5 = new CompactFrameSliderView(this, 4);
             s5
 
@@ -163,7 +169,6 @@ public class MultSections extends BaseApp {
                     .setOnSliderClickListener(this);
 
             mDemoSlider.addSlider(s5.build());
-
 
 
             CompactFrameSliderView s6 = new CompactFrameSliderView(this, 2);
