@@ -26,6 +26,8 @@ This is an amazing image slider for the Android platform. I decided to open sour
 [![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)
 ```gradle
 
+repositories {maven { url "http://dl.bintray.com/jjhesk/maven" }}
+
 dependencies {
     compile 'com.hkm.loyalslider:library:1.4.1'
 }
@@ -80,6 +82,14 @@ There are some default indicators. If you want to use a provided indicator:
 <img src="scn/device-2015-06-17-142823.png" width="300px"/>
 <img src="scn/device-2015-06-17-150718.png" width="300px"/>
 <img src="scn/device-2015-06-17-150829.png" width="300px"/>
+
+<img src="scn/WW_PhoneKOT49Hhesk11262015103358.png" width="300px"/>
+<img src="scn/WW_PhoneKOT49Hhesk11262015103406.png" width="300px"/>
+
+<img src="scn/anglerMDB08Lhesk11262015104332.png" width="450px"/>
+<img src="scn/anglerMDB08Lhesk11262015104346.png" width="450px"/>
+
+<img src="scn/anglerMDB08Lhesk11262015104354.png" width="450px"/>
 
 
 ## New Version Demo:

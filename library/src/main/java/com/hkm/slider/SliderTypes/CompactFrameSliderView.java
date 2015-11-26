@@ -181,7 +181,11 @@ public class CompactFrameSliderView extends CompactSliderView {
     }
 
 
-    private void apply_event_to_frame(@Nullable FrameLayout mframeLayout, String image_url, int n) {
+    private void apply_event_to_frame(
+            @Nullable FrameLayout mframeLayout,
+            @NonNull final String image_url,
+            final int n
+    ) {
         if (mframeLayout == null) return;
         final int layout_id = setCustomLayoutSlide == 0 ? getCompactFrameLayout() : setCustomLayoutSlide;
         final View layoutview = LayoutInflater.from(mContext).inflate(layout_id, null);
@@ -192,10 +196,22 @@ public class CompactFrameSliderView extends CompactSliderView {
             frame.applyDescription(desc);
         }
         bindEventAndShow(image_url, frame);
+
+        final CompactFrameSliderView me = this;
+        frame.setClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnSliderClickListener != null && uris.size() > 0) {
+                    link_on_click_current = uris.get(n);
+                    mOnSliderClickListener.onSliderClick(me);
+                }
+            }
+        });
+
     }
 
     private void bindEventAndShow(String mURI, final FrameImage Fr) {
-        final CompactFrameSliderView me = this;
+
         final Picasso p = Picasso.with(mContext);
         final RequestCreator mreq = p.load(mURI);
         if (getEmpty() != 0) {
@@ -218,15 +234,6 @@ public class CompactFrameSliderView extends CompactSliderView {
                 mreq.fit().centerInside();
                 break;
         }
-
-        Fr.setClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnSliderClickListener != null) {
-                    mOnSliderClickListener.onSliderClick(me);
-                }
-            }
-        });
 
 
         mreq.into(Fr.getImageTarget(), new Callback() {

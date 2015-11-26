@@ -11,7 +11,7 @@
     </item>
     <item
         android:bottom="11dp"
-        android:drawable="@mipmap/rightarrow"
+        android:drawable="@mipmap/ns_right_arrow"
         android:left="7dp"
         android:right="7dp"
         android:top="11dp" />

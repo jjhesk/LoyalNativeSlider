@@ -2,10 +2,12 @@ package com.hkm.slider.SliderTypes;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,11 +26,11 @@ import java.util.List;
  * Created by hesk on 19/11/15.
  */
 public class CompactSliderView extends BaseSliderView {
-
     protected boolean loadingProgress = false;
     protected int number_of_pieces;
     protected ImageView s1, s2, s3, s4;
     protected List<String> urls = new ArrayList<>();
+    protected List<String> uris = new ArrayList<>();
 
     public CompactSliderView(Context context, final int pieces) throws Exception {
         super(context);
@@ -84,6 +86,17 @@ public class CompactSliderView extends BaseSliderView {
 
     protected void filter_apply_event_to_view(int f) {
         bindEventAndShow(getImView(f), urls.get(f));
+        final CompactSliderView me = this;
+        final String h = uris.size() > 0 ? uris.get(f) : null;
+        getImView(f).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnSliderClickListener != null && h != null) {
+                    link_on_click_current = h;
+                    mOnSliderClickListener.onSliderClick(me);
+                }
+            }
+        });
     }
 
     protected int bindviews(View layout) {
@@ -107,6 +120,16 @@ public class CompactSliderView extends BaseSliderView {
         return total_fields;
     }
 
+    public CompactSliderView setLinksOnEach(final ArrayList<String> urls_list) {
+        uris = urls_list;
+        return this;
+    }
+
+    public CompactSliderView setLinksOnEach(final String[] urls_list) {
+        uris = Arrays.asList(urls_list);
+        return this;
+    }
+
     public CompactSliderView setDisplayOnlyImageUrls(final ArrayList<String> ArUrls) {
         if (ArUrls.size() < number_of_pieces) {
             number_of_pieces = ArUrls.size();
@@ -126,7 +149,11 @@ public class CompactSliderView extends BaseSliderView {
     }
 
     protected RequestCreator prepare_request_save_image;
+    protected String link_on_click_current;
 
+    public Uri getCurrentClickUri() {
+        return Uri.parse(link_on_click_current);
+    }
 
     @Override
     protected void saveImageActionTrigger() {
@@ -135,18 +162,12 @@ public class CompactSliderView extends BaseSliderView {
         }
     }
 
+
     private void bindEventAndShow(
             @NonNull final ImageView targetImageView,
-            @NonNull final String mURI) {
-        final CompactSliderView me = this;
-        targetImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnSliderClickListener != null) {
-                    mOnSliderClickListener.onSliderClick(me);
-                }
-            }
-        });
+            @NonNull final String mURI
+    ) {
+
         //  mLoadListener.onStart(me);
         final Picasso p = Picasso.with(mContext);
         final RequestCreator mreq = p.load(mURI);
