@@ -83,6 +83,14 @@ There are some default indicators. If you want to use a provided indicator:
 <img src="scn/device-2015-06-17-150718.png" width="300px"/>
 <img src="scn/device-2015-06-17-150829.png" width="300px"/>
 
+<img src="scn/WW_PhoneKOT49Hhesk11262015103358.png" width="300px"/>
+<img src="scn/WW_PhoneKOT49Hhesk11262015103406.png" width="300px"/>
+
+<img src="scn/anglerMDB08Lhesk11262015104332.png" width="450px"/>
+<img src="scn/anglerMDB08Lhesk11262015104346.png" width="450px"/>
+
+<img src="scn/anglerMDB08Lhesk11262015104354.png" width="450px"/>
+
 
 ## New Version Demo:
 [Mobile Testing](https://www.youtube.com/embed/s0pHZgyLeVo)

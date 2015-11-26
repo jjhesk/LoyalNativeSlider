@@ -2,6 +2,7 @@ package com.hkm.sliderdemo;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hkm.slider.Animations.DescriptionAnimation;
+import com.hkm.slider.LoyalUtil;
 import com.hkm.slider.SliderLayout;
+import com.hkm.slider.SliderTypes.AdvancedTextSliderView;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.CompactFrameSliderView;
 import com.hkm.slider.SliderTypes.CompactSliderView;
@@ -42,7 +45,7 @@ public class MultSections extends BaseApp {
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
-        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_24, R.color.red_pink_26);
+        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_26, R.color.red_pink_27);
         final NumZero n = new NumZero(this);
         mDemoSlider.setNumLayout(n);
         mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
@@ -66,39 +69,40 @@ public class MultSections extends BaseApp {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected void defaultCompleteSlider(final HashMap<String, Integer> maps) {
-        TextSliderView s1 = new TextSliderView(this);
-        // initialize a SliderLayout
-        s1
-                .description(getString(R.string.head_line_01))
-                .image(getString(R.string.hl_image_01))
-                .setScaleType(BaseSliderView.ScaleType.Fit)
-                .enableSaveImageByLongClick(getFragmentManager())
-                .enableImageLocalStorage()
-                .setOnSliderClickListener(this);
-        //add your extra information
-        // textSliderView.getBundle().putString("extra", name);
-        mDemoSlider.addSlider(s1);
 
 
         try {
-            CompactSliderView s2 = new CompactSliderView(this, 2);
-            s2
+
+            TextSliderView s1ev_dks = new TextSliderView(this);
+            // initialize a SliderLayout
+            s1ev_dks
+                    .description(getString(R.string.head_line_01))
+                    .image(getString(R.string.hl_image_01))
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                    .enableSaveImageByLongClick(getFragmentManager())
+                    .enableImageLocalStorage();
+            //add your extra information
+            // textSliderView.getBundle().putString("extra", name);
+            mDemoSlider.addSlider(s1ev_dks);
+
+
+            CompactSliderView s_dkf_12 = new CompactSliderView(this, 2);
+            s_dkf_12
 
                     .setDisplayOnlyImageUrls(new String[]{
                             getString(R.string.hl_image_02),
                             getString(R.string.hl_image_03)
                     })
-
-
-                            // initialize a SliderLayout
-
-                    .description(getString(R.string.head_line_02))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setLinksOnEach(new String[]{
+                            "http://www.wifi-egg.com/order.php",
+                            "https://www.youtube.com/watch?v=uOx3Zdl4738"
+                    })
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .enableSaveImageByLongClick(getFragmentManager())
                     .enableImageLocalStorage()
                     .setOnSliderClickListener(this);
 
-            mDemoSlider.addSlider(s2.build());
+            mDemoSlider.addSlider(s_dkf_12.build());
 
 
             CompactSliderView s3 = new CompactSliderView(this, 3);
@@ -114,7 +118,7 @@ public class MultSections extends BaseApp {
                             // initialize a SliderLayout
 
                     .description(getString(R.string.head_line_02))
-                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .enableSaveImageByLongClick(getFragmentManager())
                     .enableImageLocalStorage()
                     .setOnSliderClickListener(this);
@@ -122,30 +126,30 @@ public class MultSections extends BaseApp {
             mDemoSlider.addSlider(s3.build());
 
 
-            CompactSliderView s4 = new CompactSliderView(this, 4);
-            s4
+            CompactSliderView s_flowers_amazing_4 = new CompactSliderView(this, 4);
+            s_flowers_amazing_4
 
                     .setDisplayOnlyImageUrls(new String[]{
+                            getString(R.string.hl_image_01),
+                            getString(R.string.hl_image_02),
                             getString(R.string.hl_image_03),
-                            getString(R.string.hl_image_07),
-                            getString(R.string.hl_image_05),
-                            getString(R.string.hl_image_01)
+                            getString(R.string.hl_image_04)
                     })
 
 
                             // initialize a SliderLayout
 
                     .description(getString(R.string.head_line_02))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .enableSaveImageByLongClick(getFragmentManager())
                     .enableImageLocalStorage()
                     .setOnSliderClickListener(this);
 
-            mDemoSlider.addSlider(s4.build());
+            mDemoSlider.addSlider(s_flowers_amazing_4.build());
 
 
-            CompactFrameSliderView s5 = new CompactFrameSliderView(this, 4);
-            s5
+            CompactFrameSliderView sCompactFrameSliderView5 = new CompactFrameSliderView(this, 4);
+            sCompactFrameSliderView5
 
                     .setDescriptions(new String[]{
                             getString(R.string.head_line_03),
@@ -163,16 +167,16 @@ public class MultSections extends BaseApp {
                             getString(R.string.hl_image_01)
                     })
 
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .enableSaveImageByLongClick(getFragmentManager())
                     .enableImageLocalStorage()
                     .setOnSliderClickListener(this);
 
-            mDemoSlider.addSlider(s5.build());
+            mDemoSlider.addSlider(sCompactFrameSliderView5.build());
 
 
-            CompactFrameSliderView s6 = new CompactFrameSliderView(this, 2);
-            s6
+            CompactFrameSliderView s_setLinksOnEach_6 = new CompactFrameSliderView(this, 2);
+            s_setLinksOnEach_6
 
                     .setDescriptions(new String[]{
                             getString(R.string.head_line_03),
@@ -187,23 +191,26 @@ public class MultSections extends BaseApp {
                             getString(R.string.hl_image_07)
                     })
 
-
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .enableSaveImageByLongClick(getFragmentManager())
+                    .setLinksOnEach(new String[]{
+                            "http://www.wifi-egg.com/order.php",
+                            "https://www.youtube.com/watch?v=uOx3Zdl4738"
+                    })
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                            //  .enableSaveImageByLongClick(getFragmentManager())
                     .enableImageLocalStorage()
                     .setOnSliderClickListener(this);
-            mDemoSlider.addSlider(s6.build());
+            mDemoSlider.addSlider(s_setLinksOnEach_6.build());
 
 
-            CompactFrameSliderView s7 = new CompactFrameSliderView(this, 2);
-            s7
+            CompactFrameSliderView s_refffd = new CompactFrameSliderView(this, 2);
+            s_refffd
 
                     .setDescriptions(new String[]{
                             getString(R.string.head_line_08),
                             getString(R.string.head_line_06)
 
                     })
-                    .setSlideLayoutCustom(CompactFrameSliderView.RIPPLE_SLIDE)
+                            // .setSlideLayoutCustom(CompactFrameSliderView.RIPPLE_SLIDE)
                             // initialize a SliderLayout
 
                     .setDisplayOnlyImageUrls(new String[]{
@@ -212,12 +219,12 @@ public class MultSections extends BaseApp {
                     })
 
 
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .enableSaveImageByLongClick(getFragmentManager())
                     .enableImageLocalStorage()
                     .setOnSliderClickListener(this);
 
-            mDemoSlider.addSlider(s7.build());
+            mDemoSlider.addSlider(s_refffd.build());
 
 
         } catch (Exception e) {
@@ -233,6 +240,10 @@ public class MultSections extends BaseApp {
 
     @Override
     public void onSliderClick(BaseSliderView coreSlider) {
-
+        if (LoyalUtil.getUri(coreSlider) != null) {
+            Toast.makeText(this,
+                    LoyalUtil.getUri(coreSlider).getHost().toString(),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }
