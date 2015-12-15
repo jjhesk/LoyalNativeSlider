@@ -49,6 +49,10 @@
         <attr name="image_button_r" format="reference" />
 
         <attr name="slider_side_buttons" format="boolean" />
+        <attr name="page_type" format="enum">
+            <enum name="ZOOMABLE" value="1">ZOOMABLE</enum>
+            <enum name="NONZOOMABLE" value="0">NONZOOMABLE</enum>
+        </attr>
 
         <attr name="slider_side_buttons_function_flip" format="boolean" />
     </declare-styleable>

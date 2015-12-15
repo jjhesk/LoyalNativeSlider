@@ -12,6 +12,12 @@ This is an amazing image slider for the Android platform. I decided to open sour
 
 ##Features
 
+
+###v1.5.0
+- [x] Zoomable view
+- [X] news feed view
+
+
 ###v1.4.1
 - [x] Add local storage enable for picasso
 - [X] adapting multiple images in one slide config 2-4
@@ -29,7 +35,7 @@ This is an amazing image slider for the Android platform. I decided to open sour
 repositories {maven { url "http://dl.bintray.com/jjhesk/maven" }}
 
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.4.1'
+    compile 'com.hkm.loyalslider:library:1.5.0'
 }
 
 ```

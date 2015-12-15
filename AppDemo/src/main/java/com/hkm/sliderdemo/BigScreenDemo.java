@@ -30,10 +30,14 @@ import java.util.HashMap;
  * Created by hesk on 19/8/15.
  */
 public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
-    private SliderLayout mDemoSlider;
+    protected SliderLayout mDemoSlider;
+
+    protected boolean shouldRequestAPIBeforeLayoutRender() {
+        return false;
+    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected void defaultCompleteSlider(final HashMap<String, String> maps) {
+    protected void defaultCompleteSlider(final SliderLayout slide, final HashMap<String, String> maps) {
         for (String name : maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
@@ -46,7 +50,7 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
                     .setOnSliderClickListener(this);
             //add your extra information
             textSliderView.getBundle().putString("extra", name);
-            mDemoSlider.addSlider(textSliderView);
+            slide.addSlider(textSliderView);
         }
     }
 
@@ -67,7 +71,7 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
     }
 
     @SuppressLint("ResourceAsColor")
-    private void setupSlider() {
+    protected void setupSlider(final SliderLayout mDemoSlider) {
         // remember setup first
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         //   mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -87,8 +91,11 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
                 Toast.makeText(BigScreenDemo.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        //and data second. it is a must because you will except the data to be streamed into the pipline.
-        defaultCompleteSlider(DataProvider.getVerticalDataSrc());
+
+        if (!shouldRequestAPIBeforeLayoutRender()) {
+            //and data second. it is a must because you will except the data to be streamed into the pipline.
+            defaultCompleteSlider(mDemoSlider, DataProvider.getVerticalDataSrc());
+        }
     }
 
     /**
@@ -141,7 +148,7 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vertical_slider);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
-        setupSlider();
+        setupSlider(mDemoSlider);
     }
 
     @Override

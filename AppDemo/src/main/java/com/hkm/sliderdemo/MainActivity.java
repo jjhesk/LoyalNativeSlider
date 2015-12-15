@@ -146,7 +146,6 @@ public class MainActivity extends BaseApp {
                 break;
 
 
-
             case R.id.action_restore_default:
                 mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                 mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -168,6 +167,16 @@ public class MainActivity extends BaseApp {
             case R.id.action_bigscreendemo:
                 Intent bigscn = new Intent(this, BigScreenDemo.class);
                 startActivity(bigscn);
+                break;
+
+            case R.id.can_zoom:
+                Intent vg = new Intent(this, ZoomScreenSlider.class);
+                startActivity(vg);
+                break;
+
+            case R.id.newsread:
+                Intent h = new Intent(this, NewsArticle.class);
+                startActivity(h);
                 break;
 
             case R.id.action_multi_screen:
