@@ -1,9 +1,11 @@
 package com.hkm.slider;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.os.Message;
+import android.support.annotation.IntDef;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -51,8 +53,15 @@ import static com.hkm.slider.SliderLayout.PresentationConfig.*;
  * pager_animation
  */
 public class SliderLayout extends RelativeLayout {
+    public static final int
+            ZOOMABLE = 1, NONZOOMABLE = 0;
 
-    private Context mContext;
+    @IntDef({ZOOMABLE, NONZOOMABLE})
+    public @interface SliderLayoutType {
+    }
+
+    public Activity activity;
+    public Context mContext;
     /**
      * InfiniteViewPager is extended from ViewPagerEx. As the name says, it can scroll without bounder.
      */
@@ -82,7 +91,9 @@ public class SliderLayout extends RelativeLayout {
      */
     private Timer mResumingTimer;
     private TimerTask mResumingTask;
-    private int pagerType = 0;
+
+    @SliderLayoutType
+    private int pagerType = NONZOOMABLE;
     /**
      * If {@link com.hkm.slider.Tricks.ViewPagerEx} is Cycling
      */
@@ -174,6 +185,9 @@ public class SliderLayout extends RelativeLayout {
                 break;
             }
         }
+
+        //setType(attributes.getInt(R.styleable.SliderLayout_page_type, SliderLayout.NONZOOMABLE));
+        // setType(ZOOMABLE);
         mSliderAdapter = new SliderAdapter(mContext);
         mSliderAdapter.registerDataSetObserver(sliderDataObserver);
         pagerSetup();
@@ -228,9 +242,20 @@ public class SliderLayout extends RelativeLayout {
         }
     }
 
+    public SliderLayout setType(final @SliderLayoutType int t) {
+        pagerType = t;
+        return this;
+    }
+
+    public SliderLayout setActivity(final Activity t) {
+        activity = t;
+        return this;
+    }
+
     private void pagerSetup() {
-        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(mSliderAdapter);
-        if (pagerType == 0) {
+
+        if (pagerType == NONZOOMABLE) {
+            PagerAdapter wrappedAdapter = new InfinitePagerAdapter(mSliderAdapter);
             mViewPager = (InfiniteViewPager) findViewById(R.id.daimajia_slider_viewpager);
             if (mPagerMargin > -1) {
                 mViewPager.setMargin(mPagerMargin);
@@ -248,7 +273,8 @@ public class SliderLayout extends RelativeLayout {
                     return false;
                 }
             });
-        } else if (pagerType == 1) {
+        } else if (pagerType == ZOOMABLE) {
+
         }
     }
 

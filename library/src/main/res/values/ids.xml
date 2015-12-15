@@ -28,4 +28,10 @@
     <item name="ns_display_number_s7" type="id" />
     <item name="ns_display_i_s7" type="id" />
     <item name="ns_display_t_s7" type="id" />
+    <!-- single slider zooming image -->
+    <item name="ssz_bottom_caption" type="id" />
+    <item name="ssz_caption_textview" type="id" />
+    <item name="ssz_uk_co_senab_photoview" type="id" />
+    <item name="ssz_frame_close_window_button" type="id" />
+    <item name="ssz_debug_textview" type="id" />
 </resources>

@@ -39,11 +39,21 @@
         android:orderInCategory="100"
         android:title="Vertical Screen"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/can_zoom"
+        android:orderInCategory="100"
+        android:title="Zoom Enabled"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_multi_screen"
         android:orderInCategory="100"
         android:title="Multi Screen"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/newsread"
+        android:orderInCategory="100"
+        android:title="News View"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_github"
