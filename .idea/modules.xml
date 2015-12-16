@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AppDemo/AppDemo.iml" filepath="$PROJECT_DIR$/AppDemo/AppDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/LoyalNativeSlider.iml" filepath="$PROJECT_DIR$/LoyalNativeSlider.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/weblnslider/weblnslider.iml" filepath="$PROJECT_DIR$/weblnslider/weblnslider.iml" />
     </modules>
   </component>
 </project>
