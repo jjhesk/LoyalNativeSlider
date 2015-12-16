@@ -14,8 +14,7 @@ import com.hkm.loyalns.R;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.NewsFeedArticleView;
 
-import com.hypebeast.sdk.api.model.hbeditorial.ArticleData;
-import com.hypebeast.sdk.api.model.hbeditorial.ResponsePostW;
+import com.hypebeast.sdk.api.exception.ApiException;
 import com.hypebeast.sdk.api.model.hbeditorial.ResponseSingle;
 import com.hypebeast.sdk.clients.HBEditorialClient;
 
@@ -28,14 +27,14 @@ import retrofit.client.Response;
 /**
  * Created by hesk on 15/12/15.
  */
-public class Feed extends NewsFeedArticleView {
+public class NewsBurner extends NewsFeedArticleView {
     protected NonLeakingWebView block;
     protected HBEditorialClient clientApi;
     protected RelativeLayout rlout;
     protected long article_id;
     protected String full_path;
 
-    public Feed(Context context) {
+    public NewsBurner(Context context) {
         super(context);
         clientApi = HBEditorialClient.getInstance(context);
     }
@@ -112,12 +111,12 @@ public class Feed extends NewsFeedArticleView {
         triggerLoading();
     }
 
-    public Feed setID(final long _id) {
+    public NewsBurner setID(final long _id) {
         this.article_id = _id;
         return this;
     }
 
-    public Feed setPath(final String full_path) {
+    public NewsBurner setPath(final String full_path) {
         this.full_path = full_path;
         return this;
     }
@@ -131,6 +130,18 @@ public class Feed extends NewsFeedArticleView {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    protected void triggerLoading_althernative() {
+        try {
+            if (article_id > 0) {
+                clientApi.createFeedInterface().the_post(article_id, res);
+            } else if (full_path != null) {
+                clientApi.createAPIUniversal(full_path).getSingleArticle(res);
+            }
+        } catch (ApiException e1) {
+            e1.printStackTrace();
         }
     }
 
@@ -156,13 +167,13 @@ public class Feed extends NewsFeedArticleView {
                         }
                 );
             } catch (Exception e) {
-                e.printStackTrace();
+
             }
         }
 
         @Override
         public void failure(RetrofitError error) {
-            error.printStackTrace();
+            triggerLoading_althernative();
         }
     };
 

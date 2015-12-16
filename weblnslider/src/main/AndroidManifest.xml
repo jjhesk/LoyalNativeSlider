@@ -11,13 +11,26 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".BigScreenDemo"
+            android:theme="@style/Full" />
+        <activity
+            android:name=".MultSections"
+            android:theme="@style/Full" />
+        <activity
+            android:name=".NewsArticle"
+            android:theme="@style/Full" />
+        <activity
+            android:name=".ZoomScreenSlider"
+            android:theme="@style/Full" />
     </application>
 
 </manifest>

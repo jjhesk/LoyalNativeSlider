@@ -1,9 +1,7 @@
 package com.hkm.loyalns;
 
-import com.hkm.loyalns.modules.Feed;
+import com.hkm.loyalns.modules.NewsBurner;
 import com.hkm.slider.SliderLayout;
-import com.hkm.slider.SliderTypes.BaseSliderView;
-import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hypebeast.sdk.api.model.hbeditorial.ArticleData;
 import com.hypebeast.sdk.api.model.hbeditorial.ResponsePostW;
 import com.hypebeast.sdk.clients.HBEditorialClient;
@@ -26,7 +24,7 @@ public class NewsArticle extends BigScreenDemo {
         Iterator<ArticleData> it = list.iterator();
         while (it.hasNext()) {
             ArticleData article = it.next();
-            Feed textSliderView = new Feed(this);
+            NewsBurner textSliderView = new NewsBurner(this);
 
             textSliderView
                     //feed
