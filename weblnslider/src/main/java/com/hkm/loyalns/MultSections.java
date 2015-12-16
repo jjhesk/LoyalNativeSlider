@@ -15,6 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hkm.loyalns.Util.DataProvider;
+import com.hkm.loyalns.modules.NumZero;
+import com.hkm.loyalns.modules.TransformerAdapter;
 import com.hkm.slider.Animations.DescriptionAnimation;
 import com.hkm.slider.LoyalUtil;
 import com.hkm.slider.SliderLayout;
@@ -24,9 +27,6 @@ import com.hkm.slider.SliderTypes.CompactFrameSliderView;
 import com.hkm.slider.SliderTypes.CompactSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hkm.slider.TransformerL;
-import com.hkm.sliderdemo.Util.DataProvider;
-import com.hkm.sliderdemo.modules.NumZero;
-import com.hkm.sliderdemo.modules.TransformerAdapter;
 
 import java.util.HashMap;
 

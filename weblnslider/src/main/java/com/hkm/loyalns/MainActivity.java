@@ -19,6 +19,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hkm.loyalns.Util.DataProvider;
+import com.hkm.loyalns.modules.CustomNumberView;
+import com.hkm.loyalns.modules.NumZero;
+import com.hkm.loyalns.modules.TransformerAdapter;
 import com.hkm.slider.Animations.DescriptionAnimation;
 import com.hkm.slider.Indicators.NumContainer;
 import com.hkm.slider.Indicators.PagerIndicator;
@@ -27,11 +31,6 @@ import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
-import com.hkm.sliderdemo.Util.ChildAnimationExample;
-import com.hkm.sliderdemo.Util.DataProvider;
-import com.hkm.sliderdemo.modules.CustomNumberView;
-import com.hkm.sliderdemo.modules.TransformerAdapter;
-import com.hkm.sliderdemo.modules.NumZero;
 
 import java.util.HashMap;
 
@@ -108,7 +107,7 @@ public class MainActivity extends BaseApp {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main, menu);
+        menuInflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
