@@ -10,6 +10,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.View;
@@ -259,12 +260,14 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
         if (selected == 0) {
             mSelectedDrawable = mSelectedLayerDrawable;
         } else {
-            mSelectedDrawable = mContext.getResources().getDrawable(mUserSetSelectedIndicatorResId);
+            mSelectedDrawable = ContextCompat.getDrawable(mContext, mUserSetSelectedIndicatorResId);
+            //   mSelectedDrawable = mContext.getResources().getDrawable(mUserSetSelectedIndicatorResId);
         }
         if (unselected == 0) {
             mUnselectedDrawable = mUnSelectedLayerDrawable;
         } else {
-            mUnselectedDrawable = mContext.getResources().getDrawable(mUserSetUnSelectedIndicatorResId);
+            mUnselectedDrawable = ContextCompat.getDrawable(mContext, mUserSetUnSelectedIndicatorResId);
+            //   mUnselectedDrawable = mContext.getResources().getDrawable(mUserSetUnSelectedIndicatorResId);
         }
 
         resetDrawable();
@@ -280,15 +283,19 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
     public void setDefaultIndicatorColor(@ColorRes final int selectedColor, @ColorRes final int unselectedColor) {
         try {
             if (mUserSetSelectedIndicatorResId == 0) {
-                final int a = mContext.getResources().getColor(selectedColor);
+                //  final int a = mContext.getResources().getColor(selectedColor);
+                final int a = ContextCompat.getColor(mContext, selectedColor);
                 mSelectedGradientDrawable.setColor(a);
             }
             if (mUserSetUnSelectedIndicatorResId == 0) {
-                final int u = mContext.getResources().getColor(unselectedColor);
+                //   final int u = mContext.getResources().getColor(unselectedColor);
+                final int u = ContextCompat.getColor(mContext, unselectedColor);
                 mUnSelectedGradientDrawable.setColor(u);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            mUnSelectedGradientDrawable.setColor(ContextCompat.getColor(mContext, R.color.default_nsl_dark));
+            mSelectedGradientDrawable.setColor(ContextCompat.getColor(mContext, R.color.default_nsl_light));
         }
         resetDrawable();
     }
