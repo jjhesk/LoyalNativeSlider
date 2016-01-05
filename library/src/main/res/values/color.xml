@@ -11,5 +11,7 @@
 
     <color name="shadow_start">#00000000</color>
     <color name="shadow_ends">#7f000000</color>
+    <color name="default_nsl_dark">#7f4d4d4d</color>
+    <color name="default_nsl_light">#cbffffff</color>
 
 </resources>
