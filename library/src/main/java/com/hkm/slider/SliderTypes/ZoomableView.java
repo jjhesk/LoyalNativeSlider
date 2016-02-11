@@ -186,12 +186,14 @@ public class ZoomableView extends BaseSliderView {
                 mImage.post(new Runnable() {
                     @Override
                     public void run() {
-                        mAttacher.setScale(2f, mImage.getWidth() / 2, mImage.getHeight() / 2, true);
+                        mAttacher.setScale(
+                                initial_zoom_factor,
+                                true);
                     }
                 });
-
                 //slidrInf.unlock();
-                mAttacher.setScale(initial_zoom_factor);
+                //mImage.getImmImage.getWidth()
+                //mAttacher.setScale(initial_zoom_factor);
             }
 
             @Override

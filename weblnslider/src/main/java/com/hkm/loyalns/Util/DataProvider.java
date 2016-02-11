@@ -30,15 +30,10 @@ public class DataProvider {
     public static HashMap<String, String> getVerticalDataSrc() {
 
         HashMap<String, String> file_maps = new HashMap<String, String>();
-        file_maps.put("Hannibal", "file:///android_asset/g1.jpg");
-        file_maps.put("summer girl", "file:///android_asset/g2.jpg");
-        file_maps.put("fe", "file:///android_asset/g3.jpg");
-        file_maps.put("long leg", "file:///android_asset/g4.jpg");
-        file_maps.put("high heels", "file:///android_asset/g5.jpg");
-        file_maps.put("sf", "file:///android_asset/g6.jpg");
-        file_maps.put("sfaf", "file:///android_asset/g7.jpg");
-        file_maps.put("sfaf", "file:///android_asset/g8.jpg");
-        file_maps.put("sfaf", "file:///android_asset/g9.jpg");
+        file_maps.put("Choro Q N64", "file:///android_asset/q65.jpg");
+        file_maps.put("Choro 4 HQ PS2", "file:///android_asset/q66.jpg");
+        file_maps.put("Choro Rainbow Wings", "file:///android_asset/q67.jpg");
+        file_maps.put("Choro Q Boat Race", "file:///android_asset/q68.jpg");
         return file_maps;
 
     }

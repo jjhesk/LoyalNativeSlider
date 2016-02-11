@@ -21,19 +21,19 @@ public class ZoomScreenSlider extends BigScreenDemo {
             ZoomableView zoomer = new ZoomableView(true, this);
             // initialize a SliderLayout
             zoomer
-
                     //ZoomableView configurations
-                    .setInitalZoomFactor(1.3f)
-
-                      //BaseSlider configurations
+                    .setInitalZoomFactor(1.f)
+                            //BaseSlider configurations
                     .description(name)
                     .image(maps.get(name))
                     .enableImageLocalStorage()
-                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
+                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop)
                     .setOnSliderClickListener(this);
             //add your extra information
             zoomer.getBundle().putString("extra", name);
             slide.addSlider(zoomer);
         }
+        slide.stopAutoCycle();
+        slide.setCurrentPosition(0, true);
     }
 }

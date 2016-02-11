@@ -61,7 +61,6 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
             textSliderView
                     .description(name)
                     .image(maps.get(name))
-
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);
             //add your extra information
