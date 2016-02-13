@@ -31,10 +31,11 @@ This is an amazing image slider for the Android platform. I decided to open sour
 
 #### Gradle
 [![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)
+
+JCenter is the place to find and share popular Apache Maven packages for use by Maven, Gradle, Ivy, SBT, etc. 
+For the most comprehensive collection of artifacts, point your Maven at: `http://jcenter.bintray.com` 
+
 ```gradle
-
-repositories {maven { url "http://dl.bintray.com/jjhesk/maven" }}
-
 dependencies {
     compile 'com.hkm.loyalslider:library:1.5.0'
 }
