@@ -87,7 +87,7 @@ There are some default indicators. If you want to use a provided indicator:
 
 ## Preview
 ![zoom in slider](http://i.giphy.com/tGjjsefxE8Cze.gif)
-
+![multislide](http://i.giphy.com/NtCRzwkgbIupG.gif)
 <img src="scn/device-2015-06-17-142823.png" width="300px"/>
 <img src="scn/device-2015-06-17-150718.png" width="300px"/>
 <img src="scn/device-2015-06-17-150829.png" width="300px"/>
