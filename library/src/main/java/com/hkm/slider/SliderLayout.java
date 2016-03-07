@@ -28,6 +28,7 @@ import com.hkm.slider.Tricks.MultiViewPager;
 import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -293,7 +294,7 @@ public class SliderLayout extends RelativeLayout {
      * @param position the insert position
      * @param smooth   if that is smooth or not
      */
-    public void setCurrentPosition(int position, boolean smooth) {
+    private void setCurrentPosition(int position, boolean smooth) {
         if (getRealAdapter() == null)
             throw new IllegalStateException("You did not set a slider adapter");
         if (position >= getRealAdapter().getCount()) {
@@ -305,12 +306,31 @@ public class SliderLayout extends RelativeLayout {
     }
 
     /**
-     * set the current position
+     * this function will be removed soon in the next release. see {@link #setCurrentPositionAnim} with detail
      *
-     * @param position the int in page limit
+     * @param position number
      */
-    public void setCurrentPosition(int position) {
+    @Deprecated
+    public final void setCurrentPosition(int position) {
+        setCurrentPositionAnim(position);
+    }
+
+    /**
+     * set the current position with animation
+     *
+     * @param position the int of the slide position
+     */
+    public final void setCurrentPositionAnim(int position) {
         setCurrentPosition(position, true);
+    }
+
+    /**
+     * set current position without animation
+     *
+     * @param position the int of the slide position
+     */
+    public final void setCurrentPositionStatic(int position) {
+        setCurrentPosition(position, false);
     }
 
     /**
@@ -318,7 +338,7 @@ public class SliderLayout extends RelativeLayout {
      *
      * @param limit How many pages will be kept offscreen in an idle state.
      */
-    public void setOffscreenPageLimit(int limit) {
+    public final void setOffscreenPageLimit(int limit) {
         mViewPager.setOffscreenPageLimit(limit);
     }
 
@@ -327,7 +347,7 @@ public class SliderLayout extends RelativeLayout {
      *
      * @param indicator the indicator type
      */
-    public void setCustomIndicator(PagerIndicator indicator) {
+    public final void setCustomIndicator(PagerIndicator indicator) {
         if (mIndicator != null) {
             mIndicator.destroySelf();
         }
@@ -337,8 +357,26 @@ public class SliderLayout extends RelativeLayout {
         mIndicator.redraw();
     }
 
-    public <T extends BaseSliderView> void addSlider(T slide) {
+    public final <T extends BaseSliderView> void addSlider(T slide) {
         mSliderAdapter.addSlider(slide);
+        autoDetermineLayoutDecoration();
+    }
+
+    public final <T extends BaseSliderView> void addSliderList(List<T> slide_sequence) {
+        mSliderAdapter.addSliders(slide_sequence);
+        autoDetermineLayoutDecoration();
+    }
+
+    public final <T extends BaseSliderView> void loadSliderList(List<T> slide_sequence) {
+        mSliderAdapter.loadSliders(slide_sequence);
+        autoDetermineLayoutDecoration();
+    }
+
+    public final void setRemoveItemOnFailureToLoad(boolean enabled) {
+        mSliderAdapter.setRemoveItemOnFailureToLoad(enabled);
+    }
+
+    private void autoDetermineLayoutDecoration() {
         final boolean overlimit = mSliderAdapter.getCount() > slideDotLimit;
         switch (byVal(mSliderIndicatorPresentations)) {
             case Smart:
@@ -351,9 +389,7 @@ public class SliderLayout extends RelativeLayout {
 
                 break;
         }
-
     }
-
 
     /**
      * move to the next slide

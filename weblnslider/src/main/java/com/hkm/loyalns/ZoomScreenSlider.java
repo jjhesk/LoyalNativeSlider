@@ -34,6 +34,6 @@ public class ZoomScreenSlider extends BigScreenDemo {
             slide.addSlider(zoomer);
         }
         slide.stopAutoCycle();
-        slide.setCurrentPosition(0, true);
+        slide.setCurrentPosition(1);
     }
 }

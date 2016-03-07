@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".TheMain"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ExampleClassic"
+            android:theme="@style/Full" />
         <activity
             android:name=".BigScreenDemo"
             android:theme="@style/Full" />

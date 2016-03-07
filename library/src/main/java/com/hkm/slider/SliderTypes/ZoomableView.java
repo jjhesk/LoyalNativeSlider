@@ -19,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.hkm.slider.R;
-import com.r0adkll.slidr.model.SlidrInterface;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -39,7 +38,6 @@ public class ZoomableView extends BaseSliderView {
     protected Typeface typeface;
     private int corner_button_image;
     private Drawable corner_button_image_d;
-    private SlidrInterface control_panel_slider;
     private cornerbuttonOnClick mclick = new cornerbuttonOnClick() {
         @Override
         public void click(int button_view_id) {
@@ -105,10 +103,6 @@ public class ZoomableView extends BaseSliderView {
         return this;
     }
 
-    public ZoomableView setSlidrInterface(SlidrInterface slidr_control) {
-        control_panel_slider = slidr_control;
-        return this;
-    }
 
     public ZoomableView setButtomDescription(boolean enableDesc) {
         bottomFadeDescription = enableDesc;
@@ -176,11 +170,9 @@ public class ZoomableView extends BaseSliderView {
         Picasso.with(mContext).load(getUrl()).into(mImage, new Callback() {
             @Override
             public void onSuccess() {
-                if (control_panel_slider != null) {
-                    mAttacher.setOnMatrixChangeListener(new MatrixChangeListener(control_panel_slider, mAttacher, cover, cornerbutton));
-                } else {
-                    mAttacher.setOnMatrixChangeListener(new MatrixChangeListener(mAttacher, cover, cornerbutton));
-                }
+
+                mAttacher.setOnMatrixChangeListener(new MatrixChangeListener(mAttacher, cover, cornerbutton));
+
                 mAttacher.setOnPhotoTapListener(new PhotoTapListener());
                 circle.setVisibility(View.GONE);
                 mImage.post(new Runnable() {
@@ -238,7 +230,7 @@ public class ZoomableView extends BaseSliderView {
         private final PhotoViewAttacher mAttacher;
         private final LinearLayout cover;
         private final ImageButton button;
-        private SlidrInterface mSlidr;
+
 
         public MatrixChangeListener(PhotoViewAttacher mAttacher, LinearLayout cover, final ImageButton button_close) {
             this.mAttacher = mAttacher;
@@ -246,10 +238,6 @@ public class ZoomableView extends BaseSliderView {
             this.cover = cover;
         }
 
-        public MatrixChangeListener(SlidrInterface controller, PhotoViewAttacher mAttacher, LinearLayout cover, final ImageButton button_close) {
-            this(mAttacher, cover, button_close);
-            mSlidr = controller;
-        }
 
         @Override
         public void onMatrixChanged(RectF rect) {
@@ -262,12 +250,6 @@ public class ZoomableView extends BaseSliderView {
                     mzoom.cover(false);
                 }
 
-                if (mSlidr != null) {
-                    if (mAttacher.getScale() == 1.0f)
-                        mSlidr.unlock();
-                    else
-                        mSlidr.lock();
-                }
 
             } catch (Exception e) {
                 Log.d(LOG_TAG, "onMatrix Changed" + e.getMessage());

@@ -34,7 +34,7 @@ public abstract class BaseApp extends AppCompatActivity implements BaseSliderVie
 
     @LayoutRes
     protected int getActivityMainLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.main_slider;
     }
 
     protected abstract void setupSlider();

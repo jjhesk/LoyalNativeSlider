@@ -23,6 +23,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.DrawableTypeRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.animation.GlideAnimation;
 import com.hkm.slider.CapturePhotoUtils;
 import com.hkm.slider.R;
 import com.squareup.picasso.Callback;
@@ -32,11 +39,6 @@ import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Target;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Handler;
 
 /**
  * When you want to make your own slider view, you must extends from this class.
@@ -289,25 +291,115 @@ public abstract class BaseSliderView {
         return this;
     }
 
+
+    protected void bindEventShowGlide(final View v, final ImageView targetImageView) {
+        v.setOnClickListener(click_triggered);
+        final RequestManager glideRM = Glide.with(mContext);
+        DrawableTypeRequest rq;
+        if (mUrl != null) {
+            rq = glideRM.load(mUrl);
+        } else if (mFile != null) {
+            rq = glideRM.load(mFile);
+        } else if (mRes != 0) {
+            rq = glideRM.load(mRes);
+        } else {
+            return;
+        }
+
+        if (getEmpty() != 0) {
+            rq.placeholder(getEmpty());
+        }
+        if (getError() != 0) {
+            rq.error(getError());
+        }
+
+        switch (mScaleType) {
+            case Fit:
+                rq.fitCenter();
+                break;
+            case CenterCrop:
+                rq.centerCrop();
+                break;
+            case CenterInside:
+                rq.fitCenter();
+                break;
+        }
+        rq.diskCacheStrategy(DiskCacheStrategy.ALL);
+        if (mTargetWidth > 0 || mTargetHeight > 0) {
+            rq.override(mTargetWidth, mTargetHeight);
+        }
+        rq.listener(new RequestListener<String, GlideDrawable>() {
+            @Override
+            public boolean onException(Exception e, String model, com.bumptech.glide.request.target.Target<GlideDrawable> target, boolean isFirstResource) {
+                reportStatusEnd(false);
+                return false;
+            }
+
+
+            @Override
+            public boolean onResourceReady(GlideDrawable resource, String model, com.bumptech.glide.request.target.Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                hideLoadingProgress(v);
+                triggerOnLongClick(v);
+                reportStatusEnd(true);
+                return false;
+            }
+        });
+        rq.crossFade();
+        additionalGlideModifier(rq);
+        rq.into(targetImageView);
+    }
+
+    protected void additionalGlideModifier(DrawableTypeRequest mDrawableTypeRequest) {
+
+    }
+
+    protected void hideLoadingProgress(View mView) {
+        if (mView.findViewById(R.id.ns_loading_progress) != null) {
+            hideoutView(mView.findViewById(R.id.ns_loading_progress));
+        }
+    }
+
+    /**
+     * when {@link #mLongClickSaveImage} is true and this function will be triggered to watch the long action run
+     *
+     * @param mView the slider view object
+     */
+    private void triggerOnLongClick(View mView) {
+        if (mLongClickSaveImage && fmg != null) {
+            if (mDefaultLongClickListener == null) {
+                mDefaultLongClickListener = new View.OnLongClickListener() {
+                    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+                    @Override
+                    public boolean onLongClick(View v) {
+                        final saveImageDialog saveImageDial = new saveImageDialog();
+                        saveImageDial.show(fmg, mDescription);
+                        return false;
+                    }
+                };
+            }
+            mView.setOnLongClickListener(mDefaultLongClickListener);
+        }
+    }
+
+    private final View.OnClickListener click_triggered = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mOnSliderClickListener != null) {
+                mOnSliderClickListener.onSliderClick(BaseSliderView.this);
+            }
+        }
+    };
+
     /**
      * When you want to implement your own slider view, please call this method in the end in `getView()` method
      *
      * @param v               the whole view
      * @param targetImageView where to place image
      */
-    protected void bindEventAndShow(final View v, final ImageView targetImageView) {
-        final BaseSliderView me = this;
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnSliderClickListener != null) {
-                    mOnSliderClickListener.onSliderClick(me);
-                }
-            }
-        });
-
-        mLoadListener.onStart(me);
-        Picasso p = Picasso.with(mContext);
+    protected void bindEventAndShowPicasso(final View v, final ImageView targetImageView) {
+        v.setOnClickListener(click_triggered);
+        mLoadListener.onStart(this);
+        final Picasso p = Picasso.with(mContext);
         rq = null;
         if (mUrl != null) {
             rq = p.load(mUrl);
@@ -333,6 +425,7 @@ public abstract class BaseSliderView {
         if (mImageLocalStorageEnable) {
             rq.memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE);
         }
+
         switch (mScaleType) {
             case Fit:
                 rq.fit();
@@ -348,31 +441,22 @@ public abstract class BaseSliderView {
         rq.into(targetImageView, new Callback() {
             @Override
             public void onSuccess() {
-                if (v.findViewById(R.id.ns_loading_progress) != null) {
-                    hideoutView(v.findViewById(R.id.ns_loading_progress));
-                }
-
-                if (mLongClickSaveImage && fmg != null) {
-                    mDefaultLongClickListener = new View.OnLongClickListener() {
-                        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-                        @Override
-                        public boolean onLongClick(View v) {
-                            final saveImageDialog saveImageDial = new saveImageDialog();
-                            saveImageDial.show(fmg, mDescription);
-                            return false;
-                        }
-                    };
-                    v.setOnLongClickListener(mDefaultLongClickListener);
-                }
+                hideLoadingProgress(v);
+                triggerOnLongClick(v);
+                reportStatusEnd(true);
             }
 
             @Override
             public void onError() {
-                if (mLoadListener != null) {
-                    mLoadListener.onEnd(false, me);
-                }
+                reportStatusEnd(false);
             }
         });
+    }
+
+    private void reportStatusEnd(boolean b) {
+        if (mLoadListener != null) {
+            mLoadListener.onEnd(b, this);
+        }
     }
 
     final android.os.Handler nh = new android.os.Handler();
@@ -498,9 +582,8 @@ public abstract class BaseSliderView {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    protected void hideoutView(@Nullable final View view) {
+    final protected void hideoutView(@Nullable final View view) {
         if (view == null) return;
-
         view.animate().alpha(0f).withEndAction(new Runnable() {
             @Override
             public void run() {

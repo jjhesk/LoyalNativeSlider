@@ -5,11 +5,8 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,18 +21,17 @@ import com.hkm.loyalns.modules.CustomNumberView;
 import com.hkm.loyalns.modules.NumZero;
 import com.hkm.loyalns.modules.TransformerAdapter;
 import com.hkm.slider.Animations.DescriptionAnimation;
-import com.hkm.slider.Indicators.NumContainer;
 import com.hkm.slider.Indicators.PagerIndicator;
 import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hkm.slider.TransformerL;
-import com.hkm.slider.Tricks.ViewPagerEx;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class MainActivity extends BaseApp {
+public class ExampleClassic extends BaseApp {
 
     @SuppressLint("ResourceAsColor")
     protected void setupSlider() {
@@ -57,13 +53,18 @@ public class MainActivity extends BaseApp {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
-                Toast.makeText(MainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ExampleClassic.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
         defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
     }
 
+    /**
+     * this is the example of the dynamic loading of the sliders
+     *
+     * @param maps the list of the slider
+     */
     protected void customSliderView(final HashMap<String, String> maps) {
         for (String name : maps.keySet()) {
             CustomNumberView textSliderView = new CustomNumberView(this);
@@ -80,22 +81,36 @@ public class MainActivity extends BaseApp {
         }
     }
 
+    Handler mHandler = new Handler();
 
+    /**
+     * try this new loading mechanism
+     *
+     * @param maps the map of loading list
+     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected void defaultCompleteSlider(final HashMap<String, Integer> maps) {
-        for (String name : maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .enableSaveImageByLongClick(getFragmentManager())
-                    .setOnSliderClickListener(this);
-            //add your extra information
-            textSliderView.getBundle().putString("extra", name);
-            mDemoSlider.addSlider(textSliderView);
-        }
+        final ArrayList<TextSliderView> loadingList = new ArrayList<>();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (String name : maps.keySet()) {
+                    TextSliderView textSliderView = new TextSliderView(ExampleClassic.this);
+                    // initialize a SliderLayout
+                    textSliderView
+                            .description(name)
+                            .image(maps.get(name))
+                            .setScaleType(BaseSliderView.ScaleType.Fit)
+                            .enableSaveImageByLongClick(getFragmentManager())
+                            .setOnSliderClickListener(ExampleClassic.this);
+                    //add your extra information
+                    textSliderView.getBundle().putString("extra", name);
+                    loadingList.add(textSliderView);
+                }
+                mDemoSlider.loadSliderList(loadingList);
+                mDemoSlider.setCurrentPositionStatic(2);
+            }
+        }, 3000);
     }
 
 
@@ -156,31 +171,6 @@ public class MainActivity extends BaseApp {
 
             case R.id.default_slider_layout:
                 newloaddefaultCompleteSlider();
-                break;
-
-            case R.id.action_github:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.urlgithub)));
-                startActivity(browserIntent);
-                break;
-
-            case R.id.action_bigscreendemo:
-                Intent bigscn = new Intent(this, BigScreenDemo.class);
-                startActivity(bigscn);
-                break;
-
-            case R.id.can_zoom:
-                Intent vg = new Intent(this, ZoomScreenSlider.class);
-                startActivity(vg);
-                break;
-
-            case R.id.newsread:
-                Intent h = new Intent(this, NewsArticle.class);
-                startActivity(h);
-                break;
-
-            case R.id.action_multi_screen:
-                Intent ms = new Intent(this, MultSections.class);
-                startActivity(ms);
                 break;
 
         }

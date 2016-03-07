@@ -28,7 +28,6 @@ import java.util.Random;
  * Created by hesk on 6/25/2015.
  */
 public enum TransformerL {
-
     Default("Default"),
     Accordion("Accordion"),
     Background2Foreground("Background2Foreground"),

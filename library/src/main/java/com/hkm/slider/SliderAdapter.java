@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * A slider adapter
@@ -16,6 +18,7 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
 
     private Context mContext;
     private ArrayList<T> mImageContents;
+    private int mLoadConfiguration = POSITION_NONE;
 
     public SliderAdapter(Context context) {
         mContext = context;
@@ -25,6 +28,23 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
     public void addSlider(T slider) {
         slider.setOnImageLoadListener(this);
         mImageContents.add(slider);
+        notifyDataSetChanged();
+    }
+
+    public void loadSliders(List<T> slider) {
+        mLoadConfiguration = POSITION_UNCHANGED;
+        mImageContents.clear();
+        addSliders(slider);
+        notifyDataSetChanged();
+    }
+
+    public void addSliders(List<T> slider) {
+        Iterator<T> it = slider.iterator();
+        while (it.hasNext()) {
+            T slide = it.next();
+            slide.setOnImageLoadListener(this);
+            mImageContents.add(slide);
+        }
         notifyDataSetChanged();
     }
 
@@ -38,7 +58,7 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
 
     @Override
     public int getItemPosition(Object object) {
-        return POSITION_NONE;
+        return mLoadConfiguration;
     }
 
     public void removeSlider(BaseSliderView slider) {
@@ -99,12 +119,19 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
         if (target.isErrorDisappear() == false || result == true) {
             return;
         }
+        if (!mRemoveItemOnFailureToLoad) return;
         for (BaseSliderView slider : mImageContents) {
             if (slider.equals(target)) {
                 removeSlider(target);
                 break;
             }
         }
+    }
+
+    private boolean mRemoveItemOnFailureToLoad = true;
+
+    public final void setRemoveItemOnFailureToLoad(boolean b) {
+        mRemoveItemOnFailureToLoad = b;
     }
 
 }

@@ -195,7 +195,7 @@ public class CompactFrameSliderView extends CompactSliderView {
             String desc = descriptions.get(n);
             frame.applyDescription(desc);
         }
-        bindEventAndShow(image_url, frame);
+        bindCompatPicasso(image_url, frame);
 
         final CompactFrameSliderView me = this;
         frame.setClickListener(new View.OnClickListener() {
@@ -207,10 +207,9 @@ public class CompactFrameSliderView extends CompactSliderView {
                 }
             }
         });
-
     }
 
-    private void bindEventAndShow(String mURI, final FrameImage Fr) {
+    protected void bindCompatPicasso(String mURI, final FrameImage Fr) {
 
         final Picasso p = Picasso.with(mContext);
         final RequestCreator mreq = p.load(mURI);
@@ -261,7 +260,6 @@ public class CompactFrameSliderView extends CompactSliderView {
                 // }
             }
         });
-
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.hkm.slider.Intents;
+package com.hkm.supportslidr;
 
 import android.animation.LayoutTransition;
 import android.annotation.TargetApi;
