@@ -14,14 +14,11 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
@@ -29,7 +26,6 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.hkm.slider.CapturePhotoUtils;
 import com.hkm.slider.R;
 import com.squareup.picasso.Callback;
@@ -66,7 +62,7 @@ public abstract class BaseSliderView {
     private String mUrl;
     private File mFile;
     private int mRes;
-
+    private int mSlideNumber;
     protected OnSliderClickListener mOnSliderClickListener;
 
     protected boolean mErrorDisappear, mLongClickSaveImage;
@@ -91,6 +87,14 @@ public abstract class BaseSliderView {
         this.mBundle = new Bundle();
         mLongClickSaveImage = false;
         mImageLocalStorageEnable = false;
+    }
+
+    public final void setSlideOrderNumber(final int order) {
+        mSlideNumber = order;
+    }
+
+    public final int getSliderOrderNumber() {
+        return mSlideNumber;
     }
 
     /**

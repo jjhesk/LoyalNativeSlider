@@ -28,22 +28,35 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
     public void addSlider(T slider) {
         slider.setOnImageLoadListener(this);
         mImageContents.add(slider);
-        notifyDataSetChanged();
+        addSingleNotification();
     }
 
     public void loadSliders(List<T> slider) {
         mLoadConfiguration = POSITION_UNCHANGED;
         mImageContents.clear();
         addSliders(slider);
+    }
+
+    private void addSingleNotification() {
+        Iterator<T> it = mImageContents.iterator();
+        int orderNumber = 0;
+        while (it.hasNext()) {
+            T slide = it.next();
+            slide.setSlideOrderNumber(orderNumber);
+            orderNumber++;
+        }
         notifyDataSetChanged();
     }
 
     public void addSliders(List<T> slider) {
         Iterator<T> it = slider.iterator();
+        int orderNumber = 0;
         while (it.hasNext()) {
             T slide = it.next();
             slide.setOnImageLoadListener(this);
+            slide.setSlideOrderNumber(orderNumber);
             mImageContents.add(slide);
+            orderNumber++;
         }
         notifyDataSetChanged();
     }
