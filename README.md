@@ -11,6 +11,10 @@ Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=
 This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
+###v1.6
+- [ ] add glide
+- [ ] support list insert
+
 ###v1.5.5
 - [x] [fixed all the related bugs](https://github.com/jjhesk/LoyalNativeSlider/releases/tag/1.5.5)
 
@@ -31,14 +35,13 @@ This is an amazing image slider for the Android platform. I decided to open sour
 #### Gradle
 [![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)
 
-JCenter is the place to find and share popular Apache Maven packages for use by Maven, Gradle, Ivy, SBT, etc. 
-For the most comprehensive collection of artifacts, point your Maven at: `http://jcenter.bintray.com` 
+JCenter is the place to find and share popular Apache Maven packages for use by Maven, Gradle, Ivy, SBT, etc.
+For the most comprehensive collection of artifacts, point your Maven at: `http://jcenter.bintray.com`
 
 ```gradle
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.5.0'
+    compile 'com.hkm.loyalslider:library:1.6.0'
 }
-
 ```
 
 

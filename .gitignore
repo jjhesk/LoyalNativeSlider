@@ -29,6 +29,7 @@ gen/
 .gradle/
 .idea/
 gradle/
+.gradle/
 /*/build/
 
 # Local configuration file (sdk path, etc)
@@ -39,7 +40,7 @@ proguard/
 
 # Log Files
 *.log
-/.idea/
+.idea/
 /gradlew.bat
 /gradlew
 
