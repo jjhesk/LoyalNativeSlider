@@ -15,8 +15,8 @@ This is an amazing image slider for the Android platform. I decided to open sour
 - Adding call method to enable final detection of the tallest layout among all the loaded sliders. This method is only available thru using calls from `loadSliderList` and `addSliderList`. Because all slides needed to be rendered until all heights are found from each slide, there will be an slight delay from the first render of the sliderLayout.
 
 ###v1.6.0
-- add glide
-- support list insert
+- add glide. As mentioned from all other recommendations, this library will be now the first choice of the support module to render images. That say all slider will support Gif files now.
+- support list insert feature. Instead of having slide to be added one by one, there is a new way to insert items as a list that will be more efficient.
 
 ###v1.5.5
 - [fixed all the related bugs](https://github.com/jjhesk/LoyalNativeSlider/releases/tag/1.5.5)
