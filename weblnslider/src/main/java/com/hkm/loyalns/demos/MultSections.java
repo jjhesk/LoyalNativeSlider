@@ -1,27 +1,24 @@
-package com.hkm.loyalns;
+package com.hkm.loyalns.demos;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hkm.loyalns.R;
 import com.hkm.loyalns.Util.DataProvider;
+import com.hkm.loyalns.mod.BaseApp;
 import com.hkm.loyalns.modules.NumZero;
 import com.hkm.loyalns.modules.TransformerAdapter;
 import com.hkm.slider.Animations.DescriptionAnimation;
 import com.hkm.slider.LoyalUtil;
 import com.hkm.slider.SliderLayout;
-import com.hkm.slider.SliderTypes.AdvancedTextSliderView;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.CompactFrameSliderView;
 import com.hkm.slider.SliderTypes.CompactSliderView;
@@ -59,6 +56,7 @@ public class MultSections extends BaseApp {
             }
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
+
         defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
     }
 

@@ -17,9 +17,11 @@ public class DefaultSliderView extends BaseSliderView {
 
     @Override
     public View getView() {
-        View v = LayoutInflater.from(getContext()).inflate(R.layout.render_type_default, null);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.render_type_default, null);
         ImageView target = (ImageView) v.findViewById(R.id.ns_slider_image);
         bindEventAndShowPicasso(v, target);
         return v;
     }
+
+
 }

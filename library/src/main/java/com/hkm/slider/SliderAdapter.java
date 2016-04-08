@@ -1,9 +1,13 @@
 package com.hkm.slider;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import com.hkm.slider.SliderTypes.BaseSliderView;
 
@@ -16,9 +20,11 @@ import java.util.List;
  */
 public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implements BaseSliderView.ImageLoadListener {
 
+    private SparseArray<Integer> measurement_height = new SparseArray<>();
     private Context mContext;
     private ArrayList<T> mImageContents;
     private int mLoadConfiguration = POSITION_NONE;
+    private SliderLayout.OnViewConfigurationDetected mSetViewListener;
 
     public SliderAdapter(Context context) {
         mContext = context;
@@ -33,7 +39,6 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
 
     public void loadSliders(List<T> slider) {
         mLoadConfiguration = POSITION_UNCHANGED;
-        mImageContents.clear();
         addSliders(slider);
     }
 
@@ -108,12 +113,43 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
         container.removeView((View) object);
     }
 
+    private boolean enable_layout_observer = false;
+
+    public void setOnInitiateViewListener(SliderLayout.OnViewConfigurationDetected object) {
+        mSetViewListener = object;
+        enable_layout_observer = true;
+    }
+
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         BaseSliderView b = mImageContents.get(position);
-        View v = b.getView();
-        container.addView(v);
-        return v;
+        View item = b.getView();
+        collectionConfiguration(item, position);
+        container.addView(item);
+        return item;
+    }
+
+    public void endLayoutObserver() {
+        enable_layout_observer = false;
+    }
+
+    private void collectionConfiguration(final View layer, final int position) {
+        if (mSetViewListener != null && enable_layout_observer) {
+            layer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    int debug = layer.getHeight();
+                    Log.d("checkLayoutSlideHeight", debug + " px");
+                    measurement_height.append(position, layer.getHeight());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        layer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                    if (enable_layout_observer) {
+                        mSetViewListener.onLayoutGenerated(measurement_height);
+                    }
+                }
+            });
+        }
     }
 
     @Override

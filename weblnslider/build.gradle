@@ -24,7 +24,6 @@ android {
 repositories {
     jcenter()
     maven { url "http://dl.bintray.com/jjhesk/maven" }
-    maven { url 'http://dl.bintray.com/madcyph3r/maven/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 dependencies {

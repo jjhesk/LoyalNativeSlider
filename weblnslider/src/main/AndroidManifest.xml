@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hkm.loyalns">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Used to load images from the gallery content provider. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,19 +26,31 @@
         </activity>
 
         <activity
-            android:name=".ExampleClassic"
+            android:name=".demos.ExampleClassic"
             android:theme="@style/Full" />
         <activity
-            android:name=".BigScreenDemo"
+            android:name=".demos.BigScreenDemo"
             android:theme="@style/Full" />
         <activity
-            android:name=".MultSections"
+            android:name=".demos.BigScreenDL"
             android:theme="@style/Full" />
         <activity
-            android:name=".NewsArticle"
+            android:name=".demos.MultSections"
             android:theme="@style/Full" />
         <activity
-            android:name=".ZoomScreenSlider"
+            android:name=".demos.NewsArticle"
+            android:theme="@style/Full" />
+        <activity
+            android:name=".demos.ZoomScreenSlider"
+            android:theme="@style/Full" />
+        <activity
+            android:name=".demos.ZoomViewPager2"
+            android:theme="@style/Full" />
+        <activity
+            android:name=".demos.ZoomView3"
+            android:theme="@style/Full" />
+        <activity
+            android:name=".demos.ZoomView4"
             android:theme="@style/Full" />
     </application>
 

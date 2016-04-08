@@ -4,6 +4,9 @@ package com.hkm.loyalns.Util;
 import com.hkm.loyalns.R;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by hesk on 19/8/15.
@@ -37,4 +40,22 @@ public class DataProvider {
         return file_maps;
 
     }
+
+    public static HashMap<String, String> getSingle() {
+        HashMap<String, String> file_maps = new HashMap<String, String>();
+        file_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
+        return file_maps;
+
+    }
+
+    public static Map.Entry<String, String> getRandomSingle() {
+        int total = getVerticalDataSrc().size();
+        Random n = new Random();
+        int out = n.nextInt(total);
+        LinkedHashMap<String, String> f = new LinkedHashMap<>(getVerticalDataSrc());
+        final Map.Entry<String, String>[] test = new Map.Entry[total];
+        f.entrySet().toArray(test);
+        return test[out];
+    }
+
 }

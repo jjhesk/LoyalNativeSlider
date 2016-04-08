@@ -1,11 +1,11 @@
-package com.hkm.loyalns;
+package com.hkm.loyalns.demos;
 
 import android.annotation.TargetApi;
 import android.os.Build;
 
+import com.hkm.loyalns.demos.BigScreenDemo;
 import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.BaseSliderView;
-import com.hkm.slider.SliderTypes.TextSliderView;
 import com.hkm.slider.SliderTypes.ZoomableView;
 
 import java.util.HashMap;

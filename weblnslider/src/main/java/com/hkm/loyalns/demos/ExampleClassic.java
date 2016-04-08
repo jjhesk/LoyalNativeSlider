@@ -1,9 +1,7 @@
-package com.hkm.loyalns;
+package com.hkm.loyalns.demos;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
@@ -13,10 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hkm.loyalns.R;
 import com.hkm.loyalns.Util.DataProvider;
+import com.hkm.loyalns.mod.BaseApp;
 import com.hkm.loyalns.modules.CustomNumberView;
 import com.hkm.loyalns.modules.NumZero;
 import com.hkm.loyalns.modules.TransformerAdapter;
@@ -57,6 +58,14 @@ public class ExampleClassic extends BaseApp {
             }
         });
         //and data second. it is a must because you will except the data to be streamed into the pipline.
+        mDemoSlider.setEnableMaxHeightFromAllSliders(new SliderLayout.OnViewConfigurationFinalized() {
+            @Override
+            public void onDeterminedMaxHeight(int height) {
+                final int heifght = 700;
+                mFrameMain.setLayoutParams(new RelativeLayout.LayoutParams(-1, heifght));
+                mDemoSlider.setCurrentPositionStatic(0);
+            }
+        });
         defaultCompleteSlider(DataProvider.getFileSrcHorizontal());
     }
 
@@ -107,6 +116,8 @@ public class ExampleClassic extends BaseApp {
                     textSliderView.getBundle().putString("extra", name);
                     loadingList.add(textSliderView);
                 }
+
+
                 mDemoSlider.loadSliderList(loadingList);
                 mDemoSlider.setCurrentPositionStatic(2);
             }

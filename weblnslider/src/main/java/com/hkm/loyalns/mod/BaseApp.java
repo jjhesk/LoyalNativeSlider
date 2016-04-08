@@ -1,10 +1,12 @@
-package com.hkm.loyalns;
+package com.hkm.loyalns.mod;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
+import com.hkm.loyalns.R;
 import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.Tricks.ViewPagerEx;
@@ -21,7 +23,7 @@ public abstract class BaseApp extends AppCompatActivity implements BaseSliderVie
     }
 
     protected SliderLayout mDemoSlider;
-
+    protected RelativeLayout mFrameMain;
     protected boolean numbered = false;
 
     @Override
@@ -29,6 +31,7 @@ public abstract class BaseApp extends AppCompatActivity implements BaseSliderVie
         super.onCreate(savedInstanceState);
         setContentView(getActivityMainLayoutId());
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+        mFrameMain = (RelativeLayout) findViewById(R.id.sliderframe);
         setupSlider();
     }
 

@@ -1,4 +1,4 @@
-package com.hkm.loyalns;
+package com.hkm.loyalns.demos;
 
 import com.hkm.loyalns.modules.NewsBurner;
 import com.hkm.slider.SliderLayout;

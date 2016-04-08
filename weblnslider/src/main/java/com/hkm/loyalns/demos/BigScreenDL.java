@@ -1,4 +1,4 @@
-package com.hkm.loyalns;
+package com.hkm.loyalns.demos;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -8,66 +8,33 @@ import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hkm.loyalns.R;
 import com.hkm.loyalns.Util.DataProvider;
-import com.hkm.loyalns.modules.CustomNumberView;
 import com.hkm.loyalns.modules.NumZero;
 import com.hkm.loyalns.modules.TransformerAdapter;
-import com.hkm.slider.Animations.DescriptionAnimation;
-import com.hkm.slider.Indicators.NumContainer;
 import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.TextSliderView;
-import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by hesk on 19/8/15.
+ * Created by hesk on 17/3/16.
  */
-public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+public class BigScreenDL extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     protected SliderLayout mDemoSlider;
 
     protected boolean shouldRequestAPIBeforeLayoutRender() {
         return false;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected void defaultCompleteSlider(final SliderLayout slide, final HashMap<String, String> maps) {
-        for (String name : maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(maps.get(name))
-                    .enableImageLocalStorage()
-                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
-                    .enableSaveImageByLongClick(getFragmentManager())
-                    .setOnSliderClickListener(this);
-            //add your extra information
-            textSliderView.getBundle().putString("extra", name);
-            slide.addSlider(textSliderView);
-        }
-    }
-
-    protected void customSliderView(final HashMap<String, Integer> maps) {
-        for (String name : maps.keySet()) {
-            CustomNumberView textSliderView = new CustomNumberView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
-            //add your extra information
-            textSliderView.getBundle().putString("extra", name);
-            mDemoSlider.addSlider(textSliderView);
-        }
-    }
 
     @SuppressLint("ResourceAsColor")
     protected void setupSlider(final SliderLayout mDemoSlider) {
@@ -87,14 +54,50 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
-                Toast.makeText(BigScreenDemo.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BigScreenDL.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
         if (!shouldRequestAPIBeforeLayoutRender()) {
             //and data second. it is a must because you will except the data to be streamed into the pipline.
-            defaultCompleteSlider(mDemoSlider, DataProvider.getVerticalDataSrc());
+            defaultCompleteSlider(mDemoSlider, DataProvider.getSingle());
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    protected void defaultCompleteSlider(final SliderLayout slide, final HashMap<String, String> maps) {
+        ArrayList<TextSliderView> list = new ArrayList<>();
+        for (String name : maps.keySet()) {
+            TextSliderView textSliderView = new TextSliderView(this);
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(maps.get(name))
+                    .enableImageLocalStorage()
+                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
+                    .enableSaveImageByLongClick(getFragmentManager())
+                    .setOnSliderClickListener(this);
+            //add your extra information
+            textSliderView.getBundle().putString("extra", name);
+            list.add(textSliderView);
+        }
+        slide.loadSliderList(list);
+    }
+
+    private void add_one_more_slide() {
+        TextSliderView textSliderView = new TextSliderView(this);
+        String name = DataProvider.getRandomSingle().getKey();
+        String image = DataProvider.getRandomSingle().getValue();
+        // initialize a SliderLayout
+        textSliderView
+                .description(name)
+                .image(image)
+                .enableImageLocalStorage()
+                .setScaleType(BaseSliderView.ScaleType.CenterInside)
+                .enableSaveImageByLongClick(getFragmentManager())
+                .setOnSliderClickListener(this);
+
+        mDemoSlider.addSlider(textSliderView);
     }
 
     /**
@@ -142,11 +145,20 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
 
     }
 
+    ImageButton add;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vertical_slider);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+        add = (ImageButton) findViewById(R.id.addMore);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                add_one_more_slide();
+            }
+        });
         setupSlider(mDemoSlider);
     }
 
@@ -156,5 +168,4 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
         mDemoSlider.stopAutoCycle();
         super.onStop();
     }
-
 }

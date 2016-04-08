@@ -1,10 +1,12 @@
-package com.hkm.loyalns;
+package com.hkm.loyalns.demos;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.hkm.loyalns.R;
 
 /**
  * A placeholder fragment containing a simple view.

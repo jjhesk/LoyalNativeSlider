@@ -11,20 +11,23 @@ Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=
 This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
-###v1.6
-- [ ] add glide
-- [ ] support list insert
+###v1.8.0
+- Adding call method to enable final detection of the tallest layout among all the loaded sliders. This method is only available thru using calls from `loadSliderList` and `addSliderList`. Because all slides needed to be rendered until all heights are found from each slide, there will be an slight delay from the first render of the sliderLayout.
+
+###v1.6.0
+- add glide
+- support list insert
 
 ###v1.5.5
-- [x] [fixed all the related bugs](https://github.com/jjhesk/LoyalNativeSlider/releases/tag/1.5.5)
+- [fixed all the related bugs](https://github.com/jjhesk/LoyalNativeSlider/releases/tag/1.5.5)
 
 ###v1.5.0
-- [x] Zoomable view
-- [X] news feed view
+- Zoomable view
+- news feed view
 
 ###v1.4.1
-- [x] Add local storage enable for picasso
-- [X] adapting multiple images in one slide config 2-4
+- Add local storage enable for picasso
+- adapting multiple images in one slide config 2-4
 
 =======
 

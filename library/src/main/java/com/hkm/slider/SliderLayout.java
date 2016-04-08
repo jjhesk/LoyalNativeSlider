@@ -4,15 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IntDef;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -21,6 +23,7 @@ import com.hkm.slider.Indicators.NumContainer;
 import com.hkm.slider.Indicators.PagerIndicator;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.Transformers.BaseTransformer;
+import com.hkm.slider.Tricks.AnimationHelper;
 import com.hkm.slider.Tricks.FixedSpeedScroller;
 import com.hkm.slider.Tricks.InfinitePagerAdapter;
 import com.hkm.slider.Tricks.InfiniteViewPager;
@@ -28,6 +31,8 @@ import com.hkm.slider.Tricks.MultiViewPager;
 import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -115,12 +120,12 @@ public class SliderLayout extends RelativeLayout {
     private boolean mAutoCycle;
 
     private boolean mIsShuffle = false;
-    private boolean button_side_function_flip = false;
+
     /**
      * the duration between animation.
      */
     private long mSliderDuration = 4000;
-
+    private long mTransitionAnimation = 1000;
     /**
      * Visibility of {@link com.hkm.slider.Indicators.PagerIndicator}
      */
@@ -141,7 +146,7 @@ public class SliderLayout extends RelativeLayout {
      */
     private int mPagerMargin;
     private int buttondr, buttondl;
-
+    private int frame_width, frame_height;
     /**
      * this is the limit for switching from dot types into the page number type
      */
@@ -151,6 +156,11 @@ public class SliderLayout extends RelativeLayout {
      * hold number specific
      */
     private RelativeLayout holderNum;
+
+    /**
+     * callback from the measurement collection
+     */
+    private OnViewConfigurationDetected mViewSizeMonitor;
 
     /**
      * {@link com.hkm.slider.Indicators.PagerIndicator} shape, rect or oval.
@@ -200,7 +210,18 @@ public class SliderLayout extends RelativeLayout {
         if (mAutoCycle) {
             startAutoCycle();
         }
-        buttonNSetup();
+        ViewTreeObserver vto = this.getViewTreeObserver();
+        vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                getViewTreeObserver().removeOnPreDrawListener(this);
+                frame_width = getMeasuredWidth();
+                frame_height = getMeasuredHeight();
+                return false;
+            }
+        });
+
+        navigation_button_initialization();
     }
 
     private DataSetObserver sliderDataObserver = new DataSetObserver() {
@@ -213,16 +234,23 @@ public class SliderLayout extends RelativeLayout {
             }
         }
     };
+    private Handler postHandler = new Handler();
+    private ImageView mButtonLeft, mButtonRight;
+    private int mLWidthB, mRWidthB;
+    private boolean mLopen, mRopen, button_side_function_flip = false;
 
-
-    private void buttonNSetup() {
-        final ImageView mButtonLeft = (ImageView) findViewById(R.id.arrow_l);
-        final ImageView mButtonRight = (ImageView) findViewById(R.id.arrow_r);
+    private void navigation_button_initialization() {
+        mButtonLeft = (ImageView) findViewById(R.id.arrow_l);
+        mButtonRight = (ImageView) findViewById(R.id.arrow_r);
         mButtonLeft.setImageResource(buttondl);
         mButtonRight.setImageResource(buttondr);
+        mLWidthB = mButtonLeft.getDrawable().getIntrinsicWidth();
+        mRWidthB = mButtonRight.getDrawable().getIntrinsicWidth();
         if (!sidebuttons) {
             mButtonLeft.setVisibility(GONE);
             mButtonRight.setVisibility(GONE);
+            mLopen = false;
+            mRopen = false;
         } else {
             mButtonLeft.setOnClickListener(new OnClickListener() {
                 @Override
@@ -240,6 +268,49 @@ public class SliderLayout extends RelativeLayout {
                     else moveNextPosition(true);
                 }
             });
+            mLopen = true;
+            mRopen = true;
+        }
+    }
+
+    private void notify_navigation_buttons() {
+        int count = mSliderAdapter.getCount();
+
+        //DisplayMetrics m = getResources().getDisplayMetrics();
+        // final int width = m.widthPixels;
+        final int end_close_left = -mLWidthB;
+        final int end_close_right = mRWidthB;
+        final int open_left = 0;
+        final int open_right = 0;
+
+        if (count <= 1) {
+            postHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (mButtonLeft != null && mLopen) {
+                        mButtonLeft.animate().translationX(end_close_left);
+                        mLopen = false;
+                    }
+                    if (mButtonRight != null && mRopen) {
+                        mButtonRight.animate().translationX(end_close_right);
+                        mRopen = false;
+                    }
+                }
+            }, mTransitionAnimation);
+        } else {
+            postHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (mButtonLeft != null && !mLopen) {
+                        mButtonLeft.animate().translationX(open_left);
+                        mLopen = true;
+                    }
+                    if (mButtonRight != null && !mRopen) {
+                        mButtonRight.animate().translationX(open_right);
+                        mRopen = true;
+                    }
+                }
+            }, mTransitionAnimation);
         }
     }
 
@@ -261,7 +332,6 @@ public class SliderLayout extends RelativeLayout {
             if (mPagerMargin > -1) {
                 mViewPager.setMargin(mPagerMargin);
             }
-            mViewPager.setAdapter(wrappedAdapter);
             mViewPager.setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -274,6 +344,7 @@ public class SliderLayout extends RelativeLayout {
                     return false;
                 }
             });
+            mViewPager.setAdapter(wrappedAdapter);
         } else if (pagerType == ZOOMABLE) {
 
         }
@@ -360,18 +431,67 @@ public class SliderLayout extends RelativeLayout {
     public final <T extends BaseSliderView> void addSlider(T slide) {
         mSliderAdapter.addSlider(slide);
         autoDetermineLayoutDecoration();
+        notify_navigation_buttons();
+        AnimationHelper.notify_component(mIndicator, mSliderAdapter, postHandler);
     }
 
     public final <T extends BaseSliderView> void addSliderList(List<T> slide_sequence) {
+        if (mViewSizeMonitor != null) {
+            mSliderAdapter.setOnInitiateViewListener(mViewSizeMonitor);
+        }
         mSliderAdapter.addSliders(slide_sequence);
         autoDetermineLayoutDecoration();
+        notify_navigation_buttons();
+        AnimationHelper.notify_component(mIndicator, mSliderAdapter, postHandler);
     }
+
+    /**
+     * this is for internal use when each item is instaniated from the adapter
+     */
+    public interface OnViewConfigurationDetected {
+        void onLayoutGenerated(final SparseArray<Integer> data);
+    }
+
+    public interface OnViewConfigurationFinalized {
+        void onDeterminedMaxHeight(final int height);
+    }
+
+    private int total_length = 0;
 
     public final <T extends BaseSliderView> void loadSliderList(List<T> slide_sequence) {
+        mSliderAdapter.removeAllSliders();
+        if (mViewSizeMonitor != null) {
+            total_length = slide_sequence.size();
+            mSliderAdapter.setOnInitiateViewListener(mViewSizeMonitor);
+        }
         mSliderAdapter.loadSliders(slide_sequence);
         autoDetermineLayoutDecoration();
+        notify_navigation_buttons();
+        AnimationHelper.notify_component(mIndicator, mSliderAdapter, postHandler);
     }
 
+    public final void setEnableMaxHeightFromAllSliders(final OnViewConfigurationFinalized setFinal) {
+
+        mViewSizeMonitor = new OnViewConfigurationDetected() {
+            @Override
+            public void onLayoutGenerated(SparseArray<Integer> data) {
+                if (total_length == data.size()) {
+                    List<Integer> arrayList = new ArrayList<>(data.size());
+                    for (int i = 0; i < data.size(); i++) {
+                        arrayList.add(data.valueAt(i));
+                    }
+                    mSliderAdapter.endLayoutObserver();
+                    setFinal.onDeterminedMaxHeight(Collections.max(arrayList));
+                }
+            }
+        };
+    }
+
+    /**
+     * after slider has been defined
+     *
+     * @param enabled bool
+     */
     public final void setRemoveItemOnFailureToLoad(boolean enabled) {
         mSliderAdapter.setRemoveItemOnFailureToLoad(enabled);
     }
@@ -533,6 +653,9 @@ public class SliderLayout extends RelativeLayout {
         mCycling = false;
     }
 
+    public void setOnSliderMeasurementFinal() {
+
+    }
 
     public void addOnPageChangeListener(ViewPagerEx.OnPageChangeListener onPageChangeListener) {
         if (onPageChangeListener != null) {
