@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@id/sliderframe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.hkm.slider.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/prim_color"
+            android:minHeight="250dp"
+            custom:auto_cycle="true"
+            custom:image_button_l="@drawable/myarrowl"
+            custom:indicator_visibility="visible"
+            custom:lns_use_presentation="Smart"
+            custom:pager_animation="Accordion"
+            custom:pager_animation_span="1100"
+            custom:slider_side_buttons="false" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/field_color" />
+
+</LinearLayout>

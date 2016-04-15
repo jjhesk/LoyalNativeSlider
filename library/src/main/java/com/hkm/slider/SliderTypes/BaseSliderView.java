@@ -27,6 +27,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.hkm.slider.CapturePhotoUtils;
+import com.hkm.slider.LoyalUtil;
 import com.hkm.slider.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
@@ -44,7 +45,7 @@ import java.io.File;
  * if you want to show progressbar, you just need to set a progressbar id as @+id/loading_bar.
  */
 public abstract class BaseSliderView {
-
+    protected Object current_image_holder;
     protected Context mContext;
     private RequestCreator rq = null;
     private final Bundle mBundle;
@@ -401,6 +402,7 @@ public abstract class BaseSliderView {
      * @param targetImageView where to place image
      */
     protected void bindEventAndShowPicasso(final View v, final ImageView targetImageView) {
+        current_image_holder = targetImageView;
         v.setOnClickListener(click_triggered);
         mLoadListener.onStart(this);
         final Picasso p = Picasso.with(mContext);
@@ -455,6 +457,30 @@ public abstract class BaseSliderView {
                 reportStatusEnd(false);
             }
         });
+    }
+
+    protected void applyImageWithGlide(View v, final ImageView targetImageView) {
+        current_image_holder = targetImageView;
+        LoyalUtil.glideImplementation(getUrl(), targetImageView, getContext());
+        hideLoadingProgress(v);
+        triggerOnLongClick(v);
+        reportStatusEnd(true);
+    }
+
+    protected void applyImageWithPicasso(View v, final ImageView targetImageView) {
+        current_image_holder = targetImageView;
+        LoyalUtil.picassoImplementation(getUrl(), targetImageView, getContext());
+        hideLoadingProgress(v);
+        triggerOnLongClick(v);
+        reportStatusEnd(true);
+    }
+
+    protected void applyImageWithSmartBoth(View v, final ImageView targetImageView) {
+        current_image_holder = targetImageView;
+        LoyalUtil.hybridImplementation(getUrl(), targetImageView, getContext());
+        hideLoadingProgress(v);
+        triggerOnLongClick(v);
+        reportStatusEnd(true);
     }
 
     private void reportStatusEnd(boolean b) {
@@ -639,6 +665,10 @@ public abstract class BaseSliderView {
         void onStart(BaseSliderView target);
 
         void onEnd(boolean result, BaseSliderView target);
+    }
+
+    public Object getImageView() {
+        return current_image_holder;
     }
 
 }

@@ -2,17 +2,23 @@ package com.hkm.slider;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IntDef;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.SparseArray;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
@@ -24,6 +30,7 @@ import com.hkm.slider.Indicators.PagerIndicator;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.Transformers.BaseTransformer;
 import com.hkm.slider.Tricks.AnimationHelper;
+import com.hkm.slider.Tricks.ArrowControl;
 import com.hkm.slider.Tricks.FixedSpeedScroller;
 import com.hkm.slider.Tricks.InfinitePagerAdapter;
 import com.hkm.slider.Tricks.InfiniteViewPager;
@@ -238,42 +245,43 @@ public class SliderLayout extends RelativeLayout {
     private ImageView mButtonLeft, mButtonRight;
     private int mLWidthB, mRWidthB;
     private boolean mLopen, mRopen, button_side_function_flip = false;
+    private ArrowControl arrow_instance;
 
     private void navigation_button_initialization() {
         mButtonLeft = (ImageView) findViewById(R.id.arrow_l);
         mButtonRight = (ImageView) findViewById(R.id.arrow_r);
         mButtonLeft.setImageResource(buttondl);
         mButtonRight.setImageResource(buttondr);
+        arrow_instance = new ArrowControl(mButtonLeft, mButtonRight);
         mLWidthB = mButtonLeft.getDrawable().getIntrinsicWidth();
         mRWidthB = mButtonRight.getDrawable().getIntrinsicWidth();
         if (!sidebuttons) {
-            mButtonLeft.setVisibility(GONE);
-            mButtonRight.setVisibility(GONE);
-            mLopen = false;
-            mRopen = false;
+            arrow_instance.noSlideButtons();
         } else {
-            mButtonLeft.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!button_side_function_flip)
-                        moveNextPosition(true);
-                    else movePrevPosition(true);
-                }
-            });
-            mButtonRight.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!button_side_function_flip)
-                        movePrevPosition(true);
-                    else moveNextPosition(true);
-                }
-            });
-            mLopen = true;
-            mRopen = true;
+            arrow_instance.setListeners(
+                    new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!button_side_function_flip)
+                                moveNextPosition(true);
+                            else movePrevPosition(true);
+                        }
+                    },
+                    new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!button_side_function_flip)
+                                movePrevPosition(true);
+                            else moveNextPosition(true);
+                        }
+                    }
+            );
         }
+        mLopen = mRopen = true;
     }
 
     private void notify_navigation_buttons() {
+        arrow_instance.setTotal(mSliderAdapter.getCount());
         int count = mSliderAdapter.getCount();
 
         //DisplayMetrics m = getResources().getDisplayMetrics();
@@ -535,11 +543,15 @@ public class SliderLayout extends RelativeLayout {
     public void presentation(PresentationConfig pc) {
         // usingPresentation = pc.ordinal();
         if (pc == Dots) {
-            mIndicator.setVisibility(View.VISIBLE);
-            holderNum.setVisibility(View.GONE);
+            if (mIndicator != null)
+                mIndicator.setVisibility(View.VISIBLE);
+            if (holderNum != null)
+                holderNum.setVisibility(View.GONE);
         } else if (pc == Numbers) {
-            mIndicator.setVisibility(View.GONE);
-            holderNum.setVisibility(View.VISIBLE);
+            if (mIndicator != null)
+                mIndicator.setVisibility(View.GONE);
+            if (holderNum != null)
+                holderNum.setVisibility(View.VISIBLE);
         }
     }
 
@@ -998,5 +1010,56 @@ public class SliderLayout extends RelativeLayout {
         if (mResumingTask != null) mResumingTask.cancel();
         if (mResumingTimer != null) mResumingTimer.cancel();
         mh.removeCallbacksAndMessages(null);
+    }
+
+    public void setAutoAdjustImageByHeight() {
+        addOnPageChangeListener(new ViewPagerEx.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                setFitToCurrentImageHeight();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    public void setFitToCurrentImageHeight() {
+        if (getCurrentSlider().getImageView() instanceof ImageView) {
+            ImageView p = (ImageView) getCurrentSlider().getImageView();
+            if (p.getDrawable() != null) {
+
+                int current_width = getMeasuredWidth();
+                //(int) LoyalUtil.convertDpToPixel(image.getIntrinsicHeight(), getContext())
+                Drawable image = p.getDrawable();
+                float ratio = (float) image.getIntrinsicHeight() / (float) image.getIntrinsicWidth();
+
+                int fitheight = (int) (current_width * ratio);
+                // Rect rec = new Rect(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+                // requestRectangleOnScreen(rec);
+                // onLayout(true, 0, 0, p.getDrawable().getIntrinsicWidth(), p.getDrawable().getIntrinsicHeight());
+                RelativeLayout.LayoutParams m = (RelativeLayout.LayoutParams) getLayoutParams();
+                // int[] rules = m.getRules();
+                RelativeLayout.LayoutParams h = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, fitheight);
+                /*if (rules.length > 0) {
+                    for (int i = 0; i < rules.length; i++) {
+                        h.addRule(rules[i]);
+                    }
+                }*/
+                setLayoutParams(h);
+            }
+        }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }

@@ -19,8 +19,6 @@ import com.hkm.slider.Tricks.ViewPagerEx;
  * Created by hesk on 6/28/2015.
  */
 public class NumContainer<customText extends TextView> implements IContainer, ViewPagerEx.OnPageChangeListener {
-
-
     protected int mTotalSlides, mCurrentSlide;
     private ViewPagerEx mPager;
     protected RelativeLayout mContainer;

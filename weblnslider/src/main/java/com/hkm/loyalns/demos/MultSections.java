@@ -37,7 +37,9 @@ public class MultSections extends BaseApp {
         // remember setup first
         mDemoSlider.setPresetTransformer(TransformerL.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation(230, new DecelerateInterpolator()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            mDemoSlider.setCustomAnimation(new DescriptionAnimation(230, new DecelerateInterpolator()));
+        }
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
@@ -113,7 +115,7 @@ public class MultSections extends BaseApp {
                     })
 
 
-                            // initialize a SliderLayout
+                    // initialize a SliderLayout
 
                     .description(getString(R.string.head_line_02))
                     .setScaleType(BaseSliderView.ScaleType.CenterCrop)
@@ -135,7 +137,7 @@ public class MultSections extends BaseApp {
                     })
 
 
-                            // initialize a SliderLayout
+                    // initialize a SliderLayout
 
                     .description(getString(R.string.head_line_02))
                     .setScaleType(BaseSliderView.ScaleType.CenterCrop)
@@ -156,7 +158,7 @@ public class MultSections extends BaseApp {
                             getString(R.string.head_line_01)
 
                     })
-                            // initialize a SliderLayout
+                    // initialize a SliderLayout
 
                     .setDisplayOnlyImageUrls(new String[]{
                             getString(R.string.hl_image_03),
@@ -181,8 +183,8 @@ public class MultSections extends BaseApp {
                             getString(R.string.head_line_07)
 
                     })
-                            //  .setSlideLayoutCustom(CompactFrameSliderView.RIPPLE_SLIDE)
-                            // initialize a SliderLayout
+                    //  .setSlideLayoutCustom(CompactFrameSliderView.RIPPLE_SLIDE)
+                    // initialize a SliderLayout
 
                     .setDisplayOnlyImageUrls(new String[]{
                             getString(R.string.hl_image_03),
@@ -194,7 +196,7 @@ public class MultSections extends BaseApp {
                             "https://www.youtube.com/watch?v=uOx3Zdl4738"
                     })
                     .setScaleType(BaseSliderView.ScaleType.CenterCrop)
-                            //  .enableSaveImageByLongClick(getFragmentManager())
+                    //  .enableSaveImageByLongClick(getFragmentManager())
                     .enableImageLocalStorage()
                     .setOnSliderClickListener(this);
             mDemoSlider.addSlider(s_setLinksOnEach_6.build());
@@ -208,8 +210,8 @@ public class MultSections extends BaseApp {
                             getString(R.string.head_line_06)
 
                     })
-                            // .setSlideLayoutCustom(CompactFrameSliderView.RIPPLE_SLIDE)
-                            // initialize a SliderLayout
+                    // .setSlideLayoutCustom(CompactFrameSliderView.RIPPLE_SLIDE)
+                    // initialize a SliderLayout
 
                     .setDisplayOnlyImageUrls(new String[]{
                             getString(R.string.hl_image_08),

@@ -44,13 +44,16 @@
             android:name=".demos.ZoomScreenSlider"
             android:theme="@style/Full" />
         <activity
+            android:name=".demos.Slider_Adjustable"
+            android:theme="@style/Full" />
+        <activity
             android:name=".demos.ZoomViewPager2"
             android:theme="@style/Full" />
         <activity
-            android:name=".demos.ZoomView3"
+            android:name=".demos.ZoomView_Three"
             android:theme="@style/Full" />
         <activity
-            android:name=".demos.ZoomView4"
+            android:name=".demos.ZoomView_Single"
             android:theme="@style/Full" />
     </application>
 

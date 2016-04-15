@@ -14,9 +14,10 @@ import com.hkm.loyalns.demos.BigScreenDemo;
 import com.hkm.loyalns.demos.ExampleClassic;
 import com.hkm.loyalns.demos.MultSections;
 import com.hkm.loyalns.demos.NewsArticle;
+import com.hkm.loyalns.demos.Slider_Adjustable;
 import com.hkm.loyalns.demos.ZoomScreenSlider;
-import com.hkm.loyalns.demos.ZoomView3;
-import com.hkm.loyalns.demos.ZoomView4;
+import com.hkm.loyalns.demos.ZoomView_Three;
+import com.hkm.loyalns.demos.ZoomView_Single;
 import com.hkm.loyalns.demos.ZoomViewPager2;
 
 import java.util.ArrayList;
@@ -48,8 +49,8 @@ public class TheMain extends AppCompatActivity implements AdapterView.OnItemClic
         //7
         items.add("Zoom View Pager With Single Page");
         items.add("Single Slide - debug on single slide with the arrows disappearing on the screen");
-        //19
-        items.add("Github repos");
+        //9
+        items.add("Adjustable Slide View");
         mList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items));
         mList.setOnItemClickListener(this);
     }
@@ -72,16 +73,21 @@ public class TheMain extends AppCompatActivity implements AdapterView.OnItemClic
         } else if (position == 5) {
             intent = new Intent(this, ZoomViewPager2.class);
         } else if (position == 6) {
-            intent = new Intent(this, ZoomView3.class);
+            intent = new Intent(this, ZoomView_Three.class);
         } else if (position == 7) {
-            intent = new Intent(this, ZoomView4.class);
+            intent = new Intent(this, ZoomView_Single.class);
         } else if (position == 8) {
             intent = new Intent(this, BigScreenDL.class);
         } else if (position == 9) {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.urlgithub)));
+            intent = new Intent(this, Slider_Adjustable.class);
         }
-
         startActivity(intent);
     }
 
+    Intent intent;
+
+    private void gotoWeb() {
+        intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.urlgithub)));
+        startActivity(intent);
+    }
 }

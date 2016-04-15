@@ -19,6 +19,6 @@ public class CustomNumberView extends AdvancedTextSliderView<TextView, ImageView
 
     @Override
     protected int renderedLayoutTextBanner() {
-        return R.layout.feature_banner_slide;
+        return R.layout.item_slide_feature_banner;
     }
 }
