@@ -51,7 +51,7 @@ For the most comprehensive collection of artifacts, point your Maven at: `http:/
 
 ```gradle
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.6.0'
+    compile 'com.hkm.loyalslider:library:1.8.2'
 }
 ```
 
@@ -146,6 +146,7 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the
 - [NineOldAndroids][3]
 - [ViewPagerTransforms][4]
 - [Android Image Slider][5]
+- [Glide][15]
 
 If there are someone who I do not mention here, please accept my sincere appologies and tell me.
 
@@ -187,3 +188,4 @@ License
 [12]: https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.9/AndroidImageSlider-Eclipse.zip
 [13]: https://bitdeli.com/free
 [14]: https://waffle.io/jjhesk/LoyalNativeSlider/metrics
+[15]: https://github.com/bumptech/glide
