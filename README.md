@@ -11,6 +11,14 @@ Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=
 This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
+###v1.8.2
+adding new feature - auto adjustment for each image height when scroll
+update - android build tool 2.0.0
+update - android support library 23.3.0
+update - fixed bad image urls from the demo app
+update - added demo example code for the new feature.
+update - new version 1.8.2
+
 ###v1.8.0
 - Adding call method to enable final detection of the tallest layout among all the loaded sliders. This method is only available thru using calls from `loadSliderList` and `addSliderList`. Because all slides needed to be rendered until all heights are found from each slide, there will be an slight delay from the first render of the sliderLayout. [issue #45](https://github.com/jjhesk/LoyalNativeSlider/issues/45)
 
@@ -43,7 +51,7 @@ For the most comprehensive collection of artifacts, point your Maven at: `http:/
 
 ```gradle
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.6.0'
+    compile 'com.hkm.loyalslider:library:1.8.2'
 }
 ```
 
@@ -138,6 +146,7 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the
 - [NineOldAndroids][3]
 - [ViewPagerTransforms][4]
 - [Android Image Slider][5]
+- [Glide][15]
 
 If there are someone who I do not mention here, please accept my sincere appologies and tell me.
 
@@ -179,3 +188,4 @@ License
 [12]: https://github.com/daimajia/AndroidImageSlider/releases/download/v1.0.9/AndroidImageSlider-Eclipse.zip
 [13]: https://bitdeli.com/free
 [14]: https://waffle.io/jjhesk/LoyalNativeSlider/metrics
+[15]: https://github.com/bumptech/glide
