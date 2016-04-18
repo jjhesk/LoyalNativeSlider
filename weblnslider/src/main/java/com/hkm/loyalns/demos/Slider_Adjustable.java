@@ -5,9 +5,9 @@ import android.view.View;
 
 import com.hkm.loyalns.R;
 import com.hkm.loyalns.mod.BaseApp;
-import com.hkm.loyalns.modules.AdjustableSlide;
 import com.hkm.slider.Animations.DescriptionAnimation;
 import com.hkm.slider.SliderLayout;
+import com.hkm.slider.SliderTypes.AdjustableSlide;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.TransformerL;
 import com.hkm.slider.Tricks.ViewPagerEx;
