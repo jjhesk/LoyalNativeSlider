@@ -55,6 +55,9 @@
         <activity
             android:name=".demos.ZoomView_Single"
             android:theme="@style/Full" />
+        <activity
+            android:name=".demos.slider_adjust2"
+            android:theme="@style/Full" />
     </application>
 
 </manifest>

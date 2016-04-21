@@ -19,6 +19,7 @@ import com.hkm.loyalns.demos.ZoomScreenSlider;
 import com.hkm.loyalns.demos.ZoomView_Three;
 import com.hkm.loyalns.demos.ZoomView_Single;
 import com.hkm.loyalns.demos.ZoomViewPager2;
+import com.hkm.loyalns.demos.slider_adjust2;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,7 @@ public class TheMain extends AppCompatActivity implements AdapterView.OnItemClic
         items.add("Single Slide - debug on single slide with the arrows disappearing on the screen");
         //9
         items.add("Adjustable Slide View");
+        items.add("Adjustable Slide View 2");
         mList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items));
         mList.setOnItemClickListener(this);
     }
@@ -80,6 +82,8 @@ public class TheMain extends AppCompatActivity implements AdapterView.OnItemClic
             intent = new Intent(this, BigScreenDL.class);
         } else if (position == 9) {
             intent = new Intent(this, Slider_Adjustable.class);
+        } else if (position == 10) {
+            intent = new Intent(this, slider_adjust2.class);
         }
         startActivity(intent);
     }

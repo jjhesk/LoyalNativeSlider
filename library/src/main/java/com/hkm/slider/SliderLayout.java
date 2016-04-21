@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IntDef;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.hkm.slider.Animations.BaseAnimationInterface;
@@ -1045,15 +1047,23 @@ public class SliderLayout extends RelativeLayout {
                 // Rect rec = new Rect(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
                 // requestRectangleOnScreen(rec);
                 // onLayout(true, 0, 0, p.getDrawable().getIntrinsicWidth(), p.getDrawable().getIntrinsicHeight());
-                RelativeLayout.LayoutParams m = (RelativeLayout.LayoutParams) getLayoutParams();
-                // int[] rules = m.getRules();
-                RelativeLayout.LayoutParams h = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, fitheight);
+                if (getLayoutParams() instanceof RelativeLayout.LayoutParams) {
+                  //  RelativeLayout.LayoutParams m = (RelativeLayout.LayoutParams) getLayoutParams();
+                    // int[] rules = m.getRules();
+                    RelativeLayout.LayoutParams h = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, fitheight);
                 /*if (rules.length > 0) {
                     for (int i = 0; i < rules.length; i++) {
                         h.addRule(rules[i]);
                     }
                 }*/
-                setLayoutParams(h);
+
+                    setLayoutParams(h);
+                } else if (getLayoutParams() instanceof LinearLayout.LayoutParams) {
+                 //   LinearLayout.LayoutParams m = (LinearLayout.LayoutParams) getLayoutParams();
+                    // int[] rules = m.getRules();
+                    LinearLayout.LayoutParams h = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, fitheight);
+                    setLayoutParams(h);
+                }
             }
         }
     }
