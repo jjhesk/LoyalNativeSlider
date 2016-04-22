@@ -30,7 +30,7 @@
                     custom:slider_side_buttons="false" />
             </RelativeLayout>
 
-            <com.hkm.slider.Indicators.PagerIndicator
+          <!--  <com.hkm.slider.Indicators.PagerIndicator
                 android:id="@+id/custom_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 custom:unselected_padding_left="5dp"
                 custom:unselected_padding_right="5dp"
                 custom:unselected_width="6dp" />
-
+-->
             <View
                 android:id="@+id/slient"
                 android:layout_width="match_parent"

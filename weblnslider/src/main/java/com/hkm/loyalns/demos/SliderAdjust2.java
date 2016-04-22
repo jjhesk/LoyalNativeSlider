@@ -10,14 +10,14 @@ import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.AdjustableSlide;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.TransformerL;
-import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
 
 /**
- * Created by hesk on 15/4/16.
+ * Created by hesk on 21/4/16.
  */
-public class Slider_Adjustable extends BaseApp {
+public class SliderAdjust2 extends BaseApp {
+
     @Override
     protected void setupSlider() {
         mDemoSlider.setPresetTransformer(TransformerL.Default);
@@ -28,6 +28,7 @@ public class Slider_Adjustable extends BaseApp {
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
         mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_26, R.color.red_pink_27);
+        mDemoSlider.setDisablePageIndicator();
         mDemoSlider.setAutoAdjustImageByHeight();
         String[] urls = {
                 //   "http://pcdn.500px.net/35939982/127d53ceac436e2e17a11ea42bb2cd7719b9f1e1/4.jpg",
@@ -50,14 +51,14 @@ public class Slider_Adjustable extends BaseApp {
             //add your extra information
             list.add(textSliderView);
         }
-        mFrameMain.setVisibility(View.VISIBLE);
+//        mFrameMain.setVisibility(View.VISIBLE);
         mDemoSlider.loadSliderList(list);
 
     }
 
     @Override
     protected int getActivityMainLayoutId() {
-        return R.layout.bouncer_slider;
+        return R.layout.test_adjustment_height;
     }
 
     @Override

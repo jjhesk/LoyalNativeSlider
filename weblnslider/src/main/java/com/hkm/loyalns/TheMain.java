@@ -14,12 +14,12 @@ import com.hkm.loyalns.demos.BigScreenDemo;
 import com.hkm.loyalns.demos.ExampleClassic;
 import com.hkm.loyalns.demos.MultSections;
 import com.hkm.loyalns.demos.NewsArticle;
-import com.hkm.loyalns.demos.Slider_Adjustable;
+import com.hkm.loyalns.demos.SliderAdjust1;
 import com.hkm.loyalns.demos.ZoomScreenSlider;
 import com.hkm.loyalns.demos.ZoomView_Three;
 import com.hkm.loyalns.demos.ZoomView_Single;
 import com.hkm.loyalns.demos.ZoomViewPager2;
-import com.hkm.loyalns.demos.slider_adjust2;
+import com.hkm.loyalns.demos.SliderAdjust2;
 
 import java.util.ArrayList;
 
@@ -81,9 +81,9 @@ public class TheMain extends AppCompatActivity implements AdapterView.OnItemClic
         } else if (position == 8) {
             intent = new Intent(this, BigScreenDL.class);
         } else if (position == 9) {
-            intent = new Intent(this, Slider_Adjustable.class);
+            intent = new Intent(this, SliderAdjust1.class);
         } else if (position == 10) {
-            intent = new Intent(this, slider_adjust2.class);
+            intent = new Intent(this, SliderAdjust2.class);
         }
         startActivity(intent);
     }

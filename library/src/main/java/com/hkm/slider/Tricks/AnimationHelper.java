@@ -11,7 +11,12 @@ import com.hkm.slider.SliderAdapter;
  * Created by hesk on 17/3/16.
  */
 public class AnimationHelper {
-    public static final long mTransitionAnimation = 1000;
+    public static long mTransitionAnimation = 1000;
+
+    public static void notify_component(final @Nullable View mObject, final SliderAdapter mSliderAdapter, Handler postHandler, final int delayPost) {
+        mTransitionAnimation = delayPost;
+        notify_component(mObject, mSliderAdapter, postHandler);
+    }
 
     public static void notify_component(final @Nullable View mObject, final SliderAdapter mSliderAdapter, Handler postHandler) {
         if (mObject == null) return;
@@ -49,7 +54,6 @@ public class AnimationHelper {
             }, mTransitionAnimation);
         }
     }
-
 
 
 }

@@ -71,6 +71,7 @@ public class SliderLayout extends RelativeLayout {
     public static final int
             ZOOMABLE = 1, NONZOOMABLE = 0;
 
+
     @IntDef({ZOOMABLE, NONZOOMABLE})
     public @interface SliderLayoutType {
     }
@@ -114,6 +115,7 @@ public class SliderLayout extends RelativeLayout {
      */
     private boolean mCycling;
     private boolean sidebuttons;
+    private boolean mDisabledSlider = false;
     /**
      * Determine if auto recover after user touch the {@link com.hkm.slider.Tricks.ViewPagerEx}
      */
@@ -450,10 +452,9 @@ public class SliderLayout extends RelativeLayout {
             mSliderAdapter.setOnInitiateViewListener(mViewSizeMonitor);
         }
         mSliderAdapter.addSliders(slide_sequence);
-        autoDetermineLayoutDecoration();
-        notify_navigation_buttons();
-        AnimationHelper.notify_component(mIndicator, mSliderAdapter, postHandler);
+        afterLoadSliders();
     }
+
 
     /**
      * this is for internal use when each item is instaniated from the adapter
@@ -475,9 +476,22 @@ public class SliderLayout extends RelativeLayout {
             mSliderAdapter.setOnInitiateViewListener(mViewSizeMonitor);
         }
         mSliderAdapter.loadSliders(slide_sequence);
+        afterLoadSliders();
+    }
+
+
+    public final void afterLoadSliders() {
         autoDetermineLayoutDecoration();
         notify_navigation_buttons();
-        AnimationHelper.notify_component(mIndicator, mSliderAdapter, postHandler);
+        if (!mDisabledSlider) {
+            AnimationHelper.notify_component(mIndicator, mSliderAdapter, postHandler);
+        } else {
+            mIndicator.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
+        }
+    }
+
+    public void setDisablePageIndicator() {
+        mDisabledSlider = true;
     }
 
     public final void setEnableMaxHeightFromAllSliders(final OnViewConfigurationFinalized setFinal) {
@@ -1037,7 +1051,6 @@ public class SliderLayout extends RelativeLayout {
         if (getCurrentSlider().getImageView() instanceof ImageView) {
             ImageView p = (ImageView) getCurrentSlider().getImageView();
             if (p.getDrawable() != null) {
-
                 int current_width = getMeasuredWidth();
                 //(int) LoyalUtil.convertDpToPixel(image.getIntrinsicHeight(), getContext())
                 Drawable image = p.getDrawable();
@@ -1048,18 +1061,17 @@ public class SliderLayout extends RelativeLayout {
                 // requestRectangleOnScreen(rec);
                 // onLayout(true, 0, 0, p.getDrawable().getIntrinsicWidth(), p.getDrawable().getIntrinsicHeight());
                 if (getLayoutParams() instanceof RelativeLayout.LayoutParams) {
-                  //  RelativeLayout.LayoutParams m = (RelativeLayout.LayoutParams) getLayoutParams();
+                    //  RelativeLayout.LayoutParams m = (RelativeLayout.LayoutParams) getLayoutParams();
                     // int[] rules = m.getRules();
                     RelativeLayout.LayoutParams h = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, fitheight);
-                /*if (rules.length > 0) {
-                    for (int i = 0; i < rules.length; i++) {
-                        h.addRule(rules[i]);
-                    }
-                }*/
-
+                    /*if (rules.length > 0) {
+                        for (int i = 0; i < rules.length; i++) {
+                            h.addRule(rules[i]);
+                        }
+                    }*/
                     setLayoutParams(h);
                 } else if (getLayoutParams() instanceof LinearLayout.LayoutParams) {
-                 //   LinearLayout.LayoutParams m = (LinearLayout.LayoutParams) getLayoutParams();
+                    //   LinearLayout.LayoutParams m = (LinearLayout.LayoutParams) getLayoutParams();
                     // int[] rules = m.getRules();
                     LinearLayout.LayoutParams h = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, fitheight);
                     setLayoutParams(h);

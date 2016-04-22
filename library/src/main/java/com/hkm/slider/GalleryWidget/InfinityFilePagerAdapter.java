@@ -1,4 +1,5 @@
 package com.hkm.slider.GalleryWidget;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,8 @@ import com.hkm.slider.TouchView.FileTouchImageView;
 import java.util.List;
 
 
-
 /**
- Class wraps file paths to adapter, then it instantiates {@link com.hkm.slider.TouchView.FileTouchImageView} objects to paging up through them.
+ * Class wraps file paths to adapter, then it instantiates {@link com.hkm.slider.TouchView.FileTouchImageView} objects to paging up through them.
  */
 public class InfinityFilePagerAdapter extends BasePagerAdapter {
 
@@ -24,19 +24,19 @@ public class InfinityFilePagerAdapter extends BasePagerAdapter {
     private ImageView.ScaleType mScaleType = null;
 
     public InfinityFilePagerAdapter(Context context, List<String> resources) {
-		super(context, resources);
+        super(context, resources);
         TOTAL_PAGES = resources.size();
         FIRST_PAGE = TOTAL_PAGES * MIN_LOOPS / 2;
-	}
+    }
 
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         super.setPrimaryItem(container, position, object);
-        ((GalleryViewPager)container).mCurrentView = ((FileTouchImageView)object).getImageView();
+        ((GalleryViewPager) container).mCurrentView = ((FileTouchImageView) object).getImageView();
     }
 
     @Override
-    public Object instantiateItem(ViewGroup collection, int position){
+    public Object instantiateItem(ViewGroup collection, int position) {
         final FileTouchImageView iv = new FileTouchImageView(mContext);
 
         position = position % TOTAL_PAGES;
@@ -44,7 +44,7 @@ public class InfinityFilePagerAdapter extends BasePagerAdapter {
         iv.setUrl(mResources.get(position));
         iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        if(mScaleType != null)
+        if (mScaleType != null)
             iv.setScaleType(mScaleType);
         collection.addView(iv, 0);
         return iv;
@@ -52,7 +52,8 @@ public class InfinityFilePagerAdapter extends BasePagerAdapter {
 
     /**
      * Set Scaletype for ImageView
-     * @param scaletype
+     *
+     * @param scaletype type
      */
     public void setScaleTypeForImageView(ImageView.ScaleType scaletype) {
         mScaleType = scaletype;

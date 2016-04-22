@@ -51,7 +51,7 @@ public class InfinityUrlAdapter extends BasePagerAdapter {
     /**
      * Set Scaletype for ImageView
      *
-     * @param scaletype
+     * @param scaletype type
      */
     public void setScaleTypeForImageView(ImageView.ScaleType scaletype) {
         mScaleType = scaletype;

@@ -14,6 +14,11 @@ import static android.view.View.MeasureSpec.*;
 public class Generators {
     /**
      * OP's original implementation fixed for real centering
+     *
+     * @param context context input
+     * @param bitmap  bitmpa
+     * @param params  other control factors
+     * @return Bitmap object
      */
     public static Bitmap imageWithText(Context context, Bitmap bitmap, GenerateParams params) {
         TextView view = new TextView(context);
@@ -34,10 +39,10 @@ public class Generators {
      * Generate centered text without creating a View, more lightweight.
      * Consider http://stackoverflow.com/a/8369690/253468 for multiline support.
      *
-     * @param context n
-     * @param bitmap  n
-     * @param params  n
-     * @return n
+     * @param context context input
+     * @param bitmap  bitmpa
+     * @param params  other control factors
+     * @return Bitmap object
      */
     public static Bitmap imageWithTextNoLayout(Context context, Bitmap bitmap, GenerateParams params) {
         Paint paint = new Paint();

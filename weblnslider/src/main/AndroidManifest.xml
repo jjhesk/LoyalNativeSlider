@@ -44,7 +44,7 @@
             android:name=".demos.ZoomScreenSlider"
             android:theme="@style/Full" />
         <activity
-            android:name=".demos.Slider_Adjustable"
+            android:name=".demos.SliderAdjust1"
             android:theme="@style/Full" />
         <activity
             android:name=".demos.ZoomViewPager2"
@@ -56,7 +56,7 @@
             android:name=".demos.ZoomView_Single"
             android:theme="@style/Full" />
         <activity
-            android:name=".demos.slider_adjust2"
+            android:name=".demos.SliderAdjust2"
             android:theme="@style/Full" />
     </application>
 

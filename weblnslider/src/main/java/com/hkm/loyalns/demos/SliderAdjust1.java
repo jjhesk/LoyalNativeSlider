@@ -10,14 +10,14 @@ import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.AdjustableSlide;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.TransformerL;
+import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
 
 /**
- * Created by hesk on 21/4/16.
+ * Created by hesk on 15/4/16.
  */
-public class slider_adjust2 extends BaseApp {
-
+public class SliderAdjust1 extends BaseApp {
     @Override
     protected void setupSlider() {
         mDemoSlider.setPresetTransformer(TransformerL.Default);
@@ -50,14 +50,14 @@ public class slider_adjust2 extends BaseApp {
             //add your extra information
             list.add(textSliderView);
         }
-//        mFrameMain.setVisibility(View.VISIBLE);
+        mFrameMain.setVisibility(View.VISIBLE);
         mDemoSlider.loadSliderList(list);
 
     }
 
     @Override
     protected int getActivityMainLayoutId() {
-        return R.layout.test_adjustment_height;
+        return R.layout.bouncer_slider;
     }
 
     @Override
