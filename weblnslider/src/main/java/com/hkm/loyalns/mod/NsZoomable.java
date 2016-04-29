@@ -26,4 +26,15 @@ public abstract class NsZoomable extends AppCompatActivity {
         startViewPager(mViewPager);
 
     }
+
+    /**
+     * Call this when your activity is done and should be closed.  The
+     * ActivityResult is propagated back to whoever launched you via
+     * onActivityResult().
+     */
+    @Override
+    public void finish() {
+        super.finish();
+        Runtime.getRuntime().gc();
+    }
 }

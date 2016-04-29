@@ -15,12 +15,12 @@ public class AdjustableSlide extends DefaultSliderView {
         super(context);
     }
 
-
     @Override
     public View getView() {
         View v = LayoutInflater.from(mContext).inflate(R.layout.render_type_adjustable, null);
         ImageView target = (ImageView) v.findViewById(R.id.ns_slider_image);
-        applyImageWithSmartBoth(v, target);
+        applyImageWithSmartBothAndNotifyHeight(v, target);
+        // applyImageWithSmartBoth(v, target);
         return v;
     }
 }

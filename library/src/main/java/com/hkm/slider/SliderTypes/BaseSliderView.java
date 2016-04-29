@@ -29,6 +29,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.hkm.slider.CapturePhotoUtils;
 import com.hkm.slider.LoyalUtil;
 import com.hkm.slider.R;
+import com.hkm.slider.SliderLayout;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
@@ -36,6 +37,7 @@ import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Target;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 
 /**
  * When you want to make your own slider view, you must extends from this class.
@@ -78,6 +80,15 @@ public abstract class BaseSliderView {
      * Scale type of the image.
      */
     protected ScaleType mScaleType = ScaleType.Fit;
+
+    /**
+     * reference of the parent
+     */
+    protected WeakReference<SliderLayout> sliderContainer;
+
+    public void setSliderContainerInternal(SliderLayout b) {
+        this.sliderContainer=new WeakReference<SliderLayout>(b);
+    }
 
     public enum ScaleType {
         CenterCrop, CenterInside, Fit, FitCenterCrop
@@ -242,18 +253,18 @@ public abstract class BaseSliderView {
     }
 
     protected View.OnLongClickListener mDefaultLongClickListener = null;
-    protected FragmentManager fmg;
+    protected WeakReference<FragmentManager> fmg;
 
     /**
      * to enable the slider for saving images
      *
-     * @param fmg FragmentManager
+     * @param mfmg FragmentManager
      * @return this thing
      */
-    public BaseSliderView enableSaveImageByLongClick(FragmentManager fmg) {
+    public BaseSliderView enableSaveImageByLongClick(FragmentManager mfmg) {
         mLongClickSaveImage = true;
         mDefaultLongClickListener = null;
-        this.fmg = fmg;
+        this.fmg = new WeakReference<FragmentManager>(mfmg);
         return this;
     }
 
@@ -269,10 +280,10 @@ public abstract class BaseSliderView {
         return this;
     }
 
-    public BaseSliderView setSliderLongClickListener(View.OnLongClickListener listen, FragmentManager fmg) {
+    public BaseSliderView setSliderLongClickListener(View.OnLongClickListener listen, FragmentManager mfmg) {
         mDefaultLongClickListener = listen;
         mLongClickSaveImage = false;
-        this.fmg = fmg;
+        this.fmg = new WeakReference<FragmentManager>(mfmg);
         return this;
     }
 
@@ -377,7 +388,7 @@ public abstract class BaseSliderView {
                     @Override
                     public boolean onLongClick(View v) {
                         final saveImageDialog saveImageDial = new saveImageDialog();
-                        saveImageDial.show(fmg, mDescription);
+                        saveImageDial.show(fmg.get(), mDescription);
                         return false;
                     }
                 };
@@ -475,9 +486,26 @@ public abstract class BaseSliderView {
         reportStatusEnd(true);
     }
 
-    protected void applyImageWithSmartBoth(View v, final ImageView targetImageView) {
-        current_image_holder = targetImageView;
-        LoyalUtil.hybridImplementation(getUrl(), targetImageView, getContext());
+    protected void applyImageWithSmartBoth(View v, final ImageView target) {
+        current_image_holder = target;
+        LoyalUtil.hybridImplementation(getUrl(), target, getContext());
+        hideLoadingProgress(v);
+        triggerOnLongClick(v);
+        reportStatusEnd(true);
+    }
+
+
+    protected void applyImageWithSmartBothAndNotifyHeight(View v, final ImageView target) {
+        current_image_holder = target;
+        LoyalUtil.hybridImplementation(getUrl(), target, getContext(), new Runnable() {
+            @Override
+            public void run() {
+                if (sliderContainer == null) return;
+                if (sliderContainer.get().getCurrentPosition() == getSliderOrderNumber()) {
+                    sliderContainer.get().setFitToCurrentImageHeight();
+                }
+            }
+        });
         hideLoadingProgress(v);
         triggerOnLongClick(v);
         reportStatusEnd(true);
@@ -515,7 +543,7 @@ public abstract class BaseSliderView {
                                     @Override
                                     public void run() {
                                         final SMessage sm = SMessage.message("This image is kept in your photo directory now.");
-                                        sm.show(fmg, "done");
+                                        sm.show(fmg.get(), "done");
                                     }
                                 });
                             }

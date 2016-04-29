@@ -116,6 +116,7 @@ public class SliderLayout extends RelativeLayout {
     private boolean mCycling;
     private boolean sidebuttons;
     private boolean mDisabledSlider = false;
+    private boolean mAutoAdjustSliderHeight = false;
     /**
      * Determine if auto recover after user touch the {@link com.hkm.slider.Tricks.ViewPagerEx}
      */
@@ -474,6 +475,9 @@ public class SliderLayout extends RelativeLayout {
         if (mViewSizeMonitor != null) {
             total_length = slide_sequence.size();
             mSliderAdapter.setOnInitiateViewListener(mViewSizeMonitor);
+        }
+        if (isAutoAdjustSlideHeightInternal()) {
+            mSliderAdapter.setSliderContainerInternal(this);
         }
         mSliderAdapter.loadSliders(slide_sequence);
         afterLoadSliders();
@@ -1028,7 +1032,12 @@ public class SliderLayout extends RelativeLayout {
         mh.removeCallbacksAndMessages(null);
     }
 
+    public boolean isAutoAdjustSlideHeightInternal() {
+        return mAutoAdjustSliderHeight;
+    }
+
     public void setAutoAdjustImageByHeight() {
+        mAutoAdjustSliderHeight = true;
         addOnPageChangeListener(new ViewPagerEx.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

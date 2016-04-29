@@ -246,7 +246,7 @@ public class CompactFrameSliderView extends CompactSliderView {
                         public boolean onLongClick(View v) {
                             prepare_request_save_image = mreq;
                             final saveImageDialog saveImageDial = new saveImageDialog();
-                            saveImageDial.show(fmg, "DESC_SAVE_IM");
+                            saveImageDial.show(fmg.get(), "DESC_SAVE_IM");
                             return false;
                         }
                     });

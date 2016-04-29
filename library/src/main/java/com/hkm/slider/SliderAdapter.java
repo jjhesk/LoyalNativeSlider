@@ -60,6 +60,9 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
             T slide = it.next();
             slide.setOnImageLoadListener(this);
             slide.setSlideOrderNumber(orderNumber);
+            if (mlayout != null) {
+                slide.setSliderContainerInternal(mlayout);
+            }
             mImageContents.add(slide);
             orderNumber++;
         }
@@ -120,11 +123,17 @@ public class SliderAdapter<T extends BaseSliderView> extends PagerAdapter implem
         enable_layout_observer = true;
     }
 
+    private SliderLayout mlayout;
+
+    public void setSliderContainerInternal(SliderLayout ob) {
+        mlayout = ob;
+    }
+
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         BaseSliderView b = mImageContents.get(position);
         View item = b.getView();
-        collectionConfiguration(item, position);
+        // collectionConfiguration(item, position);
         container.addView(item);
         return item;
     }
