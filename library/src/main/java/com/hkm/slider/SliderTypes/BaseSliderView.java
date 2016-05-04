@@ -1,5 +1,6 @@
 package com.hkm.slider.SliderTypes;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Dialog;
@@ -9,13 +10,16 @@ import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,6 +53,7 @@ import java.lang.ref.WeakReference;
 public abstract class BaseSliderView {
     protected Object current_image_holder;
     protected Context mContext;
+    protected boolean imageLoaded = false;
     private RequestCreator rq = null;
     private final Bundle mBundle;
     protected int mTargetWidth, mTargetHeight;
@@ -87,7 +92,7 @@ public abstract class BaseSliderView {
     protected WeakReference<SliderLayout> sliderContainer;
 
     public void setSliderContainerInternal(SliderLayout b) {
-        this.sliderContainer=new WeakReference<SliderLayout>(b);
+        this.sliderContainer = new WeakReference<SliderLayout>(b);
     }
 
     public enum ScaleType {
@@ -458,6 +463,7 @@ public abstract class BaseSliderView {
         rq.into(targetImageView, new Callback() {
             @Override
             public void onSuccess() {
+                imageLoaded = true;
                 hideLoadingProgress(v);
                 triggerOnLongClick(v);
                 reportStatusEnd(true);
@@ -476,6 +482,7 @@ public abstract class BaseSliderView {
         hideLoadingProgress(v);
         triggerOnLongClick(v);
         reportStatusEnd(true);
+        imageLoaded = true;
     }
 
     protected void applyImageWithPicasso(View v, final ImageView targetImageView) {
@@ -483,6 +490,7 @@ public abstract class BaseSliderView {
         LoyalUtil.picassoImplementation(getUrl(), targetImageView, getContext());
         hideLoadingProgress(v);
         triggerOnLongClick(v);
+        imageLoaded = true;
         reportStatusEnd(true);
     }
 
@@ -491,6 +499,7 @@ public abstract class BaseSliderView {
         LoyalUtil.hybridImplementation(getUrl(), target, getContext());
         hideLoadingProgress(v);
         triggerOnLongClick(v);
+        imageLoaded = true;
         reportStatusEnd(true);
     }
 
@@ -500,10 +509,12 @@ public abstract class BaseSliderView {
         LoyalUtil.hybridImplementation(getUrl(), target, getContext(), new Runnable() {
             @Override
             public void run() {
+                imageLoaded = true;
                 if (sliderContainer == null) return;
                 if (sliderContainer.get().getCurrentPosition() == getSliderOrderNumber()) {
                     sliderContainer.get().setFitToCurrentImageHeight();
                 }
+
             }
         });
         hideLoadingProgress(v);
@@ -519,69 +530,89 @@ public abstract class BaseSliderView {
 
     final android.os.Handler nh = new android.os.Handler();
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected void saveImage(RequestCreator mResquest_creator) {
-        final Target target = new Target() {
+    private int notice_save_image_success = R.string.success_save_image;
 
-            /**
-             * Callback when an image has been successfully loaded.
-             * <p/>
-             * <strong>Note:</strong> You must not recycle the bitmap.
-             *
-             * @param bitmap  bitmap data
-             * @param from               from the source
-             */
+    public final void setMessageSaveImageSuccess(@StringRes final int t) {
+        notice_save_image_success = t;
+    }
+
+    protected void workAroundGetImagePicasso() {
+
+        final Target target = new Target() {
             @Override
             public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                CapturePhotoUtils.insertImage(
-                        mContext,
-                        bitmap,
-                        mDescription, new CapturePhotoUtils.Callback() {
+
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+    }
+
+    protected void workGetImage(ImageView imageView) {
+        imageView.setDrawingCacheEnabled(true);
+        imageView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        imageView.layout(0, 0, imageView.getMeasuredWidth(), imageView.getMeasuredHeight());
+        imageView.buildDrawingCache(true);
+        output_bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
+        imageView.setDrawingCacheEnabled(false);
+    }
+
+    private Bitmap output_bitmap = null;
+
+    private class getImageTask extends AsyncTask<Void, Void, Integer> {
+        private ImageView imageView;
+
+        public getImageTask(ImageView taskTarget) {
+            imageView = taskTarget;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            int tried = 0;
+            while (tried < 5) {
+                try {
+                    workGetImage(imageView);
+                    return 1;
+                } catch (Exception e) {
+                    tried++;
+                }
+            }
+            return 0;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+            if (result == 1) {
+                CapturePhotoUtils.insertImage(mContext, output_bitmap, mDescription, new CapturePhotoUtils.Callback() {
                             @Override
                             public void complete() {
                                 nh.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        final SMessage sm = SMessage.message("This image is kept in your photo directory now.");
+                                        if (fmg == null) return;
+                                        String note = mContext.getString(notice_save_image_success);
+                                        final SMessage sm = SMessage.message(note);
                                         sm.show(fmg.get(), "done");
                                     }
                                 });
                             }
                         }
                 );
-
-                //  });
+            } else {
+                String m = mContext.getString(R.string.image_not_read);
+                final SMessage sm = SMessage.message(m);
+                sm.show(fmg.get(), "try again");
             }
-
-            /**
-             * Callback indicating the image could not be successfully loaded.
-             * <strong>Note:</strong> The passed {@link Drawable} may be {@code null} if none has been
-             * specified via {@link RequestCreator#error(Drawable)}
-             * or {@link RequestCreator#error(int)}.
-             *
-             * @param errorDrawable  when the image is failed to save in the system
-             */
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-
-            }
-
-            /**
-             * Callback invoked right before your request is submitted.
-             * <strong>Note:</strong> The passed {@link Drawable} may be {@code null} if none has been
-             * specified via {@link RequestCreator#placeholder(Drawable)}
-             * or {@link RequestCreator#placeholder(int)}.
-             *
-             * @param placeHolderDrawable    the place holder for the drawable
-             */
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
-
-        mResquest_creator.into(target);
-
+        }
     }
 
 
@@ -617,6 +648,7 @@ public abstract class BaseSliderView {
     public class saveImageDialog extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            if (mContext == null) return null;
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setMessage(R.string.save_image)
@@ -636,7 +668,21 @@ public abstract class BaseSliderView {
     }
 
     protected void saveImageActionTrigger() {
-        saveImage(rq);
+        if (current_image_holder == null) return;
+        if (current_image_holder instanceof ImageView) {
+            ImageView fast = (ImageView) current_image_holder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (mContext.getApplicationContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    //   mContext.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, AnyNumber);
+                } else {
+                    getImageTask t = new getImageTask(fast);
+                    t.execute();
+                }
+            } else {
+                getImageTask t = new getImageTask(fast);
+                t.execute();
+            }
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

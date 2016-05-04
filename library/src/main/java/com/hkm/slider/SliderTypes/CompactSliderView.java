@@ -155,14 +155,6 @@ public class CompactSliderView extends BaseSliderView {
         return Uri.parse(link_on_click_current);
     }
 
-    @Override
-    protected void saveImageActionTrigger() {
-        if (prepare_request_save_image != null) {
-            saveImage(prepare_request_save_image);
-        }
-    }
-
-
     private void bindEventAndShow(
             @NonNull final ImageView targetImageView,
             @NonNull final String mURI

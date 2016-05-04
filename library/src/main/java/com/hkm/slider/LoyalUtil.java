@@ -48,7 +48,7 @@ public class LoyalUtil {
     }
 
 
-    public static void glideImplementation(String i, ImageView target, Context context) {
+    public static void glideImplementation(String i, final ImageView target, Context context) {
         if (i.contains(".gif")) {
             Glide.with(context).load(i).asGif()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
