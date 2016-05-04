@@ -56,7 +56,7 @@ dependencies {
 ```
 
 
-### Step 2
+### Step 2 - setup the xml
 
 Add permissions (if necessary) to your `AndroidManifest.xml`
 
@@ -84,7 +84,7 @@ Add the Slider to your layout:
 />
 ```        
 
-There are some default indicators. If you want to use a provided indicator:
+There are some default indicators. If you want to use a provided indicator you can add this optionally
 
 ```xml
 <com.hkm.slider.Indicators.PagerIndicator
@@ -95,7 +95,23 @@ There are some default indicators. If you want to use a provided indicator:
         />
 ```
 
-[Code example][10]
+### Step 4
+Implement the SliderLayout component in the fragment or activity
+
+### Step 5
+making some small adjustments
+
+### Step 6
+setup the slider layout either by your own custom extension or using the existing provided slides from the folder SlideType
+
+### Step 7
+binding data from json or your own data providers
+
+### Step 8
+completion of the arrayList , T as your data type
+
+### Step 3
+mSliderLayout.loadSliderList or .addSliderList or .addSlider independently. finally, check the result.
 
 ====
 
