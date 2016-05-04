@@ -111,7 +111,7 @@ binding data from json or your own data providers
 completion of the `arrayList` with your own type `T` , `T` as your data type
 
 ### Step 9
-call `mSliderLayout.loadSliderList` or `.addSliderList` or `.addSlider` independently. finally, check the result.
+call `mSliderLayout.loadSliderList` or `.addSliderList` or `.addSlider` independently. finally, check the result. For more variant and options you may [check out the sample and testing code from here.](https://github.com/jjhesk/LoyalNativeSlider/tree/master/weblnslider/src/main/java/com/hkm/loyalns/demos)
 
 ====
 
@@ -165,8 +165,6 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the
 - [Glide][15]
 
 If there are someone who I do not mention here, please accept my sincere appologies and tell me.
-
-
 
 ###Donation:
 Open Donation - USD: [![OPEN](http://i.imgur.com/wUWK6e1.jpg)][1]
