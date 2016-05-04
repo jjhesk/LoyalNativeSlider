@@ -108,10 +108,10 @@ setup the slider layout either by your own custom extension or using the existin
 binding data from json or your own data providers
 
 ### Step 8
-completion of the arrayList , T as your data type
+completion of the `arrayList` with your own type `T` , `T` as your data type
 
-### Step 3
-mSliderLayout.loadSliderList or .addSliderList or .addSlider independently. finally, check the result.
+### Step 9
+call `mSliderLayout.loadSliderList` or `.addSliderList` or `.addSlider` independently. finally, check the result.
 
 ====
 
