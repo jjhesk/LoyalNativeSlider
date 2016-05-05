@@ -1,7 +1,6 @@
 package com.hkm.loyalns.demos;
 
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
-import android.view.View;
 
 import com.hkm.loyalns.R;
 import com.hkm.loyalns.mod.BaseApp;
@@ -27,7 +26,7 @@ public class SliderAdjust2 extends BaseApp {
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
-        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_26, R.color.red_pink_27);
+        mDemoSlider.getPagerIndicator().setDefaultIndicatorColorRes(R.color.red_pink_26, R.color.red_pink_27);
         mDemoSlider.setDisablePageIndicator();
         mDemoSlider.setAutoAdjustImageByHeight();
         String[] urls = {

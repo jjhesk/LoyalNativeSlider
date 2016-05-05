@@ -45,7 +45,7 @@ public class BigScreenDL extends AppCompatActivity implements BaseSliderView.OnS
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
-        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_26, R.color.red_pink_27);
+        mDemoSlider.getPagerIndicator().setDefaultIndicatorColorRes(R.color.red_pink_26, R.color.red_pink_27);
         mDemoSlider.setNumLayout(new NumZero(this));
         mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);
         ListView l = (ListView) findViewById(R.id.transformers);

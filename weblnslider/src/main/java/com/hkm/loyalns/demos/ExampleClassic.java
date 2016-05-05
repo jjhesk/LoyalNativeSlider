@@ -44,7 +44,7 @@ public class ExampleClassic extends BaseApp {
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
-        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_26, R.color.red_pink_27);
+        mDemoSlider.getPagerIndicator().setDefaultIndicatorColorRes(R.color.red_pink_26, R.color.red_pink_27);
         final NumZero n = new NumZero(this);
         mDemoSlider.setNumLayout(n);
         mDemoSlider.presentation(SliderLayout.PresentationConfig.Numbers);

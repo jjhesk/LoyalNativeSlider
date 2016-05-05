@@ -10,7 +10,6 @@ import com.hkm.slider.SliderLayout;
 import com.hkm.slider.SliderTypes.AdjustableSlide;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.TransformerL;
-import com.hkm.slider.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ public class SliderAdjust1 extends BaseApp {
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
-        mDemoSlider.getPagerIndicator().setDefaultIndicatorColor(R.color.red_pink_26, R.color.red_pink_27);
+        mDemoSlider.getPagerIndicator().setDefaultIndicatorColorRes(R.color.red_pink_26, R.color.red_pink_27);
         mDemoSlider.setAutoAdjustImageByHeight();
         String[] urls = {
                 //   "http://pcdn.500px.net/35939982/127d53ceac436e2e17a11ea42bb2cd7719b9f1e1/4.jpg",
