@@ -1,27 +1,23 @@
 # Loyal Native Slider
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)][6][ ![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ][7][![Android Gems](http://www.android-gems.com/badge/jjhesk/LoyalNativeSlider.svg?branch=master)][8][![Gitter](https://badges.gitter.im/Join Chat.svg)][9][![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jjhesk/loyalnativeslider/trend.png)][13]
 
-
  [![Throughput Graph](https://graphs.waffle.io/jjhesk/LoyalNativeSlider/throughput.svg)][14]
 
 Master: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
-
-Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=dev)](https://travis-ci.org/jjhesk/LoyalNativeSlider)
 
 This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
 ###v1.9.0
-update - android build tool 2.1.0
-update - android support library 23.4.0
+- android build tool 2.1.0
+- android support library 23.4.0
 
 ###v1.8.2
-adding new feature - auto adjustment for each image height when scroll
-update - android build tool 2.0.0
-update - android support library 23.3.0
-update - fixed bad image urls from the demo app
-update - added demo example code for the new feature.
-update - new version 1.8.2
+- auto adjustment for each image height when scroll
+- android build tool 2.0.0
+- android support library 23.3.0
+- fixed bad image urls from the demo app
+- added demo example code for the new feature.
 
 ###v1.8.0
 - Adding call method to enable final detection of the tallest layout among all the loaded sliders. This method is only available thru using calls from `loadSliderList` and `addSliderList`. Because all slides needed to be rendered until all heights are found from each slide, there will be an slight delay from the first render of the sliderLayout. [issue #45](https://github.com/jjhesk/LoyalNativeSlider/issues/45)
