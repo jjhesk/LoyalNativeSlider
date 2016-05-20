@@ -11,6 +11,10 @@ Dev: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg?branch=
 This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
 ##Features
+###v1.9.0
+update - android build tool 2.1.0
+update - android support library 23.4.0
+
 ###v1.8.2
 adding new feature - auto adjustment for each image height when scroll
 update - android build tool 2.0.0
@@ -51,7 +55,7 @@ For the most comprehensive collection of artifacts, point your Maven at: `http:/
 
 ```gradle
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.8.2'
+    compile 'com.hkm.loyalslider:library:1.9.0'
 }
 ```
 
@@ -82,7 +86,7 @@ Add the Slider to your layout:
         android:layout_width="match_parent"
         android:layout_height="200dp"
 />
-```        
+```
 
 There are some default indicators. If you want to use a provided indicator you can add this optionally
 

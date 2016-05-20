@@ -14,29 +14,22 @@ import com.hkm.loyalns.R;
 import com.hkm.slider.SliderTypes.BaseSliderView;
 import com.hkm.slider.SliderTypes.NewsFeedArticleView;
 
-import com.hypebeast.sdk.api.exception.ApiException;
-import com.hypebeast.sdk.api.model.hbeditorial.ResponseSingle;
-import com.hypebeast.sdk.clients.HBEditorialClient;
 
 import java.io.File;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by hesk on 15/12/15.
  */
 public class NewsBurner extends NewsFeedArticleView {
     protected NonLeakingWebView block;
-    protected HBEditorialClient clientApi;
+   // protected HBEditorialClient clientApi;
     protected RelativeLayout rlout;
     protected long article_id;
     protected String full_path;
 
     public NewsBurner(Context context) {
         super(context);
-        clientApi = HBEditorialClient.getInstance(context);
+      //  clientApi = HBEditorialClient.getInstance(context);
     }
 
     @Deprecated
@@ -124,9 +117,9 @@ public class NewsBurner extends NewsFeedArticleView {
     protected void triggerLoading() {
         try {
             if (full_path != null) {
-                clientApi.createAPIUniversal(full_path).getSingleArticle(res);
+              //  clientApi.createAPIUniversal(full_path).getSingleArticle(res);
             } else if (article_id > 0) {
-                clientApi.createFeedInterface().the_post(article_id, res);
+             //   clientApi.createFeedInterface().the_post(article_id, res);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,15 +127,15 @@ public class NewsBurner extends NewsFeedArticleView {
     }
 
     protected void triggerLoading_althernative() {
-        try {
+     //   try {
             if (article_id > 0) {
-                clientApi.createFeedInterface().the_post(article_id, res);
+              //  clientApi.createFeedInterface().the_post(article_id, res);
             } else if (full_path != null) {
-                clientApi.createAPIUniversal(full_path).getSingleArticle(res);
+              //  clientApi.createAPIUniversal(full_path).getSingleArticle(res);
             }
-        } catch (ApiException e1) {
-            e1.printStackTrace();
-        }
+      //  } catch (ApiException e1) {
+      //      e1.printStackTrace();
+     //   }
     }
 
     protected void removeLoader() {
@@ -150,7 +143,7 @@ public class NewsBurner extends NewsFeedArticleView {
             progressBar_circle.animate().alpha(0.0f);
         }
     }
-
+/*
     protected Callback<ResponseSingle> res = new Callback<ResponseSingle>() {
         @Override
         public void success(ResponseSingle responsePostW, Response response) {
@@ -175,6 +168,6 @@ public class NewsBurner extends NewsFeedArticleView {
         public void failure(RetrofitError error) {
             triggerLoading_althernative();
         }
-    };
+    };*/
 
 }

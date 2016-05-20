@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
 
     defaultConfig {
         applicationId "com.hkm.loyalns"
-        minSdkVersion 17
-        targetSdkVersion 23
+        minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
+        targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode 1
         versionName "1.0"
     }
@@ -34,7 +34,7 @@ dependencies {
     compile 'com.daimajia.androidanimations:library:1.0.3@aar'
 
     compile 'com.hkm.ezwebview:library:1.2.6'
-    compile 'com.hb:sdklibrary:0.6.0'
+   // compile 'com.hb:sdklibrary:0.6.0'
     testCompile 'junit:junit:4.12'
     compile project(':library')
 }

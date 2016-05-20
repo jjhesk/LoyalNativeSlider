@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 /**
  * Created by hesk on 15/4/16.
+ * This is the smart arrow controller
  */
 public class ArrowControl {
     private ImageView left, right;

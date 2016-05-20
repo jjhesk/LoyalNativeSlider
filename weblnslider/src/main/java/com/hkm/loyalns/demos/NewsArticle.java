@@ -1,26 +1,13 @@
 package com.hkm.loyalns.demos;
 
-import com.hkm.loyalns.modules.NewsBurner;
-import com.hkm.slider.SliderLayout;
-import com.hypebeast.sdk.api.model.hbeditorial.ArticleData;
-import com.hypebeast.sdk.api.model.hbeditorial.ResponsePostW;
-import com.hypebeast.sdk.clients.HBEditorialClient;
-
-import java.util.Iterator;
-import java.util.List;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-
 /**
  * Created by hesk on 15/12/15.
  * Test of API on the news feed
  */
 public class NewsArticle extends BigScreenDemo {
-    protected HBEditorialClient clientApi;
+   // protected HBEditorialClient clientApi;
 
-    protected void defaultCompleteSlider(SliderLayout slide, List<ArticleData> list) {
+  /*  protected void defaultCompleteSlider(SliderLayout slide, List<ArticleData> list) {
         Iterator<ArticleData> it = list.iterator();
         while (it.hasNext()) {
             ArticleData article = it.next();
@@ -35,9 +22,9 @@ public class NewsArticle extends BigScreenDemo {
             slide.addSlider(textSliderView);
 
         }
-    }
+    }*/
 
-    protected Callback<ResponsePostW> res = new Callback<ResponsePostW>() {
+  /*  protected Callback<ResponsePostW> res = new Callback<ResponsePostW>() {
         @Override
         public void success(ResponsePostW responsePostW, Response response) {
             try {
@@ -51,13 +38,13 @@ public class NewsArticle extends BigScreenDemo {
         public void failure(RetrofitError error) {
             error.printStackTrace();
         }
-    };
+    };*/
 
     @Override
     protected boolean shouldRequestAPIBeforeLayoutRender() {
-        clientApi = HBEditorialClient.getInstance(this);
+      //  clientApi = HBEditorialClient.getInstance(this);
         try {
-            clientApi.createFeedInterface().the_recent_page(1, res);
+        //    clientApi.createFeedInterface().the_recent_page(1, res);
         } catch (Exception e) {
             e.printStackTrace();
         }
