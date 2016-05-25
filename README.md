@@ -7,38 +7,6 @@ Master: [![Build Status](https://travis-ci.org/jjhesk/LoyalNativeSlider.svg)](ht
 
 This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
-##Features
-###v1.9.0
-- android build tool 2.1.0
-- android support library 23.4.0
-
-###v1.8.2
-- auto adjustment for each image height when scroll
-- android build tool 2.0.0
-- android support library 23.3.0
-- fixed bad image urls from the demo app
-- added demo example code for the new feature.
-
-###v1.8.0
-- Adding call method to enable final detection of the tallest layout among all the loaded sliders. This method is only available thru using calls from `loadSliderList` and `addSliderList`. Because all slides needed to be rendered until all heights are found from each slide, there will be an slight delay from the first render of the sliderLayout. [issue #45](https://github.com/jjhesk/LoyalNativeSlider/issues/45)
-
-###v1.6.0
-- add glide. As mentioned from all other recommendations, this library will be now the first choice of the support module to render images. That say all slider will support Gif files now.
-- support list insert feature. Instead of having slide to be added one by one, there is a new way to insert items as a list that will be more efficient.
-
-###v1.5.5
-- [fixed all the related bugs](https://github.com/jjhesk/LoyalNativeSlider/releases/tag/1.5.5)
-
-###v1.5.0
-- Zoomable view
-- news feed view
-
-###v1.4.1
-- Add local storage enable for picasso
-- adapting multiple images in one slide config 2-4
-
-=======
-
 ## Usage
 
 ### Step 1
@@ -51,7 +19,7 @@ For the most comprehensive collection of artifacts, point your Maven at: `http:/
 
 ```gradle
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.9.0'
+    compile 'com.hkm.loyalslider:library:1.9.1'
 }
 ```
 
@@ -118,14 +86,6 @@ call `mSliderLayout.loadSliderList` or `.addSliderList` or `.addSlider` independ
 ## Preview
 ![zoom in slider](http://i.giphy.com/tGjjsefxE8Cze.gif)
 ![multislide](http://i.giphy.com/NtCRzwkgbIupG.gif)
-<img src="scn/device-2015-06-17-142823.png" width="300px"/>
-<img src="scn/device-2015-06-17-150718.png" width="300px"/>
-<img src="scn/device-2015-06-17-150829.png" width="300px"/>
-<img src="scn/WW_PhoneKOT49Hhesk11262015103358.png" width="300px"/>
-<img src="scn/WW_PhoneKOT49Hhesk11262015103406.png" width="300px"/>
-<img src="scn/anglerMDB08Lhesk11262015104332.png" width="300px"/>
-<img src="scn/anglerMDB08Lhesk11262015104346.png" width="300px"/>
-<img src="scn/anglerMDB08Lhesk11262015104354.png" width="300px"/>
 
 
 ## New Version Demo:
@@ -166,13 +126,49 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the
 
 If there are someone who I do not mention here, please accept my sincere appologies and tell me.
 
-###Donation:
+
+###Log History
+
+###v1.9.1
+- update get color using contextcompat
+
+###v1.9.0
+- android build tool 2.1.0
+- android support library 23.4.0
+
+###v1.8.2
+- auto adjustment for each image height when scroll
+- android build tool 2.0.0
+- android support library 23.3.0
+- fixed bad image urls from the demo app
+- added demo example code for the new feature.
+
+###v1.8.0
+- Adding call method to enable final detection of the tallest layout among all the loaded sliders. This method is only available thru using calls from `loadSliderList` and `addSliderList`. Because all slides needed to be rendered until all heights are found from each slide, there will be an slight delay from the first render of the sliderLayout. [issue #45](https://github.com/jjhesk/LoyalNativeSlider/issues/45)
+
+###v1.6.0
+- add glide. As mentioned from all other recommendations, this library will be now the first choice of the support module to render images. That say all slider will support Gif files now.
+- support list insert feature. Instead of having slide to be added one by one, there is a new way to insert items as a list that will be more efficient.
+
+###v1.5.5
+- [fixed all the related bugs](https://github.com/jjhesk/LoyalNativeSlider/releases/tag/1.5.5)
+
+###v1.5.0
+- Zoomable view
+- news feed view
+
+###v1.4.1
+- Add local storage enable for picasso
+- adapting multiple images in one slide config 2-4
+
+###Bitcoin Donation Accepted
+![wallet](http://s32.postimg.org/sdd1oio1t/qrwallet.jpg)
 Open Donation - USD: [![OPEN](http://i.imgur.com/wUWK6e1.jpg)][1]
 
 License
 --------
 
-    Copyright 2015 JJHesk
+    Copyright 2016 jjHesk
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
