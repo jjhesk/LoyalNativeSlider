@@ -208,11 +208,6 @@ public class SliderLayout extends RelativeLayout {
                 break;
             }
         }
-
-        //setType(attributes.getInt(R.styleable.SliderLayout_page_type, SliderLayout.NONZOOMABLE));
-        // setType(ZOOMABLE);
-        mSliderAdapter = new SliderAdapter(mContext);
-        mSliderAdapter.registerDataSetObserver(sliderDataObserver);
         pagerSetup();
         attributes.recycle();
         setPresetIndicator(PresetIndicators.Center_Bottom);
@@ -222,6 +217,11 @@ public class SliderLayout extends RelativeLayout {
         if (mAutoCycle) {
             startAutoCycle();
         }
+        start_detect_frame_size();
+        navigation_button_initialization();
+    }
+
+    private void start_detect_frame_size() {
         ViewTreeObserver vto = this.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
@@ -232,8 +232,6 @@ public class SliderLayout extends RelativeLayout {
                 return false;
             }
         });
-
-        navigation_button_initialization();
     }
 
     private DataSetObserver sliderDataObserver = new DataSetObserver() {
@@ -338,7 +336,7 @@ public class SliderLayout extends RelativeLayout {
     }
 
     private void pagerSetup() {
-
+        mSliderAdapter = new SliderAdapter(mContext);
         if (pagerType == NONZOOMABLE) {
             PagerAdapter wrappedAdapter = new InfinitePagerAdapter(mSliderAdapter);
             mViewPager = (InfiniteViewPager) findViewById(R.id.daimajia_slider_viewpager);
@@ -361,6 +359,7 @@ public class SliderLayout extends RelativeLayout {
         } else if (pagerType == ZOOMABLE) {
 
         }
+        mSliderAdapter.registerDataSetObserver(sliderDataObserver);
     }
 
     public <TN extends NumContainer> void setNumLayout(final TN container) {
@@ -637,6 +636,7 @@ public class SliderLayout extends RelativeLayout {
     }
 
     /**
+     * runtime call
      * pause auto cycle.
      */
     private void pauseAutoCycle() {
@@ -648,6 +648,31 @@ public class SliderLayout extends RelativeLayout {
             if (mResumingTimer != null && mResumingTask != null) {
                 recoverCycle();
             }
+        }
+    }
+
+
+    /**
+     * when paused cycle, this method can wake it up.
+     */
+    private void recoverCycle() {
+        if (!mAutoRecover || !mAutoCycle) {
+            return;
+        }
+
+        if (!mCycling) {
+            if (mResumingTask != null && mResumingTimer != null) {
+                mResumingTimer.cancel();
+                mResumingTask.cancel();
+            }
+            mResumingTimer = new Timer();
+            mResumingTask = new TimerTask() {
+                @Override
+                public void run() {
+                    startAutoCycle();
+                }
+            };
+            mResumingTimer.schedule(mResumingTask, mSliderDuration);
         }
     }
 
@@ -699,29 +724,7 @@ public class SliderLayout extends RelativeLayout {
         mViewPager.removeOnPageChangeListener(onPageChangeListener);
     }
 
-    /**
-     * when paused cycle, this method can weak it up.
-     */
-    private void recoverCycle() {
-        if (!mAutoRecover || !mAutoCycle) {
-            return;
-        }
 
-        if (!mCycling) {
-            if (mResumingTask != null && mResumingTimer != null) {
-                mResumingTimer.cancel();
-                mResumingTask.cancel();
-            }
-            mResumingTimer = new Timer();
-            mResumingTask = new TimerTask() {
-                @Override
-                public void run() {
-                    startAutoCycle();
-                }
-            };
-            mResumingTimer.schedule(mResumingTask, 6000);
-        }
-    }
 
 
     @Override

@@ -58,6 +58,9 @@
         <activity
             android:name=".demos.SliderAdjust2"
             android:theme="@style/Full" />
+        <activity
+            android:name=".demos.DelayInitalzation"
+            android:theme="@style/Full" />
     </application>
 
 </manifest>

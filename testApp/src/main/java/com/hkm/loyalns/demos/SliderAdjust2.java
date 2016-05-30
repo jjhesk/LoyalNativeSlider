@@ -16,9 +16,7 @@ import java.util.ArrayList;
  * Created by hesk on 21/4/16.
  */
 public class SliderAdjust2 extends BaseApp {
-
-    @Override
-    protected void setupSlider() {
+    protected void realSetupSlider() {
         mDemoSlider.setPresetTransformer(TransformerL.Default);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -53,6 +51,11 @@ public class SliderAdjust2 extends BaseApp {
 //        mFrameMain.setVisibility(View.VISIBLE);
         mDemoSlider.loadSliderList(list);
 
+    }
+
+    @Override
+    protected void setupSlider() {
+        realSetupSlider();
     }
 
     @Override

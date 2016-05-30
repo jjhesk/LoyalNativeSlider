@@ -1,1 +1,1 @@
-include ':library', ':weblnslider', ':supportslidr'
+include ':library', ':testApp', ':supportslidr'
