@@ -202,12 +202,7 @@ public class SliderLayout extends RelativeLayout {
         sidebuttons = attributes.getBoolean(R.styleable.SliderLayout_slider_side_buttons, false);
         slideDotLimit = attributes.getInt(R.styleable.SliderLayout_slide_dot_limit, 5);
         int visibility = attributes.getInt(R.styleable.SliderLayout_indicator_visibility, 0);
-        for (PagerIndicator.IndicatorVisibility v : PagerIndicator.IndicatorVisibility.values()) {
-            if (v.ordinal() == visibility) {
-                mIndicatorVisibility = v;
-                break;
-            }
-        }
+        checkVisibility(visibility);
         pagerSetup();
         attributes.recycle();
         setPresetIndicator(PresetIndicators.Center_Bottom);
@@ -219,6 +214,15 @@ public class SliderLayout extends RelativeLayout {
         }
         start_detect_frame_size();
         navigation_button_initialization();
+    }
+
+    private void checkVisibility(int xml_config) {
+        for (PagerIndicator.IndicatorVisibility v : PagerIndicator.IndicatorVisibility.values()) {
+            if (v.ordinal() == xml_config) {
+                mIndicatorVisibility = v;
+                break;
+            }
+        }
     }
 
     private void start_detect_frame_size() {
@@ -723,8 +727,6 @@ public class SliderLayout extends RelativeLayout {
     public void removeOnPageChangeListener(ViewPagerEx.OnPageChangeListener onPageChangeListener) {
         mViewPager.removeOnPageChangeListener(onPageChangeListener);
     }
-
-
 
 
     @Override
