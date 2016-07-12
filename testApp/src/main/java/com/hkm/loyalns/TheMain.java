@@ -71,14 +71,14 @@ public class TheMain extends AppCompatActivity implements AdapterView.OnItemClic
         data.put("Full screen", BigScreenDemo.class);
         data.put("Zoom in&out", ZoomScreenSlider.class);
         data.put("News Pager", NewsArticle.class);
-        data.put("MultiSection", MultSections.class);
+        data.put("MultiSection - allow multiple mini sliders to fit into a single large slide. The max slides is suggested to 4", MultSections.class);
         data.put("Classic Example - with content height adjustment", ExampleClassic.class);
         data.put("Zoom View Pager Local Files", ZoomViewPager2.class);
         data.put("Zoom View Pager Load URL Single", ZoomView_Three.class);
         data.put("Zoom View Pager With Single Page", ZoomView_Single.class);
         data.put("Single Slide - debug on single slide with the arrows disappearing on the screen", BigScreenDL.class);
-        data.put("Adjustable Slide View", SliderAdjust1.class);
-        data.put("Adjustable Slide View application", SliderAdjust2.class);
+        data.put("Adjustable Slide View fit on screen demo", SliderAdjust1.class);
+        data.put("Adjustable Slide + Real world application reading app demo", SliderAdjust2.class);
         data.put("debug time delay initialization", DelayInitalzation.class);
 
     }

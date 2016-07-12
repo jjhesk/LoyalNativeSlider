@@ -40,7 +40,7 @@ proguard/
 
 # Log Files
 *.log
-.idea/
+.idea
 /gradlew.bat
 /gradlew
 

@@ -1,0 +1,22 @@
+package com.hkm.slider.SliderTypes;
+
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+
+/**
+ * Created by zJJ on 7/13/2016.
+ */
+public interface MiniSliderFrame {
+    View getView();
+
+    View getTouch();
+
+    void setClickListener(final View.OnClickListener listner);
+
+    ImageView getImageTarget();
+
+    ProgressBar getLoadingBar();
+
+    void applyDescription(String word);
+}

@@ -1,9 +1,9 @@
 package com.hkm.slider.SliderTypes;
 
 import android.annotation.TargetApi;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,23 +27,46 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by hesk on 24/11/15.
+ * Created by zSH
+ * This one will be more widely used in the real world applications
  */
 public class CompactFrameSliderView extends CompactSliderView {
+
+    /**
+     * declare the mini frame resource id first
+     *
+     * @return the mini frame resource id
+     */
     @LayoutRes
     protected int getCompactFrameLayout() {
         return DEFAULT_SLIDE;
     }
 
-    public class FrameImage {
+    /**
+     * the best way to product the miniframe
+     * @param n_order the input order
+     * @return the miniframe instance
+     */
+    protected MiniSliderFrame produceMiniFrame(final int n_order) {
+        final int layout_id = setCustomLayoutSlide == 0 ? getCompactFrameLayout() : setCustomLayoutSlide;
+        final View layoutview = LayoutInflater.from(mContext).inflate(layout_id, null);
+        final FrameImage frame = new FrameImage(n_order, layoutview);
+        return frame;
+    }
+
+    /**
+     * this is the demo default use only
+     */
+    private class FrameImage implements MiniSliderFrame {
         private ImageView mImage;
         private ProgressBar mProgress;
         public TextView mTextView;
         private LinearLayout ly;
         private MaterialRippleLayout touch;
         private View full_view;
+        private int loc_order;
 
-        public FrameImage(View frame) {
+        public FrameImage(final int order_n, View frame) {
             mImage = (ImageView) frame.findViewById(R.id.ns_slider_image);
             mProgress = (ProgressBar) frame.findViewById(R.id.ns_loading_progress);
             mTextView = (TextView) frame.findViewById(R.id.ns_slider_desc);
@@ -51,18 +74,22 @@ public class CompactFrameSliderView extends CompactSliderView {
             if (frame.findViewById(R.id.ns_touch_frame) != null) {
                 touch = (MaterialRippleLayout) frame.findViewById(R.id.ns_touch_frame);
             }
+            this.loc_order = order_n;
             full_view = frame;
         }
 
+        @Override
         public View getView() {
             return full_view;
         }
 
+        @Override
         public View getTouch() {
             if (touch == null) return mImage;
             return touch;
         }
 
+        @Override
         public void setClickListener(final View.OnClickListener listner) {
             if (touch == null) {
                 mImage.setOnClickListener(listner);
@@ -71,18 +98,28 @@ public class CompactFrameSliderView extends CompactSliderView {
             }
         }
 
+        @Override
         public ImageView getImageTarget() {
             return mImage;
         }
 
+        @Override
         public ProgressBar getLoadingBar() {
             return mProgress;
         }
 
+        @Override
         public void applyDescription(String word) {
             if (mTextView == null) return;
             mTextView.setText(word);
         }
+    }
+
+    /**
+     * specialized slider click listener for extensive use
+     */
+    public interface OnMiniSliderClickListener {
+        void onMiniSlideClick(MiniSliderFrame minislide, int order, String extra);
     }
 
     public static final int DEFAULT_SLIDE = R.layout.hb_feature_slide;
@@ -90,6 +127,10 @@ public class CompactFrameSliderView extends CompactSliderView {
     private int setCustomLayoutSlide = 0;
     private List<String> descriptions = new ArrayList<>();
 
+    /**
+     * auto configuration of using the special layout from 1-4 mini frames
+     * @return the res layout
+     */
     @LayoutRes
     protected int getLayoutConfig() {
         switch (number_of_pieces) {
@@ -126,6 +167,7 @@ public class CompactFrameSliderView extends CompactSliderView {
         return this;
     }
 
+
     /**
      * the description of a slider image. Do not use this
      *
@@ -143,6 +185,7 @@ public class CompactFrameSliderView extends CompactSliderView {
     }
 
     protected FrameLayout f1, f2, f3, f4;
+    protected OnMiniSliderClickListener mSliderCKlistener;
 
     /**
      * the extended class have to implement getView(), which is called by the adapter,
@@ -180,6 +223,14 @@ public class CompactFrameSliderView extends CompactSliderView {
         }
     }
 
+    /**
+     * choose or direct implementation of graphic loading system here we can use whatever we like
+     * @param mUrl the image url
+     * @param mMiniframe the instance of the miniframe
+     */
+    protected void onBindImageLoadingSystem(final String mUrl, final MiniSliderFrame mMiniframe) {
+        bindCompatPicasso(mUrl, mMiniframe);
+    }
 
     private void apply_event_to_frame(
             @Nullable FrameLayout mframeLayout,
@@ -187,29 +238,30 @@ public class CompactFrameSliderView extends CompactSliderView {
             final int n
     ) {
         if (mframeLayout == null) return;
-        final int layout_id = setCustomLayoutSlide == 0 ? getCompactFrameLayout() : setCustomLayoutSlide;
-        final View layoutview = LayoutInflater.from(mContext).inflate(layout_id, null);
-        final FrameImage frame = new FrameImage(layoutview);
-        mframeLayout.addView(frame.getView());
+        final MiniSliderFrame mF = produceMiniFrame(n);
+        mframeLayout.addView(mF.getView());
         if (descriptions.size() > 0) {
             String desc = descriptions.get(n);
-            frame.applyDescription(desc);
+            mF.applyDescription(desc);
         }
-        bindCompatPicasso(image_url, frame);
-
-        final CompactFrameSliderView me = this;
-        frame.setClickListener(new View.OnClickListener() {
+        onBindImageLoadingSystem(image_url, mF);
+        mF.setClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnSliderClickListener != null && uris.size() > 0) {
+                if (mSliderCKlistener != null && uris.size() > 0) {
                     link_on_click_current = uris.get(n);
-                    mOnSliderClickListener.onSliderClick(me);
+                    mSliderCKlistener.onMiniSlideClick(mF, n, link_on_click_current);
                 }
             }
         });
     }
 
-    protected void bindCompatPicasso(String mURI, final FrameImage Fr) {
+    public CompactFrameSliderView setMiniSilderClickListener(final OnMiniSliderClickListener listener) {
+        mSliderCKlistener = listener;
+        return this;
+    }
+
+    protected void bindCompatPicasso(String mURI, final MiniSliderFrame Fr) {
 
         final Picasso p = Picasso.with(mContext);
         final RequestCreator mreq = p.load(mURI);
@@ -265,5 +317,34 @@ public class CompactFrameSliderView extends CompactSliderView {
     @Override
     public CompactFrameSliderView build() {
         return this;
+    }
+
+    @Deprecated
+    @Override
+    public BaseSliderView enableSaveImageByLongClick(FragmentManager mfmg) {
+        return this;
+    }
+
+    @Override
+    public BaseSliderView enableImageLocalStorage() {
+        return super.enableImageLocalStorage();
+    }
+
+    @Deprecated
+    @Override
+    public BaseSliderView setOnSliderClickListener(OnSliderClickListener l) {
+        return super.setOnSliderClickListener(l);
+    }
+
+    @Deprecated
+    @Override
+    public BaseSliderView setSliderLongClickListener(View.OnLongClickListener listen) {
+        return super.setSliderLongClickListener(listen);
+    }
+
+    @Deprecated
+    @Override
+    public BaseSliderView setSliderLongClickListener(View.OnLongClickListener listen, FragmentManager mfmg) {
+        return super.setSliderLongClickListener(listen, mfmg);
     }
 }

@@ -19,7 +19,7 @@ For the most comprehensive collection of artifacts, point your Maven at: `http:/
 
 ```gradle
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.9.1'
+    compile 'com.hkm.loyalslider:library:1.9.3'
 }
 ```
 
@@ -128,6 +128,10 @@ If there are someone who I do not mention here, please accept my sincere appolog
 
 
 ###Log History
+###v1.9.3
+- android support library 24.0.0
+- update build tool
+- improve mini frame slider framework
 
 ###v1.9.1
 - update get color using contextcompat

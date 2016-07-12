@@ -28,12 +28,23 @@ public class SliderAdjust2 extends BaseApp {
         mDemoSlider.setDisablePageIndicator();
         mDemoSlider.setAutoAdjustImageByHeight();
         String[] urls = {
-                //   "http://pcdn.500px.net/35939982/127d53ceac436e2e17a11ea42bb2cd7719b9f1e1/4.jpg",
-                "https://drscdn.500px.org/photo/149207821/m%3D900/61196063c2685f6c3461bbc8568b3a2e",
-                //    special url with error
-                "https://drscdn.500px.org/photo/144545025/m%3D900/aa1681951f730749a27dc1aec604ca4f",
-                "https://drscdn.500px.org/photo/138365879/m%3D900/a349013757f0766bccd3024e237c3601",
-                "https://c3.staticflickr.com/2/1515/26325284906_92b7a12363_n.jpg"
+                getString(R.string.hl_image_01),
+                getString(R.string.hl_image_02),
+                getString(R.string.hl_image_03),
+                getString(R.string.hl_image_04),
+                getString(R.string.hl_image_11),
+                getString(R.string.hl_image_12),
+                getString(R.string.hl_image_08),
+                getString(R.string.hl_image_07),
+                getString(R.string.hl_image_06),
+                getString(R.string.hl_image_09),
+                getString(R.string.hl_image_10),
+                getString(R.string.hl_image_13),
+                getString(R.string.star_url_1),
+                getString(R.string.star_url_2),
+                getString(R.string.star_url_3),
+                getString(R.string.star_url_4),
+                getString(R.string.star_url_5)
         };
 
         ArrayList<AdjustableSlide> list = new ArrayList<>();
