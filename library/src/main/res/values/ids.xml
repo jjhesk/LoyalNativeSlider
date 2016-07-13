@@ -28,6 +28,7 @@
     <item name="ns_display_number_s7" type="id" />
     <item name="ns_display_i_s7" type="id" />
     <item name="ns_display_t_s7" type="id" />
+    <item name="ns_framecompact_overlay" type="id" />
     <item name="ns_slidable_panel" type="id" />
     <!-- single slider zooming image -->
     <item name="ssz_bottom_caption" type="id" />

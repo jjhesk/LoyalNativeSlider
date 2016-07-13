@@ -1,6 +1,9 @@
 package com.hkm.loyalns.demos;
 
+import android.os.Bundle;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.hkm.loyalns.R;
 import com.hkm.loyalns.mod.BaseApp;
@@ -20,7 +23,7 @@ public class SliderAdjust2 extends BaseApp {
         mDemoSlider.setPresetTransformer(TransformerL.Default);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(4000);
+        mDemoSlider.setDuration(40000);
         mDemoSlider.addOnPageChangeListener(this);
         mDemoSlider.setOffscreenPageLimit(3);
         mDemoSlider.setSliderTransformDuration(400, new LinearOutSlowInInterpolator());
@@ -60,8 +63,20 @@ public class SliderAdjust2 extends BaseApp {
             list.add(textSliderView);
         }
 //        mFrameMain.setVisibility(View.VISIBLE);
-        mDemoSlider.loadSliderList(list);
+        mDemoSlider.setOnImageLoadWithAdjustableHeightListener(new SliderLayout.OnImageLoadWithAdjustableHeight() {
+            @Override
+            public void onNotified(int new_height, boolean isMax) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("confirmed new height: ");
+                sb.append(new_height);
+                sb.append("\n");
+                sb.append("Is max height has reached: ");
+                sb.append(isMax);
+                mdisplay_num_text.setText(sb.toString());
+            }
+        });
 
+        mDemoSlider.loadSliderList(list);
     }
 
     @Override
@@ -77,5 +92,13 @@ public class SliderAdjust2 extends BaseApp {
     @Override
     public void onSliderClick(BaseSliderView coreSlider) {
 
+    }
+
+    private TextView mdisplay_num_text;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mdisplay_num_text = (TextView) findViewById(R.id.display_num_text);
     }
 }

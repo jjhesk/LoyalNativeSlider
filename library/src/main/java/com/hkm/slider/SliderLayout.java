@@ -5,21 +5,18 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IntDef;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.SparseArray;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
@@ -46,7 +43,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.hkm.slider.SliderLayout.PresentationConfig.*;
+import static com.hkm.slider.SliderLayout.PresentationConfig.Dots;
+import static com.hkm.slider.SliderLayout.PresentationConfig.Numbers;
+import static com.hkm.slider.SliderLayout.PresentationConfig.Smart;
+import static com.hkm.slider.SliderLayout.PresentationConfig.byVal;
 
 /**
  * SliderLayout is compound layout. This is combined with {@link com.hkm.slider.Indicators.PagerIndicator}
@@ -173,6 +173,11 @@ public class SliderLayout extends RelativeLayout {
      * callback from the measurement collection
      */
     private OnViewConfigurationDetected mViewSizeMonitor;
+
+    /**
+     * callback will be triggered only when the {@link []}
+     */
+    private OnImageLoadWithAdjustableHeight mOnImageLoadWithAdjustableHeight;
 
     /**
      * {@link com.hkm.slider.Indicators.PagerIndicator} shape, rect or oval.
@@ -469,6 +474,10 @@ public class SliderLayout extends RelativeLayout {
 
     public interface OnViewConfigurationFinalized {
         void onDeterminedMaxHeight(final int height);
+    }
+
+    public interface OnImageLoadWithAdjustableHeight {
+        void onNotified(final int new_height, boolean isFullScreenHeight);
     }
 
     private int total_length = 0;
@@ -1047,19 +1056,55 @@ public class SliderLayout extends RelativeLayout {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 setFitToCurrentImageHeight();
+                Log.d("tagup", "position start " + position);
             }
 
             @Override
             public void onPageSelected(int position) {
-
+                Log.d("tagup", "position selected " + position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                Log.d("tagup", "position state " + state);
+                if (mOnImageLoadWithAdjustableHeight != null && temp_adjustment_height > 0 && state == 0) {
+                    mOnImageLoadWithAdjustableHeight.onNotified(temp_adjustment_height, temp_adjustment_height > temp_adjustmentcontent_max_height);
+                    temp_adjustment_height = -1;
+                }
             }
         });
+        setAutoAdjustImageFullContentMaxHeight(CONTEXT_DEFAULT_MAX_HEIGHT_AS_SCREEN_HEIGHT);
     }
+
+    private int temp_adjustment_height = -1;
+    private int temp_adjustmentcontent_max_height = -1;
+    public static final int CONTEXT_DEFAULT_MAX_HEIGHT_AS_SCREEN_HEIGHT = -2;
+
+    /**
+     * set this param to enable the height of the
+     *
+     * @param maxHeight the maximum height
+     */
+    public void setAutoAdjustImageFullContentMaxHeight(final int maxHeight) {
+        if (maxHeight == CONTEXT_DEFAULT_MAX_HEIGHT_AS_SCREEN_HEIGHT) {
+            Resources resources = getContext().getResources();
+            DisplayMetrics metrics = resources.getDisplayMetrics();
+            temp_adjustmentcontent_max_height = metrics.heightPixels;
+        } else {
+            temp_adjustmentcontent_max_height = maxHeight;
+        }
+    }
+
+    /**
+     * additional call that is optional for user to make their own implementation
+     *
+     * @param wing listener
+     */
+    public final void setOnImageLoadWithAdjustableHeightListener(final OnImageLoadWithAdjustableHeight wing) {
+        setAutoAdjustImageByHeight();
+        mOnImageLoadWithAdjustableHeight = wing;
+    }
+
 
     public void setFitToCurrentImageHeight() {
         if (getCurrentSlider().getImageView() instanceof ImageView) {
@@ -1070,26 +1115,28 @@ public class SliderLayout extends RelativeLayout {
                 Drawable image = p.getDrawable();
                 float ratio = (float) image.getIntrinsicHeight() / (float) image.getIntrinsicWidth();
 
-                int fitheight = (int) (current_width * ratio);
+                final int fit_height = (int) (current_width * ratio);
                 // Rect rec = new Rect(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
                 // requestRectangleOnScreen(rec);
                 // onLayout(true, 0, 0, p.getDrawable().getIntrinsicWidth(), p.getDrawable().getIntrinsicHeight());
                 if (getLayoutParams() instanceof RelativeLayout.LayoutParams) {
                     //  RelativeLayout.LayoutParams m = (RelativeLayout.LayoutParams) getLayoutParams();
                     // int[] rules = m.getRules();
-                    RelativeLayout.LayoutParams h = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, fitheight);
-                    /*if (rules.length > 0) {
-                        for (int i = 0; i < rules.length; i++) {
+                    RelativeLayout.LayoutParams h = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, fit_height);
+                    /*   if (rules.length > 0) {
+                           for (int i = 0; i < rules.length; i++) {
                             h.addRule(rules[i]);
-                        }
-                    }*/
+                           }
+                         }
+                    */
                     setLayoutParams(h);
                 } else if (getLayoutParams() instanceof LinearLayout.LayoutParams) {
                     //   LinearLayout.LayoutParams m = (LinearLayout.LayoutParams) getLayoutParams();
-                    // int[] rules = m.getRules();
-                    LinearLayout.LayoutParams h = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, fitheight);
+                    //   int[] rules = m.getRules();
+                    LinearLayout.LayoutParams h = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, fit_height);
                     setLayoutParams(h);
                 }
+                temp_adjustment_height = fit_height;
             }
         }
     }

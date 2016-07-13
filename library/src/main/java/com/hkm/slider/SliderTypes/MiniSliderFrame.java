@@ -18,5 +18,15 @@ public interface MiniSliderFrame {
 
     ProgressBar getLoadingBar();
 
+    /**
+     * all bundled string can be applied in here
+     * @param word input word
+     */
     void applyDescription(String word);
+
+    /**
+     * all bundled string can be applied in here
+     * @param wordlist input word
+     */
+    void applyDescription(String[] wordlist);
 }

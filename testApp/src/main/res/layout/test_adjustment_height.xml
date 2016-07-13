@@ -30,27 +30,27 @@
                     custom:slider_side_buttons="false" />
             </RelativeLayout>
 
-          <!--  <com.hkm.slider.Indicators.PagerIndicator
-                android:id="@+id/custom_indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                custom:selected_color="#0095BF"
-                custom:selected_drawable="@drawable/bird"
-                custom:selected_height="6dp"
-                custom:selected_padding_left="5dp"
-                custom:selected_padding_right="5dp"
-                custom:selected_width="6dp"
-                custom:shape="oval"
-                custom:unselected_color="#55333333"
-                custom:unselected_height="6dp"
-                custom:unselected_padding_left="5dp"
-                custom:unselected_padding_right="5dp"
-                custom:unselected_width="6dp" />
--->
+            <!--  <com.hkm.slider.Indicators.PagerIndicator
+                  android:id="@+id/custom_indicator"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginBottom="20dp"
+                  android:gravity="center"
+                  custom:selected_color="#0095BF"
+                  custom:selected_drawable="@drawable/bird"
+                  custom:selected_height="6dp"
+                  custom:selected_padding_left="5dp"
+                  custom:selected_padding_right="5dp"
+                  custom:selected_width="6dp"
+                  custom:shape="oval"
+                  custom:unselected_color="#55333333"
+                  custom:unselected_height="6dp"
+                  custom:unselected_padding_left="5dp"
+                  custom:unselected_padding_right="5dp"
+                  custom:unselected_width="6dp" />
+  -->
             <View
                 android:id="@+id/slient"
                 android:layout_width="match_parent"
@@ -59,6 +59,7 @@
                 android:background="@color/red_23" />
 
             <TextView
+                android:id="@+id/display_num_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/story_in" />

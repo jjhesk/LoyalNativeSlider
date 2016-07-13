@@ -44,6 +44,7 @@ public class CompactFrameSliderView extends CompactSliderView {
 
     /**
      * the best way to product the miniframe
+     *
      * @param n_order the input order
      * @return the miniframe instance
      */
@@ -113,6 +114,12 @@ public class CompactFrameSliderView extends CompactSliderView {
             if (mTextView == null) return;
             mTextView.setText(word);
         }
+
+        @Override
+        public void applyDescription(String[] list) {
+            if (mTextView == null) return;
+            mTextView.setText(list[0]);
+        }
     }
 
     /**
@@ -126,9 +133,11 @@ public class CompactFrameSliderView extends CompactSliderView {
     public static final int RIPPLE_SLIDE = R.layout.hb_feature_slide_ripple;
     private int setCustomLayoutSlide = 0;
     private List<String> descriptions = new ArrayList<>();
+    private List<String[]> description_fragments = new ArrayList<>();
 
     /**
      * auto configuration of using the special layout from 1-4 mini frames
+     *
      * @return the res layout
      */
     @LayoutRes
@@ -167,16 +176,23 @@ public class CompactFrameSliderView extends CompactSliderView {
         return this;
     }
 
+    public CompactFrameSliderView setDescriptionFragments(final ArrayList<String[]> description_fragments) throws Exception {
+        if (description_fragments.size() < number_of_pieces) {
+            throw new Exception("not enough descriptions. There in total we will need to have " + number_of_pieces + " of them");
+        }
+        this.description_fragments = description_fragments;
+        return this;
+    }
 
     /**
-     * the description of a slider image. Do not use this
+     * This the description to overlay all the miniframe on the screen
      *
      * @param description String
      * @return BaseSliderView
      */
-    @Deprecated
     @Override
     public CompactFrameSliderView description(String description) {
+        super.description(description);
         return this;
     }
 
@@ -207,9 +223,15 @@ public class CompactFrameSliderView extends CompactSliderView {
         if (number_of_pieces >= 4) {
             f4 = (FrameLayout) layout.findViewById(R.id.ns_display_i_s4);
         }
+        onBindOverLay((FrameLayout) layout.findViewById(R.id.ns_framecompact_overlay));
         return number_of_pieces;
     }
 
+    /**
+     * only triggered once when the initalization is ready
+     *
+     * @param f the number of mini frame that has been determined.
+     */
     @Override
     protected void filter_apply_event_to_view(int f) {
         if (f == 0) {
@@ -225,13 +247,36 @@ public class CompactFrameSliderView extends CompactSliderView {
 
     /**
      * choose or direct implementation of graphic loading system here we can use whatever we like
-     * @param mUrl the image url
+     *
+     * @param mUrl       the image url
      * @param mMiniframe the instance of the miniframe
      */
     protected void onBindImageLoadingSystem(final String mUrl, final MiniSliderFrame mMiniframe) {
         bindCompatPicasso(mUrl, mMiniframe);
     }
 
+    /**
+     * this call is built for external use. please feel free to make override of this call to make your work started in here
+     *
+     * @param the_overlay_layout the layout found
+     */
+    protected void onBindOverLay(@Nullable FrameLayout the_overlay_layout) {
+/*
+        final int layout_id = setCustomLayoutSlide == 0 ? getCompactFrameLayout() : setCustomLayoutSlide;
+        final View layoutview = LayoutInflater.from(mContext).inflate(layout_id, null);
+        final FrameImage frame = new FrameImage(n_order, layoutview);
+
+        the_overlay_layout.addView(mF.getView());
+  */
+    }
+
+    /**
+     * will trigger multiple times that dictated by the number of the total mini frames
+     *
+     * @param mframeLayout frame layout
+     * @param image_url    the image url
+     * @param n            the mini frame index
+     */
     private void apply_event_to_frame(
             @Nullable FrameLayout mframeLayout,
             @NonNull final String image_url,
@@ -240,11 +285,17 @@ public class CompactFrameSliderView extends CompactSliderView {
         if (mframeLayout == null) return;
         final MiniSliderFrame mF = produceMiniFrame(n);
         mframeLayout.addView(mF.getView());
+
         if (descriptions.size() > 0) {
             String desc = descriptions.get(n);
             mF.applyDescription(desc);
+        } else if (description_fragments.size() > 0) {
+            String[] descf = description_fragments.get(n);
+            mF.applyDescription(descf);
         }
+
         onBindImageLoadingSystem(image_url, mF);
+
         mF.setClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

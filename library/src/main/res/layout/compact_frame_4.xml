@@ -34,4 +34,12 @@
             android:layout_height="match_parent"
             android:layout_weight="20" />
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@id/ns_framecompact_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </FrameLayout>
 </RelativeLayout>
