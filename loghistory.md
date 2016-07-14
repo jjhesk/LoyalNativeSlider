@@ -6,6 +6,7 @@
 - android support library 24.0.0
 - update build tool
 - improve mini frame slider framework
+- [release apk](https://github.com/jjhesk/LoyalNativeSlider/releases/download/1.9.3/testApp-debug.apk)
 
 ###v1.9.1
 - update get color using contextcompat
