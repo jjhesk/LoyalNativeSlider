@@ -5,10 +5,11 @@
 
 This is an amazing image slider for the Android platform. I decided to open source this because there is really not an attractive, convenient slider widget in Android. You can easily load images from an internet URL, drawable, or file. And there are many kinds of amazing animations you can choose. :-D
 
+##Demo Apk
+Please also check the latest release testing apk from the [log history](loghistory.md)
+
 ## Usage
-
 ### Step 1
-
 #### Gradle
 [![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg) ](https://bintray.com/jjhesk/maven/library/_latestVersion)
 
@@ -20,7 +21,6 @@ dependencies {
     compile 'com.hkm.loyalslider:library:1.9.4'
 }
 ```
-
 
 ### Step 2 - setup the xml
 
