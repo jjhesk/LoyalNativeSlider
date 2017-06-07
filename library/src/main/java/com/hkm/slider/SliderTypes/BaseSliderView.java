@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
@@ -90,6 +92,7 @@ public abstract class BaseSliderView {
      * reference of the parent
      */
     protected WeakReference<SliderLayout> sliderContainer;
+    protected Typeface mTypeface;
 
     public void setSliderContainerInternal(SliderLayout b) {
         this.sliderContainer = new WeakReference<SliderLayout>(b);
@@ -123,6 +126,18 @@ public abstract class BaseSliderView {
     public BaseSliderView empty(int resId) {
         mEmptyPlaceHolderRes = resId;
         return this;
+    }
+
+    public BaseSliderView descriptionTypeface(Typeface typeface) {
+        mTypeface = typeface;
+        return this;
+    }
+
+    protected void setupDescription(TextView descTextView) {
+        descTextView.setText(mDescription);
+        if (mTypeface != null) {
+            descTextView.setTypeface(mTypeface);
+        }
     }
 
     /**
@@ -615,7 +630,10 @@ public abstract class BaseSliderView {
         }
     }
 
-
+    /**
+     * should use OnImageSavedListener instead or other listener for dialogs
+     */
+    @Deprecated
     @SuppressLint("ValidFragment")
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class SMessage extends DialogFragment {
@@ -745,4 +763,19 @@ public abstract class BaseSliderView {
         return current_image_holder;
     }
 
+    public interface OnImageSavedListener {
+        void onImageSaved(String description);
+
+        void onImageSaveFailed();
+    }
+
+    protected OnImageSavedListener onImageSavedListener = null;
+
+    public OnImageSavedListener getOnImageSavedListener() {
+        return onImageSavedListener;
+    }
+
+    public void setOnImageSavedListener(OnImageSavedListener onImageSavedListener) {
+        this.onImageSavedListener = onImageSavedListener;
+    }
 }

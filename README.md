@@ -21,7 +21,7 @@ For the most comprehensive collection of artifacts, point your Maven at: `http:/
 
 ```gradle
 dependencies {
-    compile 'com.hkm.loyalslider:library:1.9.4'
+    compile 'com.hkm.loyalslider:library:1.10.1'
 }
 ```
 
