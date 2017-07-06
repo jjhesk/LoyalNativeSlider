@@ -69,8 +69,6 @@ public class MultSections extends BaseApp {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected void defaultCompleteSlider(final HashMap<String, Integer> maps) {
-
-
         try {
 
             TextSliderView s1ev_dks = new TextSliderView(this);
@@ -84,7 +82,6 @@ public class MultSections extends BaseApp {
             //add your extra information
             // textSliderView.getBundle().putString("extra", name);
             mDemoSlider.addSlider(s1ev_dks);
-
 
             CompactSliderView s_dkf_12 = new CompactSliderView(this, 2);
             s_dkf_12
@@ -101,9 +98,7 @@ public class MultSections extends BaseApp {
                     .enableSaveImageByLongClick(getFragmentManager())
                     .enableImageLocalStorage()
                     .setOnSliderClickListener(this);
-
             mDemoSlider.addSlider(s_dkf_12.build());
-
 
             CompactSliderView s3 = new CompactSliderView(this, 3);
             s3
@@ -173,7 +168,6 @@ public class MultSections extends BaseApp {
                     .setOnSliderClickListener(this);
 
             mDemoSlider.addSlider(sCompactFrameSliderView5.build());
-
 
             CompactFrameSliderView s_setLinksOnEach_6 = new CompactFrameSliderView(this, 2);
             s_setLinksOnEach_6
