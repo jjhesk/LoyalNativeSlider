@@ -29,6 +29,7 @@ public class DescriptionAnimation implements BaseAnimationInterface {
     /**
      * @param animation_behavior the interpolator behavior
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
     public DescriptionAnimation(BaseInterpolator animation_behavior) {
         this.animation_behavior = animation_behavior;
     }
@@ -37,6 +38,7 @@ public class DescriptionAnimation implements BaseAnimationInterface {
      * @param min_sec            additional setting minute second that controls the time threadhold between each slide
      * @param animation_behavior the interpolator behavior
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
     public DescriptionAnimation(int min_sec, BaseInterpolator animation_behavior) {
         this.time_threadhold = min_sec;
         this.animation_behavior = animation_behavior;

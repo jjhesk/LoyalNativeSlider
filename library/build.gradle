@@ -25,8 +25,8 @@ dependencies {
     compile supportDependencies.appCompat
     compile supportDependencies.support
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     //compile 'com.github.chrisbanes:PhotoView:2.0.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'

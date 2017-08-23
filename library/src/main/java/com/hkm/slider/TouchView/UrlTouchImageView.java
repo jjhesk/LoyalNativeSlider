@@ -1,13 +1,10 @@
 package com.hkm.slider.TouchView;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
 
@@ -15,17 +12,14 @@ import android.widget.ImageView.ScaleType;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.BitmapEncoder;
-import com.bumptech.glide.load.resource.bitmap.StreamBitmapDecoder;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.load.resource.file.FileToStreamDecoder;
-import com.bumptech.glide.load.resource.transcode.BitmapToGlideDrawableTranscoder;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.hkm.slider.R;
 
 
 public class UrlTouchImageView extends RelativeLayout {
@@ -33,9 +27,8 @@ public class UrlTouchImageView extends RelativeLayout {
     protected TouchImageView mImageView;
 
     protected Context mContext;
-    private int image_view_width, image_view_height;
     private String mImageUrl;
-    protected GenericRequestBuilder generator;
+    protected RequestBuilder<Bitmap> generator;
 
     public UrlTouchImageView(Context ctx) {
         super(ctx);
@@ -68,16 +61,11 @@ public class UrlTouchImageView extends RelativeLayout {
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             public boolean onPreDraw() {
                 mImageView.getViewTreeObserver().removeOnPreDrawListener(this);
-                image_view_height = mImageView.getMeasuredHeight();
-                image_view_width = mImageView.getMeasuredWidth();
-                // mImageView.setText("Height: " + finalHeight + " Width: " + finalWidth);
                 initLoadingRequest();
-                // mImageView.setVisibility(GONE);
                 return false;
             }
         });
         this.addView(mImageView);
-        //  mProgressBar = new ProgressBar(mContext, null, android.R.attr.progressBarStyleHorizontal);
         mProgressBar = new ProgressBar(mContext, null);
         params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.CENTER_VERTICAL);
@@ -92,48 +80,22 @@ public class UrlTouchImageView extends RelativeLayout {
         generator.load(mImageUrl).into(mImageView);
     }
 
-    private void glide2() {
-        //   DrawableTypeRequest<String> t = Glide.with(mContext);
-        generator = Glide.with(mContext)
-                .using(new GenerateParamsPassthroughModelLoader(), GenerateParams.class)          // custom class
-                .from(GenerateParams.class)
-                .as(Bitmap.class)
-                .transcode(new BitmapToGlideDrawableTranscoder(mContext), GlideDrawable.class)     // builtin
-                .decoder(new GenerateParamsBitmapResourceDecoder(mContext))                        // custom class
-                .encoder(new BitmapEncoder(Bitmap.CompressFormat.PNG, 0/*ignored for lossless*/)) // builtin
-
-                .cacheDecoder(new FileToStreamDecoder<Bitmap>(new StreamBitmapDecoder(mContext)))  // builtin
-                        //.placeholder(new ColorDrawable(Color.YELLOW)) // you can pre-set placeholder and error
-                .error(new ColorDrawable(Color.RED))            // so it's easier when binding
-        //.diskCacheStrategy(DiskCacheStrategy.NONE)    // only for debugging to always regenerate
-        //.skipMemoryCache(true)                        // only for debugging to always regenerate
-        ;
-    }
-
-
     private void glide3() {
-        //   DrawableTypeRequest<String> t = Glide.with(mContext);
         generator = Glide.with(mContext)
-
-                .fromString()
                 .asBitmap()
-
-                .cacheDecoder(new FileToStreamDecoder<Bitmap>(new StreamBitmapDecoder(mContext)))  // builtin
-                        //.placeholder(new ColorDrawable(Color.YELLOW)) // you can pre-set placeholder and error
-                        //  .error(new ColorDrawable(Color.RED))            // so it's easier when binding
-                        //.error(R.drawable.shadow_hb_professional)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)    // only for debugging to always regenerate
-
-                .skipMemoryCache(true)                        // only for debugging to always regenerate
-                .listener(new RequestListener<String, Bitmap>() {
+                .apply(new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .skipMemoryCache(true)
+                )
+                .listener(new RequestListener<Bitmap>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
                         mImageView.setVisibility(GONE);
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                             mProgressBar.animate().alpha(0).withEndAction(new Runnable() {
                                 @Override
@@ -144,14 +106,12 @@ public class UrlTouchImageView extends RelativeLayout {
                         }
                         return false;
                     }
-                })
-        ;
+                });
     }
 
 
     public void setUrl(String imageUrl) {
         mImageUrl = imageUrl;
-        //new ImageLoadTask().execute(imageUrl);
     }
 
     public void setScaleType(ScaleType scaleType) {

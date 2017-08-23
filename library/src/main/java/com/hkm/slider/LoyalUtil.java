@@ -9,12 +9,11 @@ import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.hkm.slider.SliderTypes.AdvancedTextSliderView;
@@ -25,6 +24,9 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import static android.R.attr.fragment;
+import static android.R.attr.opacity;
 
 /**
  * Created by hesk on 25/11/15.
@@ -47,24 +49,28 @@ public class LoyalUtil {
         }
     }
 
+    private static RequestOptions getOpt() {
+        RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
+
+        return options;
+    }
 
     public static void glideImplementation(String i, final ImageView target, Context context) {
+
         if (i.contains(".gif")) {
-            Glide.with(context).load(i).asGif()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(target);
+            RequestBuilder<GifDrawable> requestBuilder = Glide.with(context).asGif();
+            requestBuilder.load(i).apply(getOpt()).into(target);
         } else {
-            Glide.with(context).load(i)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(target)
+            RequestBuilder<Drawable> requestBuilder = Glide.with(context).asDrawable();
+            requestBuilder.load(i).apply(getOpt()).into(target)
             ;
         }
     }
 
     public static void glideImplementation(String i, final ImageView target, Context context, final Runnable run) {
         if (i.contains(".gif")) {
-            Glide.with(context).load(i).asGif()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+            Glide.with(context).asGif().load(i)
+                    .apply(getOpt())
                     .into(new ImageViewTarget<GifDrawable>(target) {
                         @Override
                         protected void setResource(GifDrawable resource) {
@@ -74,11 +80,11 @@ public class LoyalUtil {
                     });
         } else {
             Glide.with(context).load(i)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(new GlideDrawableImageViewTarget(target) {
+                    .apply(getOpt())
+                    .into(new ImageViewTarget<Drawable>(target) {
                         @Override
-                        protected void setResource(GlideDrawable resource) {
-                            super.setResource(resource);
+                        protected void setResource(Drawable resource) {
+                            target.setImageDrawable(resource);
                             run.run();
                         }
                     });
@@ -114,8 +120,8 @@ public class LoyalUtil {
 
     public static void hybridImplementation(String u, final ImageView target, Context context, final Runnable callback) {
         if (u.contains(".gif")) {
-            Glide.with(context).load(u).asGif()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+            Glide.with(context).asGif().load(u)
+                    .apply(getOpt())
                     .into(new ImageViewTarget<GifDrawable>(target) {
                         @Override
                         protected void setResource(GifDrawable resource) {
@@ -131,8 +137,8 @@ public class LoyalUtil {
 
     public static void hybridImplementation(String u, ImageView target, Context context) {
         if (u.contains(".gif")) {
-            Glide.with(context).load(u).asGif()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+            Glide.with(context).asGif().load(u)
+                    .apply(getOpt())
                     .into(target);
         } else {
             picassoImplementation(u, target, context);
