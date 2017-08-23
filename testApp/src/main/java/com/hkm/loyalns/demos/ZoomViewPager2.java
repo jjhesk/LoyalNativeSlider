@@ -48,14 +48,11 @@ public class ZoomViewPager2 extends NsZoomable {
             e.printStackTrace();
         }
         FilePagerAdapter pagerAdapter = new FilePagerAdapter(this, items);
-
         return pagerAdapter;
     }
 
-
     @Override
     protected void startViewPager(final GalleryViewPager mViewpager) {
-
         FilePagerAdapter pagerAdapter = getImages();
         pagerAdapter.setOnItemChangeListener(new BasePagerAdapter.OnItemChangeListener() {
             @Override
@@ -63,7 +60,6 @@ public class ZoomViewPager2 extends NsZoomable {
                 Toast.makeText(ZoomViewPager2.this, "Current item is " + currentPosition, Toast.LENGTH_SHORT).show();
             }
         });
-
         mViewpager.setOffscreenPageLimit(3);
         mViewpager.setAdapter(pagerAdapter);
     }

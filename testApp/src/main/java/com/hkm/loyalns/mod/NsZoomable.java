@@ -24,7 +24,6 @@ public abstract class NsZoomable extends AppCompatActivity {
         setContentView(R.layout.pager_slide);
         mViewPager = (GalleryViewPager) findViewById(R.id.slider);
         startViewPager(mViewPager);
-
     }
 
     /**
