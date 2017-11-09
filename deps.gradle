@@ -1,0 +1,56 @@
+rootProject.ext.supportDependencies = [
+
+        percent               : "com.android.support:percent:${SUPPORT_LIBRARY}",
+        annotation            : "com.android.support:support-annotations:${SUPPORT_LIBRARY}",
+        support               : "com.android.support:support-v13:${SUPPORT_LIBRARY}",
+        appCompat             : "com.android.support:appcompat-v7:${SUPPORT_LIBRARY}",
+        recycler              : "com.android.support:recyclerview-v7:${SUPPORT_LIBRARY}",
+        design                : "com.android.support:design:${SUPPORT_LIBRARY}",
+        cardView              : "com.android.support:cardview-v7:${SUPPORT_LIBRARY}",
+        mediarouter           : "com.android.support:mediarouter-v7:${SUPPORT_LIBRARY}",
+        palette               : "com.android.support:palette-v7:${SUPPORT_LIBRARY}",
+
+        retrofitAdapter       : "com.squareup.retrofit2:retrofit-adapters:${RETROFIT_LIBRARY}",
+        retrofitCore          : "com.squareup.retrofit2:retrofit:${RETROFIT_LIBRARY}",
+        retrofitRXJava        : "com.squareup.retrofit2:adapter-rxjava:${RETROFIT_LIBRARY}",
+        retrofitConverterGson : "com.squareup.retrofit2:converter-gson:${RETROFIT_LIBRARY}",
+        retrofitParent        : "com.squareup.retrofit2:parent:${RETROFIT_LIBRARY}",
+
+        okhttpLogger          : "com.squareup.okhttp3:logging-interceptor:${OKHTTP_LIBRARY}",
+        okhttpWebsocket       : "com.squareup.okhttp3:okhttp-ws:${OKHTTP_LIBRARY}",
+        okhttpCore            : "com.squareup.okhttp3:okhttp:${OKHTTP_LIBRARY}",
+
+        icepick               : "frankiesardo:icepick:${FRANKIES_ICEPICK}",
+        icepickProcessor      : "frankiesardo:icepick-processor:${FRANKIES_ICEPICK}",
+
+        smartTabLayoutUtilsV13: "com.ogaclejapan.smarttablayout:utils-v13:${SMARTTABLAYOUT}@aar",
+        smartTabLayoutUtilsV4 : "com.ogaclejapan.smarttablayout:utils-v4:${SMARTTABLAYOUT}@aar",
+        smartTabLayoutCore    : "com.ogaclejapan.smarttablayout:library:${SMARTTABLAYOUT}@aar",
+
+        leakcanary            : "com.squareup.leakcanary:leakcanary-android:${LEAKCANARY}",
+        leakcanarynoop        : "com.squareup.leakcanary:leakcanary-android-no-op:${LEAKCANARY}",
+
+        gms_facial            : "com.google.android.gms:play-services-vision:9.8.0",
+        gms_anayltics         : "com.google.android.gms:play-services-analytics:${GOOGLE_PLAY_SERVICE}",
+
+        dagger                : "com.google.dagger:dagger:${DAGGER_2}",
+        daggerapt             : "com.google.dagger:dagger-compiler:${DAGGER_2}",
+
+
+        fishglassannotation   : "org.glassfish:javax.annotation:10.0-b28",
+        pretty_time           : "org.ocpsoft.prettytime:prettytime:4.0.1.Final",
+        gson                  : "com.google.code.gson:gson:2.6.2",
+        jsoup                 : "org.jsoup:jsoup:1.9.2",
+
+        firebasecore          : "com.google.firebase:firebase-core:${FIREBASE}",
+        database              : "com.google.firebase:firebase-database:${FIREBASE}",
+        storage               : "com.google.firebase:firebase-storage:${FIREBASE}",
+        crash                 : "com.google.firebase:firebase-crash:${FIREBASE}",
+        auth                  : "com.google.firebase:firebase-auth:${FIREBASE}",
+        messaging             : "com.google.firebase:firebase-messaging:${FIREBASE}",
+        config                : "com.google.firebase:firebase-config:${FIREBASE}",
+        invites               : "com.google.firebase:firebase-invites:${FIREBASE}",
+        ads                   : "com.google.firebase:firebase-ads:${FIREBASE}",
+        appindexing           : "com.google.firebase:firebase-appindexing:${FIREBASE}"
+
+]

@@ -2,7 +2,6 @@ package com.hkm.slider.SliderTypes;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -14,16 +13,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.chrisbanes.photoview.OnMatrixChangedListener;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.hkm.slider.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by hesk on 15/12/15.
@@ -216,17 +218,16 @@ public class ZoomableView extends BaseSliderView {
     }
 
 
-    public class PhotoTapListener implements PhotoViewAttacher.OnPhotoTapListener {
-
+    public class PhotoTapListener implements OnPhotoTapListener {
         @Override
-        public void onPhotoTap(View view, float x, float y) {
+        public void onPhotoTap(ImageView imageView, float x, float y) {
             float xPercentage = x * 100f;
             float yPercentage = y * 100f;
             //    Tool.trace(zoomimage.this,  String.format(PHOTO_TAP_TOAST_STRING, xPercentage, yPercentage, view == null ? 0 : view.getId()));
         }
     }
 
-    public class MatrixChangeListener implements PhotoViewAttacher.OnMatrixChangedListener {
+    public class MatrixChangeListener implements OnMatrixChangedListener {
         private final PhotoViewAttacher mAttacher;
         private final LinearLayout cover;
         private final ImageButton button;

@@ -2,6 +2,7 @@ package com.hkm.loyalns.demos;
 
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.widget.Toast;
 
 import com.hkm.loyalns.demos.BigScreenDemo;
 import com.hkm.slider.SliderLayout;
@@ -23,7 +24,7 @@ public class ZoomScreenSlider extends BigScreenDemo {
             zoomer
                     //ZoomableView configurations
                     .setInitalZoomFactor(1.f)
-                            //BaseSlider configurations
+                    //BaseSlider configurations
                     .description(name)
                     .image(maps.get(name))
                     .enableImageLocalStorage()
@@ -36,4 +37,10 @@ public class ZoomScreenSlider extends BigScreenDemo {
         slide.stopAutoCycle();
         slide.setCurrentPosition(1);
     }
+
+    @Override
+    public void onSliderClick(BaseSliderView coreSlider) {
+        Toast.makeText(this, "Clicked Item", Toast.LENGTH_SHORT);
+    }
+
 }

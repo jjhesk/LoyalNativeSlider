@@ -142,8 +142,9 @@ public class BigScreenDL extends AppCompatActivity implements BaseSliderView.OnS
 
     @Override
     public void onSliderClick(BaseSliderView coreSlider) {
-
+        Toast.makeText(this, "Clicked Item", Toast.LENGTH_SHORT);
     }
+
 
     ImageButton add;
 

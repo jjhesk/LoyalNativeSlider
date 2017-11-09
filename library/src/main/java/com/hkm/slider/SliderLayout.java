@@ -36,6 +36,8 @@ import com.hkm.slider.Tricks.InfiniteViewPager;
 import com.hkm.slider.Tricks.MultiViewPager;
 import com.hkm.slider.Tricks.ViewPagerEx;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -71,7 +73,7 @@ public class SliderLayout extends RelativeLayout {
     public static final int
             ZOOMABLE = 1, NONZOOMABLE = 0;
 
-
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({ZOOMABLE, NONZOOMABLE})
     public @interface SliderLayoutType {
     }
@@ -510,6 +512,11 @@ public class SliderLayout extends RelativeLayout {
         mDisabledSlider = true;
     }
 
+    /**
+     * boardcast the height changes from the slider layout
+     *
+     * @param setFinal OnViewConfigurationFinalized
+     */
     public final void setEnableMaxHeightFromAllSliders(final OnViewConfigurationFinalized setFinal) {
 
         mViewSizeMonitor = new OnViewConfigurationDetected() {
@@ -537,16 +544,14 @@ public class SliderLayout extends RelativeLayout {
     }
 
     private void autoDetermineLayoutDecoration() {
-        final boolean overlimit = mSliderAdapter.getCount() > slideDotLimit;
+        final boolean over_limit = mSliderAdapter.getCount() > slideDotLimit;
         switch (byVal(mSliderIndicatorPresentations)) {
             case Smart:
-                presentation(overlimit ? Numbers : Dots);
+                presentation(over_limit ? Numbers : Dots);
                 break;
             case Dots:
-
                 break;
             case Numbers:
-
                 break;
         }
     }
@@ -781,7 +786,7 @@ public class SliderLayout extends RelativeLayout {
             final FixedSpeedScroller scroller = new FixedSpeedScroller(mViewPager.getContext(), interpolator, period);
             mScroller.set(mViewPager, scroller);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

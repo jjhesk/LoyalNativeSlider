@@ -82,7 +82,7 @@ import java.util.Comparator;
  */
 public class ViewPagerEx extends ViewGroup {
     private static final String TAG = "ViewPagerEx";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private static final boolean USE_CACHE = false;
 
@@ -262,7 +262,7 @@ public class ViewPagerEx extends ViewGroup {
          * @param positionOffset       Value from [0, 1) indicating the offset from the page at position.
          * @param positionOffsetPixels Value in pixels indicating the offset from position.
          */
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
+        void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
 
         /**
          * This method will be invoked when a new page becomes selected. Animation is not
@@ -270,7 +270,7 @@ public class ViewPagerEx extends ViewGroup {
          *
          * @param position Position index of the new selected page.
          */
-        public void onPageSelected(int position);
+        void onPageSelected(int position);
 
         /**
          * Called when the scroll state changes. Useful for discovering when the user
@@ -282,7 +282,7 @@ public class ViewPagerEx extends ViewGroup {
          * @see ViewPagerEx#SCROLL_STATE_DRAGGING
          * @see ViewPagerEx#SCROLL_STATE_SETTLING
          */
-        public void onPageScrollStateChanged(int state);
+        void onPageScrollStateChanged(int state);
     }
 
     /**
@@ -1949,6 +1949,12 @@ public class ViewPagerEx extends ViewGroup {
                     mIsBeingDragged = false;
                 }
 
+                InfinitePagerAdapter infiniteAdapter = (InfinitePagerAdapter) mAdapter;
+                if (infiniteAdapter.getRealCount() == 1) {
+                    requestParentDisallowInterceptTouchEvent(true);
+                }
+
+
                 if (DEBUG) Log.v(TAG, "Down at " + mLastMotionX + "," + mLastMotionY
                         + " mIsBeingDragged=" + mIsBeingDragged
                         + "mIsUnableToDrag=" + mIsUnableToDrag);
@@ -1969,8 +1975,12 @@ public class ViewPagerEx extends ViewGroup {
          * The only time we want to intercept motion events is if we are in the
          * drag mode.
          */
+        //  if (!mIsBeingDragged) {
+        ///onSecondaryPointerUp(ev);
+        //   }
         return mIsBeingDragged;
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
@@ -1991,7 +2001,6 @@ public class ViewPagerEx extends ViewGroup {
             // Nothing to present or scroll; nothing to touch.
             return false;
         }
-
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
@@ -2063,13 +2072,16 @@ public class ViewPagerEx extends ViewGroup {
                             MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                     final float x = MotionEventCompat.getX(ev, activePointerIndex);
                     final int totalDelta = (int) (x - mInitialMotionX);
-                    int nextPage = determineTargetPage(currentPage, pageOffset, initialVelocity,
-                            totalDelta);
-                    setCurrentItemInternal(nextPage, true, true, initialVelocity);
+                    int nextPage = determineTargetPage(currentPage, pageOffset, initialVelocity, totalDelta);
 
+                    if (isRealCountMoreThanOne()) {
+                        setCurrentItemInternal(nextPage, true, true, initialVelocity);
+                    }
                     mActivePointerId = INVALID_POINTER;
-                    endDrag();
-                    needsInvalidate = mLeftEdge.onRelease() | mRightEdge.onRelease();
+                    if (isRealCountMoreThanOne()) {
+                        endDrag();
+                        needsInvalidate = mLeftEdge.onRelease() | mRightEdge.onRelease();
+                    }
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
@@ -2089,8 +2101,7 @@ public class ViewPagerEx extends ViewGroup {
             }
             case MotionEventCompat.ACTION_POINTER_UP:
                 onSecondaryPointerUp(ev);
-                mLastMotionX = MotionEventCompat.getX(ev,
-                        MotionEventCompat.findPointerIndex(ev, mActivePointerId));
+                mLastMotionX = MotionEventCompat.getX(ev, MotionEventCompat.findPointerIndex(ev, mActivePointerId));
                 break;
         }
         if (needsInvalidate) {
@@ -2147,10 +2158,19 @@ public class ViewPagerEx extends ViewGroup {
         }
         // Don't lose the rounded component
         mLastMotionX += scrollX - (int) scrollX;
-        scrollTo((int) scrollX, getScrollY());
-        pageScrolled((int) scrollX);
+
+        //determine if the scroll is enabled
+        if (isRealCountMoreThanOne()) {
+            scrollTo((int) scrollX, getScrollY());
+            pageScrolled((int) scrollX);
+        }
 
         return needsInvalidate;
+    }
+
+    private boolean isRealCountMoreThanOne() {
+        InfinitePagerAdapter infiniteAdapter = (InfinitePagerAdapter) mAdapter;
+        return infiniteAdapter.getRealCount() > 1;
     }
 
     /**

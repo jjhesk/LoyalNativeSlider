@@ -140,7 +140,7 @@ public class BigScreenDemo extends AppCompatActivity implements BaseSliderView.O
 
     @Override
     public void onSliderClick(BaseSliderView coreSlider) {
-
+        Toast.makeText(this, "Clicked Item", Toast.LENGTH_SHORT);
     }
 
     @Override
