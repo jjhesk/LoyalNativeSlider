@@ -2,7 +2,8 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Loyal%20Native%20Slider-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1998)
 [![Download](https://api.bintray.com/packages/jjhesk/maven/library/images/download.svg)](https://bintray.com/jjhesk/maven/library/_latestVersion)
 [![Android Gems](http://www.android-gems.com/badge/jjhesk/LoyalNativeSlider.svg?branch=master)](http://www.android-gems.com/lib/jjhesk/LoyalNativeSlider)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/daimajia/AndroidImageSlider?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)]
 
 [![Throughput Graph](https://graphs.waffle.io/jjhesk/LoyalNativeSlider/throughput.svg)](https://waffle.io/jjhesk/LoyalNativeSlider/metrics)
 
@@ -149,6 +150,7 @@ License
 
 
 ##About me
+
 [1]: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ooxfordck@gmail.com&currency_code=USD&amount=&return=&item_name=LoyalSliderDonation
 [2]: https://github.com/square/picasso
 [3]: https://github.com/JakeWharton/NineOldAndroids
