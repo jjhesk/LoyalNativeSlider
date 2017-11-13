@@ -127,9 +127,8 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the
 
 If there are someone who I do not mention here, please accept my sincere appologies and tell me.
 
-###Bitcoin Donation Accepted
+### Thank you for your support and we will bring more amazing libraries to your productive works. We are accepting bitcoin by the address as below. Please scan the QR code to start
 ![wallet](http://s32.postimg.org/sdd1oio1t/qrwallet.jpg)
-Open Donation - USD: [![OPEN](http://i.imgur.com/wUWK6e1.jpg)][1]
 
 License
 --------
