@@ -27,7 +27,7 @@ gen/
 
 # Gradle files
 .gradle/
-.idea/
+
 gradle/
 .gradle/
 /*/build/
@@ -40,13 +40,11 @@ proguard/
 
 # Log Files
 *.log
-.idea
+
 /gradlew.bat
 /gradlew
 
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
 .DS_Store
 /build
 
@@ -54,7 +52,7 @@ proguard/
 *.iml
 *.ipr
 *.iws
-.idea/
+
 out/
 output/
 .gitignore.orig
@@ -73,10 +71,12 @@ output/
 .gradle/2.2.1/taskArtifacts/fileSnapshots.bin
 .gradle/2.2.1/taskArtifacts/outputFileStates.bin
 .gradle/2.2.1/taskArtifacts/taskArtifacts.bin
-.idea/misc.xml
+
 build/intermediates/dex-cache/cache.xml
 build/intermediates/gradle_project_sync_data.bin
 local.properties
+.idea/
+*/.idea
 
-**/.idea
 **/*.iml
+
