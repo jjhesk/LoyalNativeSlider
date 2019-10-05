@@ -112,7 +112,7 @@ This is the attribute support set for [SliderLayout][11]
 | image_button_l| reference of drawable for the left arrow button to enable previous slide |
 | image_button_r| reference of drawable for the right arrow button to enable next slide |
 | slider_side_buttons| enable or disable the arrow buttons on each right or left side |
-| slider_side_buttons_function_flip| unkown |
+| slider_side_buttons_function_flip| unknown |
 
 
 ## Advanced usage
@@ -126,7 +126,7 @@ Please visit [Wiki](https://github.com/daimajia/AndroidImageSlider/wiki) for the
 - [Android Image Slider][5]
 - [Glide][15]
 
-If there are someone who I do not mention here, please accept my sincere appologies and tell me.
+If there are someone who I do not mention here, please accept my sincere apologies and tell me.
 
 ### Thank you for your support and we will bring more amazing libraries to your productive works. We are accepting bitcoin by the address as below. Please scan the QR code to start
 ![wallet](http://s32.postimg.org/sdd1oio1t/qrwallet.jpg)
